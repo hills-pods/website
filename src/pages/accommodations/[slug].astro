@@ -1,0 +1,90 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import { Image } from 'astro:assets';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import BookNowButton from '@/components/BookNowButton.astro';
+
+export async function getStaticPaths() {
+  const suites = await getCollection('suites');
+  return suites.map((suite) => ({
+    params: { slug: suite.slug },
+    props: { suite },
+  }));
+}
+
+interface Props {
+  suite: CollectionEntry<'suites'>;
+}
+
+const { suite } = Astro.props;
+const { data } = suite;
+const { Content } = await suite.render();
+---
+
+<BaseLayout title={data.name} description={data.summary} ogImage={data.heroImage.src}>
+  <!-- Full-bleed suite hero -->
+  <section class="relative flex min-h-[70vh] items-end overflow-hidden">
+    <Image
+      src={data.heroImage}
+      alt={data.heroImageAlt}
+      class="absolute inset-0 h-full w-full object-cover"
+      widths={[640, 960, 1280, 1920]}
+      sizes="100vw"
+      loading="eager"
+      fetchpriority="high"
+    />
+    <div class="absolute inset-0 bg-gradient-to-t from-night via-night/40 to-night/20"></div>
+    <div class="container-luxe relative z-10 pb-16 pt-40">
+      <p class="eyebrow">{data.view}</p>
+      <h1 class="mt-4 text-5xl sm:text-6xl">{data.name}</h1>
+      {
+        !data.available && (
+          <p class="mt-4 inline-block rounded-full bg-night/70 px-4 py-2 text-sm uppercase tracking-luxe text-champagne">
+            Currently unavailable — join the waitlist via enquiry
+          </p>
+        )
+      }
+    </div>
+  </section>
+
+  <section class="container-luxe grid gap-12 py-20 lg:grid-cols-3">
+    <div class="space-y-4 text-lg leading-relaxed text-cream/85 lg:col-span-2">
+      <Content />
+    </div>
+
+    <div class="space-y-10">
+      <div>
+        <p class="eyebrow mb-4">Features</p>
+        <ul class="space-y-2 text-sm text-cream/80">
+          {data.features.map((f) => <li class="border-b border-white/10 pb-2">{f}</li>)}
+        </ul>
+      </div>
+      <div>
+        <p class="eyebrow mb-4">Included</p>
+        <ul class="space-y-2 text-sm text-cream/80">
+          {data.included.map((i) => <li class="border-b border-white/10 pb-2">{i}</li>)}
+        </ul>
+      </div>
+      <BookNowButton />
+    </div>
+  </section>
+
+  {
+    data.gallery && data.gallery.length > 0 && (
+      <section class="container-luxe pb-24">
+        <div class="grid gap-4 sm:grid-cols-2">
+          {data.gallery.map((g) => (
+            <Image
+              src={g.image}
+              alt={g.alt}
+              class="w-full rounded-lg object-cover"
+              widths={[400, 640, 900]}
+              sizes="(min-width: 640px) 50vw, 100vw"
+              loading="lazy"
+            />
+          ))}
+        </div>
+      </section>
+    )
+  }
+</BaseLayout>

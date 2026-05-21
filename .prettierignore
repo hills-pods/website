@@ -1,0 +1,16 @@
+node_modules/
+dist/
+.astro/
+coverage/
+playwright-report/
+test-results/
+package-lock.json
+src/env.d.ts
+
+# Spec Kit & planning artifacts (managed by tooling / authored as docs)
+.specify/
+specs/
+.github/agents/
+.github/prompts/
+.github/copilot-instructions.md
+.vscode/

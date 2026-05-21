@@ -1,0 +1,43 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  suite: CollectionEntry<'suites'>;
+}
+
+const { suite } = Astro.props;
+const { data, slug } = suite;
+---
+
+<article class="group relative overflow-hidden rounded-lg bg-night-800">
+  <a href={`/accommodations/${slug}`} class="block">
+    <div class="relative aspect-[4/3] overflow-hidden">
+      <Image
+        src={data.heroImage}
+        alt={data.heroImageAlt}
+        class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+        widths={[400, 640, 800]}
+        sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+        loading="lazy"
+      />
+      {
+        !data.available && (
+          <span class="absolute left-4 top-4 rounded-full bg-night/80 px-3 py-1 font-body text-xs uppercase tracking-luxe text-champagne">
+            Currently unavailable
+          </span>
+        )
+      }
+    </div>
+    <div class="p-6">
+      <p class="eyebrow">{data.view}</p>
+      <h3 class="mt-2 text-2xl">{data.name}</h3>
+      <p class="mt-2 text-sm text-mist">{data.summary}</p>
+      <span
+        class="mt-4 inline-block font-body text-sm uppercase tracking-luxe text-champagne underline-offset-8 group-hover:underline"
+      >
+        Discover
+      </span>
+    </div>
+  </a>
+</article>

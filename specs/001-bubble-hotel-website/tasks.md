@@ -23,13 +23,13 @@ independently implementable, testable, deployable increment.
 
 **Purpose**: Initialize the Astro project and the constitution-mandated quality gates.
 
-- [ ] T001 Initialize Astro project (TypeScript strict) at repository root per quickstart.md (creates `package.json`, `astro.config.mjs`, `tsconfig.json`)
-- [ ] T002 [P] Add and configure Tailwind via `@astrojs/tailwind`; define brand design tokens (color, type scale, spacing) in `tailwind.config.mjs`
-- [ ] T003 [P] Configure ESLint + Prettier with a zero-warning policy in `.eslintrc.cjs` and `.prettierrc`, plus `lint`/`format` npm scripts
-- [ ] T004 [P] Configure Vitest in `vitest.config.ts` (with V8 coverage reporting and minimum coverage thresholds) and Playwright in `playwright.config.ts` with mobile/tablet/desktop viewport projects and `@axe-core/playwright`
-- [ ] T005 [P] Configure Lighthouse CI budgets in `lighthouserc.json` (LCP≤2.5s, INP≤200ms, CLS≤0.1 + per-page asset budget) and a `lighthouse` npm script
-- [ ] T006 [P] Add CI workflow `.github/workflows/ci.yml` running lint → typecheck → unit (with coverage) → e2e+a11y → lighthouse → build on every pull request; the unit step MUST fail the build if coverage falls below the configured threshold (enforces the constitution's "coverage MUST NOT decrease" gate)
-- [ ] T007 [P] Add Vercel deployment config (`vercel.json` if needed) and document the per-PR preview-deploy flow
+- [x] T001 Initialize Astro project (TypeScript strict) at repository root per quickstart.md (creates `package.json`, `astro.config.mjs`, `tsconfig.json`)
+- [x] T002 [P] Add and configure Tailwind via `@astrojs/tailwind`; define brand design tokens (color, type scale, spacing) in `tailwind.config.mjs`
+- [x] T003 [P] Configure ESLint + Prettier with a zero-warning policy in `.eslintrc.cjs` and `.prettierrc`, plus `lint`/`format` npm scripts
+- [x] T004 [P] Configure Vitest in `vitest.config.ts` (with V8 coverage reporting and minimum coverage thresholds) and Playwright in `playwright.config.ts` with mobile/tablet/desktop viewport projects and `@axe-core/playwright`
+- [x] T005 [P] Configure Lighthouse CI budgets in `lighthouserc.json` (LCP≤2.5s, INP≤200ms, CLS≤0.1 + per-page asset budget) and a `lighthouse` npm script
+- [x] T006 [P] Add CI workflow `.github/workflows/ci.yml` running lint → typecheck → unit (with coverage) → e2e+a11y → lighthouse → build on every pull request; the unit step MUST fail the build if coverage falls below the configured threshold (enforces the constitution's "coverage MUST NOT decrease" gate)
+- [x] T007 [P] Add Vercel deployment config (`vercel.json` if needed) and document the per-PR preview-deploy flow
 
 ---
 
@@ -39,16 +39,16 @@ independently implementable, testable, deployable increment.
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete.
 
-- [ ] T008 Define typed content-collection schemas (Zod) for `suites` and `experiences` in `src/content/config.ts` per data-model.md (required fields, alt-text required, slug uniqueness)
-- [ ] T009 [P] Create typed site config in `src/data/site.config.ts` (brandName, tagline, `bookingUrl: string | null`, contact, location, seo defaults) per data-model.md
-- [ ] T010 [P] Create global styles / design-system base in `src/styles/global.css` (Tailwind layers, base typography, `prefers-reduced-motion` handling)
-- [ ] T011 [P] Add self-hosted, subset web fonts (one display, one body) in `src/assets/fonts/` and preload them
-- [ ] T012 Create `src/layouts/BaseLayout.astro` (semantic landmarks, head/SEO slot, header + footer, skip-to-content link)
-- [ ] T013 [P] Create SEO component in `src/components/SEO.astro` emitting title/description/OG/Twitter from `site.config` (FR-015)
-- [ ] T014 Create `src/components/Header.astro` and accessible `src/components/MobileNav.astro` (persistent nav + Book Now slot; keyboard-operable, focus-trapped menu) — supports FR-010
-- [ ] T015 [P] Create `src/components/Footer.astro` (contact summary + location link from `site.config`)
-- [ ] T016 Create persistent `src/components/BookNowButton.astro` rendering a clearly-labeled CTA linking to `site.config.bookingUrl` (basic external link; reachable on every page via Header) — FR-005
-- [ ] T017 [P] Create on-brand not-found page `src/pages/404.astro` (FR-014)
+- [x] T008 Define typed content-collection schemas (Zod) for `suites` and `experiences` in `src/content/config.ts` per data-model.md (required fields, alt-text required, slug uniqueness)
+- [x] T009 [P] Create typed site config in `src/data/site.config.ts` (brandName, tagline, `bookingUrl: string | null`, contact, location, seo defaults) per data-model.md
+- [x] T010 [P] Create global styles / design-system base in `src/styles/global.css` (Tailwind layers, base typography, `prefers-reduced-motion` handling)
+- [x] T011 [P] Add self-hosted, subset web fonts (one display, one body) in `src/assets/fonts/` and preload them
+- [x] T012 Create `src/layouts/BaseLayout.astro` (semantic landmarks, head/SEO slot, header + footer, skip-to-content link)
+- [x] T013 [P] Create SEO component in `src/components/SEO.astro` emitting title/description/OG/Twitter from `site.config` (FR-015)
+- [x] T014 Create `src/components/Header.astro` and accessible `src/components/MobileNav.astro` (persistent nav + Book Now slot; keyboard-operable, focus-trapped menu) — supports FR-010
+- [x] T015 [P] Create `src/components/Footer.astro` (contact summary + location link from `site.config`)
+- [x] T016 Create persistent `src/components/BookNowButton.astro` rendering a clearly-labeled CTA linking to `site.config.bookingUrl` (basic external link; reachable on every page via Header) — FR-005
+- [x] T017 [P] Create on-brand not-found page `src/pages/404.astro` (FR-014)
 
 **Checkpoint**: Foundation ready — user stories can now proceed (in parallel if staffed).
 
@@ -65,15 +65,15 @@ page passes axe + Lighthouse budgets.
 
 ### Tests for User Story 1 ⚠️ (write first, ensure they FAIL before implementation)
 
-- [ ] T018 [P] [US1] E2E test for home hero + above-the-fold messaging at mobile/tablet/desktop viewports in `tests/e2e/home.spec.ts`
-- [ ] T019 [P] [US1] Accessibility (axe) test for the home page in `tests/e2e/home.a11y.spec.ts`
+- [x] T018 [P] [US1] E2E test for home hero + above-the-fold messaging at mobile/tablet/desktop viewports in `tests/e2e/home.spec.ts`
+- [x] T019 [P] [US1] Accessibility (axe) test for the home page in `tests/e2e/home.a11y.spec.ts`
 
 ### Implementation for User Story 1
 
-- [ ] T020 [P] [US1] Create `src/components/Hero.astro` (signature image + tagline, mobile-first, responsive, no layout shift) — FR-001
-- [ ] T021 [US1] Build `src/pages/index.astro` using BaseLayout + Hero, composing the narrative sections (experience → suites → amenities → how to stay) — US1 scenarios
-- [ ] T022 [US1] Add featured suites/experiences preview sections to `src/pages/index.astro` sourced from content collections
-- [ ] T023 [US1] Optimize hero and home imagery with Astro `<Image>` (responsive sizes, preload hero, explicit dimensions) — FR-012, CLS budget
+- [x] T020 [P] [US1] Create `src/components/Hero.astro` (signature image + tagline, mobile-first, responsive, no layout shift) — FR-001
+- [x] T021 [US1] Build `src/pages/index.astro` using BaseLayout + Hero, composing the narrative sections (experience → suites → amenities → how to stay) — US1 scenarios
+- [x] T022 [US1] Add featured suites/experiences preview sections to `src/pages/index.astro` sourced from content collections
+- [x] T023 [US1] Optimize hero and home imagery with Astro `<Image>` (responsive sizes, preload hero, explicit dimensions) — FR-012, CLS budget
 
 **Checkpoint**: Home page is a fully functional, beautiful, mobile-first MVP — deployable on its own.
 
@@ -90,20 +90,20 @@ on any device.
 
 ### Tests for User Story 2 ⚠️
 
-- [ ] T024 [P] [US2] E2E test: suite listing → suite detail navigation at responsive viewports in `tests/e2e/accommodations.spec.ts`
-- [ ] T025 [P] [US2] E2E test: experiences + gallery render and images lazy-load in `tests/e2e/experiences-gallery.spec.ts`
-- [ ] T026 [P] [US2] Accessibility (axe) tests for accommodations/experiences/gallery pages in `tests/e2e/us2.a11y.spec.ts`
+- [x] T024 [P] [US2] E2E test: suite listing → suite detail navigation at responsive viewports in `tests/e2e/accommodations.spec.ts`
+- [x] T025 [P] [US2] E2E test: experiences + gallery render and images lazy-load in `tests/e2e/experiences-gallery.spec.ts`
+- [x] T026 [P] [US2] Accessibility (axe) tests for accommodations/experiences/gallery pages in `tests/e2e/us2.a11y.spec.ts`
 
 ### Implementation for User Story 2
 
-- [ ] T027 [P] [US2] Create `src/components/SuiteCard.astro` (image + summary card)
-- [ ] T028 [P] [US2] Create `src/components/ExperienceCard.astro`
-- [ ] T029 [P] [US2] Create `src/components/Gallery.astro` (responsive grid, lazy-loaded optimized images, required alt text) — FR-004
-- [ ] T030 [US2] Build suite listing page `src/pages/accommodations/index.astro` (sorted by `order`; renders "unavailable" state when `available` is false) — FR-002, edge case
-- [ ] T031 [US2] Build suite detail page `src/pages/accommodations/[slug].astro` via `getStaticPaths` from the `suites` collection (hero, view, features, included, gallery, body; 404 for unknown slug)
-- [ ] T032 [US2] Build experiences page `src/pages/experiences.astro` from the `experiences` collection — FR-003
-- [ ] T033 [US2] Build gallery page `src/pages/gallery.astro` using the Gallery component
-- [ ] T034 [P] [US2] Add placeholder suite + experience content entries and images under `src/content/` and `src/assets/` (per data-model.md schemas)
+- [x] T027 [P] [US2] Create `src/components/SuiteCard.astro` (image + summary card)
+- [x] T028 [P] [US2] Create `src/components/ExperienceCard.astro`
+- [x] T029 [P] [US2] Create `src/components/Gallery.astro` (responsive grid, lazy-loaded optimized images, required alt text) — FR-004
+- [x] T030 [US2] Build suite listing page `src/pages/accommodations/index.astro` (sorted by `order`; renders "unavailable" state when `available` is false) — FR-002, edge case
+- [x] T031 [US2] Build suite detail page `src/pages/accommodations/[slug].astro` via `getStaticPaths` from the `suites` collection (hero, view, features, included, gallery, body; 404 for unknown slug)
+- [x] T032 [US2] Build experiences page `src/pages/experiences.astro` from the `experiences` collection — FR-003
+- [x] T033 [US2] Build gallery page `src/pages/gallery.astro` using the Gallery component
+- [x] T034 [P] [US2] Add placeholder suite + experience content entries and images under `src/content/` and `src/assets/` (per data-model.md schemas)
 
 **Checkpoint**: Suites, experiences, and gallery work independently and on all devices.
 
@@ -120,14 +120,14 @@ falls back to contact.
 
 ### Tests for User Story 3 ⚠️
 
-- [ ] T035 [P] [US3] E2E test: "Book Now" reachable on every page, opens external provider in a new tab, external-site labeling present in `tests/e2e/booking.spec.ts`
-- [ ] T036 [P] [US3] E2E test: when `site.config.bookingUrl` is null, "Book Now" routes to the contact method in `tests/e2e/booking-fallback.spec.ts`
+- [x] T035 [P] [US3] E2E test: "Book Now" reachable on every page, opens external provider in a new tab, external-site labeling present in `tests/e2e/booking.spec.ts`
+- [x] T036 [P] [US3] E2E test: when `site.config.bookingUrl` is null, "Book Now" routes to the contact method in `tests/e2e/booking-fallback.spec.ts`
 
 ### Implementation for User Story 3
 
-- [ ] T037 [US3] Enhance `src/components/BookNowButton.astro` with `target="_blank"` + `rel="noopener noreferrer"` and explicit "opens external booking site" labeling — FR-006, FR-007
-- [ ] T038 [US3] Implement the contact fallback in `src/components/BookNowButton.astro` when `bookingUrl` is null — FR-008
-- [ ] T039 [P] [US3] Document the placeholder `bookingUrl` and how to set the real provider in `src/data/site.config.ts`
+- [x] T037 [US3] Enhance `src/components/BookNowButton.astro` with `target="_blank"` + `rel="noopener noreferrer"` and explicit "opens external booking site" labeling — FR-006, FR-007
+- [x] T038 [US3] Implement the contact fallback in `src/components/BookNowButton.astro` when `bookingUrl` is null — FR-008
+- [x] T039 [P] [US3] Document the placeholder `bookingUrl` and how to set the real provider in `src/data/site.config.ts`
 
 **Checkpoint**: Booking handoff and fallback work consistently across the site.
 
@@ -142,13 +142,13 @@ confirm it is complete and reachable.
 
 ### Tests for User Story 4 ⚠️
 
-- [ ] T040 [P] [US4] E2E test: location, directions, and a direct contact method are present and reachable in `tests/e2e/location.spec.ts`
-- [ ] T041 [P] [US4] Accessibility (axe) test for the location page in `tests/e2e/location.a11y.spec.ts`
+- [x] T040 [P] [US4] E2E test: location, directions, and a direct contact method are present and reachable in `tests/e2e/location.spec.ts`
+- [x] T041 [P] [US4] Accessibility (axe) test for the location page in `tests/e2e/location.a11y.spec.ts`
 
 ### Implementation for User Story 4
 
-- [ ] T042 [US4] Build location page `src/pages/location.astro` (location description, directions, direct contact method, optional map link) from `site.config` — FR-009
-- [ ] T043 [US4] Wire footer contact details from `site.config` and link to the location page
+- [x] T042 [US4] Build location page `src/pages/location.astro` (location description, directions, direct contact method, optional map link) from `site.config` — FR-009
+- [x] T043 [US4] Wire footer contact details from `site.config` and link to the location page
 
 **Checkpoint**: All four user stories are independently functional.
 
@@ -158,13 +158,13 @@ confirm it is complete and reachable.
 
 **Purpose**: Site-wide quality, performance, accessibility, and launch readiness.
 
-- [ ] T044 [P] Run Lighthouse CI across all pages and tune to meet Core Web Vitals + asset budgets (Principle IV, SC-002)
-- [ ] T045 [P] Full-site WCAG 2.1 AA accessibility sweep across all primary pages (SC-007)
-- [ ] T046 [P] Verify mobile-first parity at phone/tablet/desktop on every page; fix any reflow-only (non-purpose-built) layouts (FR-010, SC-006)
-- [ ] T047 [P] Add `public/robots.txt`, favicon, and a default OG share image (FR-015)
-- [ ] T048 [P] Add unit tests for utilities/components in `tests/unit/`
-- [ ] T049 Run the quickstart.md validation end to end (setup → verify scripts → production build)
-- [ ] T050 [P] Update `README.md` with content-editing and booking-provider configuration instructions
+- [x] T044 [P] Run Lighthouse CI across all pages and tune to meet Core Web Vitals + asset budgets (Principle IV, SC-002)
+- [x] T045 [P] Full-site WCAG 2.1 AA accessibility sweep across all primary pages (SC-007)
+- [x] T046 [P] Verify mobile-first parity at phone/tablet/desktop on every page; fix any reflow-only (non-purpose-built) layouts (FR-010, SC-006)
+- [x] T047 [P] Add `public/robots.txt`, favicon, and a default OG share image (FR-015)
+- [x] T048 [P] Add unit tests for utilities/components in `tests/unit/`
+- [x] T049 Run the quickstart.md validation end to end (setup → verify scripts → production build)
+- [x] T050 [P] Update `README.md` with content-editing and booking-provider configuration instructions
 
 ---
 

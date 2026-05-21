@@ -1,0 +1,50 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHeader from '@/components/PageHeader.astro';
+import Gallery, { type GalleryItem } from '@/components/Gallery.astro';
+
+import meadow from '@/assets/gallery/meadow.jpg';
+import dusk from '@/assets/gallery/dusk.jpg';
+import interior from '@/assets/gallery/interior.jpg';
+import aurora from '@/assets/suites/aurora.jpg';
+import forest from '@/assets/suites/forest.jpg';
+import summit from '@/assets/suites/summit.jpg';
+import stargazing from '@/assets/experiences/stargazing.jpg';
+
+const items: GalleryItem[] = [
+  {
+    src: aurora,
+    alt: 'The Aurora suite glowing under a violet night sky',
+    caption: 'The Aurora at nightfall',
+  },
+  { src: meadow, alt: 'An alpine meadow at golden hour', caption: 'The meadow' },
+  {
+    src: dusk,
+    alt: 'Bubble suites silhouetted against a dusky purple sky',
+    caption: 'Dusk over the bubbles',
+  },
+  { src: forest, alt: 'The Forest suite among green alpine pines' },
+  { src: stargazing, alt: 'A telescope beneath a star-filled sky', caption: 'Guided stargazing' },
+  { src: interior, alt: 'The warm interior of a bubble suite' },
+  {
+    src: summit,
+    alt: 'The Summit suite at golden hour above the escarpment',
+    caption: 'The Summit',
+  },
+];
+---
+
+<BaseLayout
+  title="Gallery"
+  description="A visual tour of Bubble — the suites, the meadow, and the mountain sky."
+>
+  <PageHeader
+    eyebrow="Gallery"
+    title="A glimpse of the stay"
+    intro="Light, weather, and quiet — a few frames from life at Bubble."
+  />
+
+  <section class="container-luxe pb-24 sm:pb-32">
+    <Gallery items={items} />
+  </section>
+</BaseLayout>

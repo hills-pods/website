@@ -1,0 +1,59 @@
+---
+import { site } from '@/data/site.config';
+import { navLinks } from '@/data/nav';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t border-white/10 bg-night-800">
+  <div class="container-luxe grid gap-10 py-16 sm:grid-cols-2 lg:grid-cols-3">
+    <div>
+      <p class="font-display text-2xl text-cream">{site.brandName}</p>
+      <p class="mt-3 max-w-xs text-sm text-mist">{site.tagline}</p>
+    </div>
+
+    <nav aria-label="Footer">
+      <p class="eyebrow mb-4">Explore</p>
+      <ul class="flex flex-col gap-2">
+        {
+          navLinks.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                class="text-sm text-cream/80 transition-colors hover:text-champagne"
+              >
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <div>
+      <p class="eyebrow mb-4">Contact</p>
+      <ul class="flex flex-col gap-2 text-sm text-cream/80">
+        <li>
+          <a href={`mailto:${site.contact.email}`} class="transition-colors hover:text-champagne">
+            {site.contact.email}
+          </a>
+        </li>
+        <li>
+          <a
+            href={`tel:${site.contact.phone.replace(/[^+\d]/g, '')}`}
+            class="transition-colors hover:text-champagne"
+          >
+            {site.contact.phone}
+          </a>
+        </li>
+        <li>
+          <a href="/location" class="transition-colors hover:text-champagne">Find us</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="container-luxe border-t border-white/5 py-6">
+    <p class="text-xs text-mist">© {year} {site.brandName}. All rights reserved.</p>
+  </div>
+</footer>

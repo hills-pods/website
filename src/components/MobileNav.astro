@@ -1,0 +1,88 @@
+---
+import { navLinks } from '@/data/nav';
+import BookNowButton from './BookNowButton.astro';
+
+const pathname = Astro.url.pathname;
+const isActive = (href: string) => (href === '/' ? pathname === '/' : pathname.startsWith(href));
+---
+
+<div class="md:hidden" data-mobile-nav>
+  <button
+    type="button"
+    class="inline-flex min-h-11 min-w-11 items-center justify-center text-cream"
+    aria-expanded="false"
+    aria-controls="mobile-menu"
+    aria-label="Open menu"
+    data-menu-toggle
+  >
+    <span class="text-2xl" aria-hidden="true">☰</span>
+  </button>
+
+  <div
+    id="mobile-menu"
+    class="bg-night/98 fixed inset-0 z-40 hidden flex-col px-6 pt-24"
+    data-menu-panel
+  >
+    <button
+      type="button"
+      class="absolute right-4 top-4 inline-flex min-h-11 min-w-11 items-center justify-center text-cream"
+      aria-label="Close menu"
+      data-menu-close
+    >
+      <span class="text-3xl" aria-hidden="true">×</span>
+    </button>
+
+    <nav aria-label="Primary">
+      <ul class="flex flex-col gap-6">
+        {
+          navLinks.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                aria-current={isActive(link.href) ? 'page' : undefined}
+                class:list={[
+                  'font-display text-3xl',
+                  isActive(link.href) ? 'text-champagne' : 'text-cream',
+                ]}
+              >
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <div class="mt-10">
+        <BookNowButton />
+      </div>
+    </nav>
+  </div>
+</div>
+
+<script>
+  // Progressive enhancement: toggle the mobile menu, manage focus + aria, close on Escape.
+  const root = document.querySelector<HTMLElement>('[data-mobile-nav]');
+  if (root) {
+    const toggle = root.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+    const close = root.querySelector<HTMLButtonElement>('[data-menu-close]');
+    const panel = root.querySelector<HTMLElement>('[data-menu-panel]');
+
+    const setOpen = (open: boolean) => {
+      if (!panel || !toggle) return;
+      panel.classList.toggle('hidden', !open);
+      panel.classList.toggle('flex', open);
+      toggle.setAttribute('aria-expanded', String(open));
+      document.body.classList.toggle('overflow-hidden', open);
+      if (open) {
+        panel.querySelector<HTMLElement>('a, button')?.focus();
+      } else {
+        toggle.focus();
+      }
+    };
+
+    toggle?.addEventListener('click', () => setOpen(true));
+    close?.addEventListener('click', () => setOpen(false));
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') setOpen(false);
+    });
+  }
+</script>

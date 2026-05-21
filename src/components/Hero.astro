@@ -1,0 +1,41 @@
+---
+import { Image } from 'astro:assets';
+import heroImage from '@/assets/hero.jpg';
+import { site } from '@/data/site.config';
+import BookNowButton from './BookNowButton.astro';
+---
+
+<section class="relative flex min-h-dvh items-end overflow-hidden">
+  <!-- Hero image: eager + high priority so it is the LCP element, with explicit
+       dimensions to avoid layout shift (FR-001, FR-012, CLS budget). -->
+  <Image
+    src={heroImage}
+    alt="A transparent bubble suite glowing beneath a star-filled mountain sky at night"
+    class="absolute inset-0 h-full w-full object-cover"
+    widths={[640, 960, 1280, 1920, 2200]}
+    sizes="100vw"
+    loading="eager"
+    fetchpriority="high"
+  />
+  <div class="absolute inset-0 bg-gradient-to-t from-night via-night/40 to-night/30"></div>
+
+  <div class="container-luxe relative z-10 pb-20 pt-40">
+    <p class="eyebrow">A luxury bubble hotel in the mountains</p>
+    <h1 class="mt-4 max-w-3xl text-5xl leading-[1.05] sm:text-6xl lg:text-7xl">
+      {site.tagline}
+    </h1>
+    <p class="mt-6 max-w-xl text-lg text-cream/85">
+      Transparent suites suspended in an alpine meadow — where the only thing between you and the
+      stars is a breath of warm air.
+    </p>
+    <div class="mt-10 flex flex-wrap items-center gap-4">
+      <BookNowButton />
+      <a
+        href="/accommodations"
+        class="inline-flex min-h-11 items-center font-body text-sm uppercase tracking-luxe text-cream underline-offset-8 transition-colors hover:text-champagne hover:underline"
+      >
+        Explore the suites
+      </a>
+    </div>
+  </div>
+</section>

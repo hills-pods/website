@@ -1,0 +1,33 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+.output/
+.vercel/
+
+# Astro
+.astro/
+
+# Test / coverage artifacts
+coverage/
+test-results/
+playwright-report/
+.lighthouseci/
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+
+# Local tooling config (personal, not shared)
+.claude/settings.local.json

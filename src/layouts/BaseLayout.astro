@@ -1,0 +1,56 @@
+---
+import '@/styles/global.css';
+import cg400 from '@fontsource/cormorant-garamond/files/cormorant-garamond-latin-400-normal.woff2?url';
+import cg500 from '@fontsource/cormorant-garamond/files/cormorant-garamond-latin-500-normal.woff2?url';
+import inter400 from '@fontsource/inter/files/inter-latin-400-normal.woff2?url';
+import inter500 from '@fontsource/inter/files/inter-latin-500-normal.woff2?url';
+
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import SEO from '@/components/SEO.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+}
+
+const { title, description, ogImage } = Astro.props;
+
+// Self-host fonts with font-display: optional + preload of the above-the-fold weights.
+// Preloading makes the luxury type available before first paint, while `optional` guarantees
+// the large display headings never reflow afterward — protecting the CLS budget (Principle IV).
+const fontFaces = [
+  ['Cormorant Garamond', 400, cg400],
+  ['Cormorant Garamond', 500, cg500],
+  ['Inter', 400, inter400],
+  ['Inter', 500, inter500],
+]
+  .map(
+    ([family, weight, url]) =>
+      `@font-face{font-family:'${family}';font-style:normal;font-weight:${weight};font-display:optional;src:url(${url}) format('woff2');}`,
+  )
+  .join('');
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preload" href={cg400} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={inter400} as="font" type="font/woff2" crossorigin />
+    <style set:html={fontFaces}></style>
+    <meta name="generator" content={Astro.generator} />
+    <SEO title={title} description={description} ogImage={ogImage} />
+  </head>
+  <body class="min-h-dvh">
+    <a href="#main" class="skip-link">Skip to content</a>
+    <Header />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

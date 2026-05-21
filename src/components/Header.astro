@@ -1,0 +1,48 @@
+---
+import { site } from '@/data/site.config';
+import { navLinks } from '@/data/nav';
+import BookNowButton from './BookNowButton.astro';
+import MobileNav from './MobileNav.astro';
+
+const pathname = Astro.url.pathname;
+const isActive = (href: string) => (href === '/' ? pathname === '/' : pathname.startsWith(href));
+---
+
+<header class="absolute inset-x-0 top-0 z-30">
+  <div class="container-luxe flex items-center justify-between py-6">
+    <a
+      href="/"
+      class="font-display text-2xl tracking-wide text-cream"
+      aria-label={`${site.brandName} — home`}
+    >
+      {site.brandName}
+    </a>
+
+    <nav class="hidden md:block" aria-label="Primary">
+      <ul class="flex items-center gap-8">
+        {
+          navLinks.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                aria-current={isActive(link.href) ? 'page' : undefined}
+                class:list={[
+                  'font-body text-sm uppercase tracking-luxe transition-colors hover:text-champagne',
+                  isActive(link.href) ? 'text-champagne' : 'text-cream',
+                ]}
+              >
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <!-- Book Now is persistent and visible on every page, at every size (FR-005). -->
+    <div class="flex items-center gap-2">
+      <BookNowButton variant="subtle" class="px-4 py-2 text-xs sm:px-6 sm:py-3 sm:text-sm" />
+      <MobileNav />
+    </div>
+  </div>
+</header>

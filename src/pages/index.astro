@@ -1,0 +1,79 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Hero from '@/components/Hero.astro';
+import SuiteCard from '@/components/SuiteCard.astro';
+import ExperienceCard from '@/components/ExperienceCard.astro';
+import BookNowButton from '@/components/BookNowButton.astro';
+
+const suites = (await getCollection('suites')).sort((a, b) => a.data.order - b.data.order);
+const experiences = (await getCollection('experiences')).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+const featuredSuites = suites.slice(0, 3);
+const featuredExperiences = experiences.slice(0, 3);
+---
+
+<BaseLayout>
+  <Hero />
+
+  <!-- Narrative: the experience -->
+  <section class="container-luxe py-24 sm:py-32">
+    <div class="max-w-2xl">
+      <p class="eyebrow">The experience</p>
+      <h2 class="mt-4 text-4xl sm:text-5xl">A night you feel rather than simply book</h2>
+      <p class="mt-6 text-lg text-cream/80">
+        Bubble is a handful of transparent suites set in a high alpine meadow. No lobby, no crowds —
+        only the slow theatre of weather and light, and the quiet luxury of being completely,
+        comfortably present in the mountains.
+      </p>
+    </div>
+  </section>
+
+  <!-- Narrative: the suites -->
+  <section class="container-luxe pb-24 sm:pb-32">
+    <div class="mb-12 flex items-end justify-between gap-6">
+      <div>
+        <p class="eyebrow">The suites</p>
+        <h2 class="mt-4 text-4xl sm:text-5xl">Three ways to sleep under the sky</h2>
+      </div>
+      <a
+        href="/accommodations"
+        class="hidden shrink-0 font-body text-sm uppercase tracking-luxe text-champagne underline-offset-8 hover:underline sm:inline-block"
+      >
+        All suites
+      </a>
+    </div>
+    <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+      {featuredSuites.map((suite) => <SuiteCard suite={suite} />)}
+    </div>
+  </section>
+
+  <!-- Narrative: the amenities -->
+  <section class="bg-night-800 py-24 sm:py-32">
+    <div class="container-luxe">
+      <div class="mb-12 max-w-2xl">
+        <p class="eyebrow">The experiences</p>
+        <h2 class="mt-4 text-4xl sm:text-5xl">Days as memorable as the nights</h2>
+      </div>
+      <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        {featuredExperiences.map((experience) => <ExperienceCard experience={experience} />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- Narrative: how to stay -->
+  <section class="container-luxe py-24 text-center sm:py-32">
+    <p class="eyebrow">How to stay</p>
+    <h2 class="mx-auto mt-4 max-w-2xl text-4xl sm:text-5xl">
+      A handful of bubbles. Reserve yours.
+    </h2>
+    <p class="mx-auto mt-6 max-w-xl text-lg text-cream/80">
+      Each suite is released in limited number across the season. Secure your night beneath the
+      stars.
+    </p>
+    <div class="mt-10 flex justify-center">
+      <BookNowButton />
+    </div>
+  </section>
+</BaseLayout>

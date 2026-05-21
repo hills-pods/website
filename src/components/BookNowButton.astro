@@ -1,0 +1,53 @@
+---
+import { site } from '@/data/site.config';
+import { resolveBookingTarget } from '@/lib/booking';
+
+interface Props {
+  /** Visual emphasis: primary (filled) or subtle (outline). */
+  variant?: 'primary' | 'subtle';
+  class?: string;
+}
+
+const { variant = 'primary', class: className = '' } = Astro.props;
+
+const target = resolveBookingTarget({
+  bookingUrl: site.bookingUrl,
+  contactEmail: site.contact.email,
+});
+
+const base =
+  'inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 font-body text-sm uppercase tracking-luxe transition-colors duration-200 min-h-11';
+const styles =
+  variant === 'primary'
+    ? 'bg-champagne text-night hover:bg-champagne-600'
+    : 'border border-champagne/60 text-champagne hover:border-champagne hover:text-cream';
+
+// External handoff opens in a new tab and is labeled as leaving the site (FR-006/007).
+// When no provider is configured, this resolves to the contact method instead (FR-008).
+const externalAttrs = target.external ? { target: '_blank', rel: 'noopener noreferrer' } : {};
+const label = target.external ? 'Book Now' : 'Enquire to Book';
+const a11yLabel = target.external
+  ? 'Book Now — opens our booking site in a new tab'
+  : 'Enquire to book by email';
+---
+
+<a
+  href={target.href}
+  class={`${base} ${styles} ${className}`}
+  aria-label={a11yLabel}
+  {...externalAttrs}
+>
+  <span>{label}</span>
+  {
+    target.external && (
+      <span aria-hidden="true" class="text-xs">
+        ↗
+      </span>
+    )
+  }
+</a>
+{
+  target.external && (
+    <span class="sr-only">This link opens an external booking site in a new tab.</span>
+  )
+}

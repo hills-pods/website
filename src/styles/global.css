@@ -1,0 +1,55 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-night font-body text-cream antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply font-display font-normal tracking-tight text-cream;
+    text-wrap: balance;
+  }
+
+  /* Visible focus for keyboard users (Principle III / FR-013). */
+  :focus-visible {
+    @apply outline outline-2 outline-offset-2 outline-champagne;
+  }
+
+  /* Skip link is visually hidden until focused. */
+  .skip-link {
+    @apply sr-only;
+  }
+  .skip-link:focus {
+    @apply not-sr-only fixed left-4 top-4 z-50 rounded bg-champagne px-4 py-2 font-body text-sm text-night;
+  }
+}
+
+@layer components {
+  .container-luxe {
+    @apply mx-auto w-full max-w-content px-6 sm:px-8;
+  }
+
+  .eyebrow {
+    @apply font-body text-xs uppercase tracking-luxe text-champagne;
+  }
+}
+
+/* Respect reduced-motion preferences across the whole site (Principle III). */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

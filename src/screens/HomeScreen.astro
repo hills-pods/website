@@ -1,0 +1,69 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Hero from '@/components/Hero.astro';
+import SuiteCarousel from '@/components/SuiteCarousel.astro';
+import ExperienceCard from '@/components/ExperienceCard.astro';
+import BookNowButton from '@/components/BookNowButton.astro';
+import { getLangFromUrl, useTranslations, localizeHref } from '@/i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const suites = (await getCollection('suites', ({ data }) => data.lang === lang)).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+const experiences = (await getCollection('experiences', ({ data }) => data.lang === lang)).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+const featuredExperiences = experiences.slice(0, 3);
+---
+
+<BaseLayout>
+  <Hero />
+
+  <section class="container-luxe py-24 sm:py-32">
+    <div class="max-w-2xl">
+      <p class="eyebrow">{t('home.exp.eyebrow')}</p>
+      <h2 class="mt-4 text-4xl sm:text-5xl">{t('home.exp.title')}</h2>
+      <p class="mt-6 text-lg text-cream/80">{t('home.exp.body')}</p>
+    </div>
+  </section>
+
+  <section class="container-luxe pb-24 sm:pb-32">
+    <div class="mb-12 flex items-end justify-between gap-6">
+      <div>
+        <p class="eyebrow">{t('home.suites.eyebrow')}</p>
+        <h2 class="mt-4 text-4xl sm:text-5xl">{t('home.suites.title')}</h2>
+      </div>
+      <a
+        href={localizeHref('/accommodations', lang)}
+        class="hidden shrink-0 font-body text-sm uppercase tracking-luxe text-champagne underline-offset-8 hover:underline sm:inline-block"
+      >
+        {t('home.suites.all')}
+      </a>
+    </div>
+    <SuiteCarousel suites={suites} />
+  </section>
+
+  <section class="bg-night-800 py-24 sm:py-32">
+    <div class="container-luxe">
+      <div class="mb-12 max-w-2xl">
+        <p class="eyebrow">{t('home.exps.eyebrow')}</p>
+        <h2 class="mt-4 text-4xl sm:text-5xl">{t('home.exps.title')}</h2>
+      </div>
+      <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        {featuredExperiences.map((experience) => <ExperienceCard experience={experience} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="container-luxe py-24 text-center sm:py-32">
+    <p class="eyebrow">{t('home.stay.eyebrow')}</p>
+    <h2 class="mx-auto mt-4 max-w-2xl text-4xl sm:text-5xl">{t('home.stay.title')}</h2>
+    <p class="mx-auto mt-6 max-w-xl text-lg text-cream/80">{t('home.stay.body')}</p>
+    <div class="mt-10 flex justify-center">
+      <BookNowButton />
+    </div>
+  </section>
+</BaseLayout>

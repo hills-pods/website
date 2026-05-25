@@ -109,6 +109,33 @@ contact details from the site and confirm they are complete and unambiguous.
 
 ---
 
+### User Story 5 - Browse in Ukrainian or English (Priority: P2)
+
+A visitor reads the site in their preferred language. Ukrainian is the default; a switcher
+in the header lets them move between Ukrainian and English, staying on the same page.
+
+**Why this priority**: The hotel's primary audience is Ukrainian-speaking, so Ukrainian is
+the default experience; offering English broadens reach to international guests. It enriches
+the existing pages rather than blocking them.
+
+**Independent Test**: From any page, confirm the content is in Ukrainian by default, the
+header language switcher is present, and switching to English shows the same page fully
+translated (under `/en/`), and switching back returns to the Ukrainian equivalent.
+
+**Acceptance Scenarios**:
+
+1. **Given** a first-time visitor on any page, **When** the page loads, **Then** all content
+   is presented in Ukrainian by default (served at the root, with no language prefix).
+2. **Given** a visitor on a Ukrainian page, **When** they use the header language switcher,
+   **Then** they are taken to the same page in English (under `/en/`) with all content
+   translated.
+3. **Given** a visitor on an English page, **When** they switch language, **Then** they
+   return to the Ukrainian equivalent of the same page.
+4. **Given** any page in either language, **When** it is inspected, **Then** it declares the
+   correct page language and references its alternate-language version.
+
+---
+
 ### Edge Cases
 
 - How does the site present accommodations when a suite or experience is temporarily
@@ -157,6 +184,20 @@ contact details from the site and confirm they are complete and unambiguous.
 - **FR-014**: The site MUST present an on-brand experience for unknown/error pages.
 - **FR-015**: Each page MUST present appropriate titles and preview information so links
   shared on search and social media reflect the brand attractively.
+- **FR-016**: The site MUST be available in two languages — Ukrainian (default) and English
+  — with Ukrainian served at the root and English under an `/en/` path prefix.
+- **FR-017**: A language switcher MUST be present in the header on every page, letting
+  visitors move between Ukrainian and English.
+- **FR-018**: Switching language MUST keep the visitor on the equivalent page in the chosen
+  language (not redirect them to the home page).
+- **FR-019**: All user-facing content — navigation, UI labels, calls-to-action, suite and
+  experience descriptions, and page copy — MUST be fully translated in both languages; no
+  untranslated or mixed-language strings may remain on any page.
+- **FR-020**: Each page MUST declare its language to assistive technology and search engines
+  (correct `lang` attribute and locale metadata) and MUST cross-reference its
+  alternate-language version (e.g., `hreflang`).
+- **FR-021**: The default language MUST be Ukrainian; first-time visitors land in Ukrainian
+  and switch to English manually (no automatic language redirection).
 
 ### Key Entities *(include if feature involves data)*
 
@@ -170,6 +211,10 @@ contact details from the site and confirm they are complete and unambiguous.
 
 > Note: Reservations are completed on the hotel's external booking provider, so the site
 > does not store reservation/guest data itself; it links out to where booking occurs.
+
+> Note: Textual content (suite/experience copy, captions, alt text) exists in both Ukrainian
+> and English. A suite/experience is the same conceptual entity across languages, identified
+> by a shared key so the language switcher can map between equivalents.
 
 ## Success Criteria *(mandatory)*
 
@@ -190,13 +235,17 @@ contact details from the site and confirm they are complete and unambiguous.
   tablet, and desktop, with no broken layouts at common screen sizes; at least 90% of test
   viewers rate the phone experience as looking "perfect" / purpose-built for mobile.
 - **SC-007**: The site meets WCAG 2.1 AA accessibility checks on all primary pages.
+- **SC-008**: A visitor can switch between Ukrainian and English from any page in a single
+  action and land on that same page's equivalent in the chosen language.
+- **SC-009**: 100% of user-facing strings render in the selected language on every page,
+  with no untranslated fallback, placeholder, or mixed-language text.
 
 ## Assumptions
 
 - The site is primarily a marketing/brochure presence for a single property (the Bubble
   hotel), not a multi-property platform or guest account portal.
-- Content is presented in a single language (English) for the initial version; multilingual
-  support is out of scope unless later requested.
+- Content is presented in two languages: Ukrainian (the default, served at the root) and
+  English (served under `/en/`). Further languages are out of scope unless later requested.
 - "Simple but beautiful" means a small number of focused pages/sections with restrained,
   high-impact design — not a content-heavy site.
 - Photography and brand assets (logo, imagery of the bubbles and mountain setting) will be

@@ -1,9 +1,13 @@
 ---
 import { navLinks } from '@/data/nav';
+import { getLangFromUrl, useTranslations, localizeHref, toCanonicalPath } from '@/i18n/utils';
 import BookNowButton from './BookNowButton.astro';
+import LanguageSwitcher from './LanguageSwitcher.astro';
 
-const pathname = Astro.url.pathname;
-const isActive = (href: string) => (href === '/' ? pathname === '/' : pathname.startsWith(href));
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const canonical = toCanonicalPath(Astro.url.pathname);
+const isActive = (href: string) => (href === '/' ? canonical === '/' : canonical.startsWith(href));
 ---
 
 <div class="md:hidden" data-mobile-nav>
@@ -12,7 +16,7 @@ const isActive = (href: string) => (href === '/' ? pathname === '/' : pathname.s
     class="inline-flex min-h-11 min-w-11 items-center justify-center text-cream"
     aria-expanded="false"
     aria-controls="mobile-menu"
-    aria-label="Open menu"
+    aria-label={t('nav.openMenu')}
     data-menu-toggle
   >
     <span class="text-2xl" aria-hidden="true">☰</span>
@@ -26,33 +30,34 @@ const isActive = (href: string) => (href === '/' ? pathname === '/' : pathname.s
     <button
       type="button"
       class="absolute right-4 top-4 inline-flex min-h-11 min-w-11 items-center justify-center text-cream"
-      aria-label="Close menu"
+      aria-label={t('nav.closeMenu')}
       data-menu-close
     >
       <span class="text-3xl" aria-hidden="true">×</span>
     </button>
 
-    <nav aria-label="Primary">
+    <nav aria-label={t('nav.primary')}>
       <ul class="flex flex-col gap-6">
         {
           navLinks.map((link) => (
             <li>
               <a
-                href={link.href}
+                href={localizeHref(link.href, lang)}
                 aria-current={isActive(link.href) ? 'page' : undefined}
                 class:list={[
                   'font-display text-3xl',
                   isActive(link.href) ? 'text-champagne' : 'text-cream',
                 ]}
               >
-                {link.label}
+                {t(link.key)}
               </a>
             </li>
           ))
         }
       </ul>
-      <div class="mt-10">
+      <div class="mt-10 flex items-center gap-6">
         <BookNowButton />
+        <LanguageSwitcher />
       </div>
     </nav>
   </div>

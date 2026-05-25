@@ -1,0 +1,24 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHeader from '@/components/PageHeader.astro';
+import ExperienceCard from '@/components/ExperienceCard.astro';
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const experiences = (await getCollection('experiences', ({ data }) => data.lang === lang)).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+---
+
+<BaseLayout title={t('seo.experiences.title')} description={t('seo.experiences.desc')}>
+  <PageHeader eyebrow={t('exp.eyebrow')} title={t('exp.title')} intro={t('exp.intro')} />
+
+  <section class="container-luxe pb-24 sm:pb-32">
+    <h2 class="sr-only">{t('exp.srHeading')}</h2>
+    <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+      {experiences.map((experience) => <ExperienceCard experience={experience} />)}
+    </div>
+  </section>
+</BaseLayout>

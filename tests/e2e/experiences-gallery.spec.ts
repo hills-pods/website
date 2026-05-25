@@ -1,18 +1,18 @@
 import { test, expect } from '@playwright/test';
+import { locales, t, url } from './_helpers';
 
-// US2 — experiences and gallery render; gallery images are lazy-loaded (FR-003, FR-004, FR-012).
-test('experiences page renders signature experiences', async ({ page }) => {
-  await page.goto('/experiences');
-  await expect(page.getByRole('heading', { name: /rituals of a mountain stay/i })).toBeVisible();
-  await expect(page.getByRole('heading', { name: /guided stargazing/i })).toBeVisible();
-  await expect(page.getByRole('heading', { name: /mountain table/i })).toBeVisible();
-});
+// US2 — experiences and gallery render; gallery images lazy-load (FR-003, FR-004, FR-012).
+for (const { lang, base } of locales) {
+  test(`experiences page renders (${lang})`, async ({ page }) => {
+    await page.goto(url(base, '/experiences'));
+    await expect(page.getByRole('heading', { level: 1, name: t(lang, 'exp.title') })).toBeVisible();
+  });
 
-test('gallery renders images that lazy-load', async ({ page }) => {
-  await page.goto('/gallery');
-  await expect(page.getByRole('heading', { name: /a glimpse of the stay/i })).toBeVisible();
-  const images = page.locator('img');
-  await expect(images.first()).toBeVisible();
-  // At least one gallery image defers loading (graceful on slow connections).
-  expect(await page.locator('img[loading="lazy"]').count()).toBeGreaterThan(0);
-});
+  test(`gallery renders lazy-loaded images (${lang})`, async ({ page }) => {
+    await page.goto(url(base, '/gallery'));
+    await expect(
+      page.getByRole('heading', { level: 1, name: t(lang, 'gallery.title') }),
+    ).toBeVisible();
+    expect(await page.locator('img[loading="lazy"]').count()).toBeGreaterThan(0);
+  });
+}

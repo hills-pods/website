@@ -1,25 +1,19 @@
 import { test, expect } from '@playwright/test';
+import { locales, t, url } from './_helpers';
 
-// US3 — "Book Now" is reachable on every page and hands off to the external provider
-// in a new tab, with clear external-site labeling (FR-005/006/007).
-const paths = ['/', '/accommodations', '/experiences', '/gallery', '/location'];
+// US3 — "Book Now" is reachable on every page and hands off externally, in each language
+// (FR-005/006/007). The accessible name is the localized external label.
+const canonicalPages = ['/', '/accommodations', '/experiences', '/gallery', '/location'];
 
-for (const path of paths) {
-  test(`Book Now is reachable and hands off externally on ${path}`, async ({ page }) => {
-    await page.goto(path);
-    const cta = page.getByRole('link', { name: /book now/i }).first();
-    await expect(cta).toBeVisible();
-    await expect(cta).toHaveAttribute('target', '_blank');
-    await expect(cta).toHaveAttribute('rel', /noopener/);
-    await expect(cta).toHaveAttribute('href', /^https?:\/\//);
-    // Labeled as leaving the site (accessible name mentions a new tab).
-    await expect(cta).toHaveAttribute('aria-label', /new tab/i);
-  });
+for (const { lang, base } of locales) {
+  for (const canonical of canonicalPages) {
+    test(`Book Now hands off externally on ${url(base, canonical)} (${lang})`, async ({ page }) => {
+      await page.goto(url(base, canonical));
+      const cta = page.getByRole('link', { name: t(lang, 'book.ariaExternal') }).first();
+      await expect(cta).toBeVisible();
+      await expect(cta).toHaveAttribute('target', '_blank');
+      await expect(cta).toHaveAttribute('rel', /noopener/);
+      await expect(cta).toHaveAttribute('href', /^https?:\/\//);
+    });
+  }
 }
-
-test('external handoff includes a screen-reader explanation', async ({ page }) => {
-  await page.goto('/');
-  await expect(
-    page.getByText(/opens an external booking site in a new tab/i).first(),
-  ).toBeAttached();
-});

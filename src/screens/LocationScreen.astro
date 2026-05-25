@@ -1,0 +1,60 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHeader from '@/components/PageHeader.astro';
+import BookNowButton from '@/components/BookNowButton.astro';
+import { site } from '@/data/site.config';
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+
+const t = useTranslations(getLangFromUrl(Astro.url));
+const telHref = `tel:${site.contact.phone.replace(/[^+\d]/g, '')}`;
+---
+
+<BaseLayout title={t('seo.location.title')} description={t('seo.location.desc')}>
+  <PageHeader eyebrow={t('loc.eyebrow')} title={t('loc.title')} intro={t('loc.description')} />
+
+  <section class="container-luxe grid gap-12 pb-24 lg:grid-cols-2">
+    <div class="space-y-10">
+      <div>
+        <p class="eyebrow mb-4">{t('loc.gettingThere')}</p>
+        <p class="text-lg leading-relaxed text-cream/85">{t('loc.directions')}</p>
+        {
+          site.mapUrl && (
+            <a
+              href={site.mapUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="mt-4 inline-flex min-h-11 items-center font-body text-sm uppercase tracking-luxe text-champagne underline-offset-8 hover:underline"
+            >
+              {t('loc.openMaps')}
+            </a>
+          )
+        }
+      </div>
+
+      <div>
+        <p class="eyebrow mb-4">{t('loc.contact')}</p>
+        <ul class="space-y-3 text-lg text-cream/85">
+          <li>
+            <a href={`mailto:${site.contact.email}`} class="hover:text-champagne">
+              {site.contact.email}
+            </a>
+          </li>
+          <li>
+            <a href={telHref} class="hover:text-champagne">{site.contact.phone}</a>
+          </li>
+        </ul>
+      </div>
+
+      <BookNowButton />
+    </div>
+
+    <div class="rounded-lg bg-night-800 p-8">
+      <p class="eyebrow mb-4">{t('loc.goodToKnow')}</p>
+      <ul class="space-y-3 text-sm text-cream/80">
+        <li class="border-b border-white/10 pb-3">{t('loc.gtk1')}</li>
+        <li class="border-b border-white/10 pb-3">{t('loc.gtk2')}</li>
+        <li class="border-b border-white/10 pb-3">{t('loc.gtk3')}</li>
+      </ul>
+    </div>
+  </section>
+</BaseLayout>

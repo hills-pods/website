@@ -1,0 +1,78 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import SuiteCard from './SuiteCard.astro';
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+
+interface Props {
+  suites: CollectionEntry<'suites'>[];
+}
+
+const { suites } = Astro.props;
+const t = useTranslations(getLangFromUrl(Astro.url));
+---
+
+<div class="relative" data-carousel>
+  <!-- Native scroll-snap track: swipeable on touch, keyboard-scrollable (focusable region),
+       and fully readable by assistive tech. Works with zero JS; buttons are an enhancement. -->
+  <div
+    class="snap-x snap-mandatory overflow-x-auto scroll-smooth pb-4 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+    tabindex="0"
+    role="group"
+    aria-label={t('carousel.suites')}
+    data-carousel-track
+  >
+    <ul class="flex gap-6">
+      {
+        suites.map((suite) => (
+          <li class="w-[80%] shrink-0 snap-start sm:w-[46%] lg:w-[31%]">
+            <SuiteCard suite={suite} />
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+
+  <button
+    type="button"
+    hidden
+    data-carousel-prev
+    aria-label={t('carousel.prev')}
+    class="absolute left-0 top-[33%] hidden h-11 w-11 -translate-x-1/2 items-center justify-center rounded-full border border-champagne/40 bg-night/80 text-2xl text-cream backdrop-blur transition-opacity hover:border-champagne disabled:opacity-30 sm:flex"
+  >
+    <span aria-hidden="true">‹</span>
+  </button>
+  <button
+    type="button"
+    hidden
+    data-carousel-next
+    aria-label={t('carousel.next')}
+    class="absolute right-0 top-[33%] hidden h-11 w-11 translate-x-1/2 items-center justify-center rounded-full border border-champagne/40 bg-night/80 text-2xl text-cream backdrop-blur transition-opacity hover:border-champagne disabled:opacity-30 sm:flex"
+  >
+    <span aria-hidden="true">›</span>
+  </button>
+</div>
+
+<script>
+  // Progressive enhancement: wire prev/next buttons to scroll the snap track by ~one viewport.
+  document.querySelectorAll<HTMLElement>('[data-carousel]').forEach((root) => {
+    const track = root.querySelector<HTMLElement>('[data-carousel-track]');
+    const prev = root.querySelector<HTMLButtonElement>('[data-carousel-prev]');
+    const next = root.querySelector<HTMLButtonElement>('[data-carousel-next]');
+    if (!track || !prev || !next) return;
+
+    const step = () => track.clientWidth * 0.8;
+    const update = () => {
+      const max = track.scrollWidth - track.clientWidth - 2;
+      prev.disabled = track.scrollLeft <= 0;
+      next.disabled = track.scrollLeft >= max;
+    };
+
+    prev.hidden = false;
+    next.hidden = false;
+    prev.addEventListener('click', () => track.scrollBy({ left: -step(), behavior: 'smooth' }));
+    next.addEventListener('click', () => track.scrollBy({ left: step(), behavior: 'smooth' }));
+    track.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+  });
+</script>

@@ -1,0 +1,42 @@
+---
+import { languages, type Lang } from '@/i18n/ui';
+import { getLangFromUrl, useTranslations, getAlternateUrl } from '@/i18n/utils';
+
+const current = getLangFromUrl(Astro.url);
+const t = useTranslations(current);
+const order: Lang[] = ['uk', 'en'];
+const shortLabel: Record<Lang, string> = { uk: 'УК', en: 'EN' };
+---
+
+<nav class="flex items-center gap-1" aria-label={t('site.switchTo')}>
+  {
+    order.map((lang, i) => (
+      <Fragment>
+        {i > 0 && (
+          <span class="text-cream/30" aria-hidden="true">
+            /
+          </span>
+        )}
+        {lang === current ? (
+          <span
+            class="px-1 font-body text-sm uppercase tracking-luxe text-champagne"
+            aria-current="true"
+            lang={lang}
+          >
+            {shortLabel[lang]}
+          </span>
+        ) : (
+          <a
+            href={getAlternateUrl(Astro.url.pathname, lang)}
+            class="px-1 font-body text-sm uppercase tracking-luxe text-cream/70 transition-colors hover:text-champagne"
+            hreflang={lang}
+            lang={lang}
+            aria-label={languages[lang]}
+          >
+            {shortLabel[lang]}
+          </a>
+        )}
+      </Fragment>
+    ))
+  }
+</nav>

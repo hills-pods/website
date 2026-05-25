@@ -1,0 +1,25 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import BookNowButton from '@/components/BookNowButton.astro';
+import { getLangFromUrl, useTranslations, localizeHref } from '@/i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<BaseLayout title={t('seo.notfound.title')} description={t('seo.notfound.desc')}>
+  <section class="container-luxe flex min-h-dvh flex-col items-center justify-center text-center">
+    <p class="eyebrow">{t('nf.eyebrow')}</p>
+    <h1 class="mt-4 text-5xl sm:text-6xl">{t('nf.title')}</h1>
+    <p class="mt-6 max-w-md text-mist">{t('nf.body')}</p>
+    <div class="mt-10 flex flex-wrap items-center justify-center gap-4">
+      <a
+        href={localizeHref('/', lang)}
+        class="inline-flex min-h-11 items-center rounded-full border border-champagne/60 px-6 py-3 font-body text-sm uppercase tracking-luxe text-champagne transition-colors hover:text-cream"
+      >
+        {t('nf.returnHome')}
+      </a>
+      <BookNowButton />
+    </div>
+  </section>
+</BaseLayout>

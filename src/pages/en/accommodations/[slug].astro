@@ -1,0 +1,14 @@
+---
+import { getCollection } from 'astro:content';
+import SuiteDetailScreen from '@/screens/SuiteDetailScreen.astro';
+import { baseSlug } from '@/i18n/utils';
+
+export async function getStaticPaths() {
+  const suites = await getCollection('suites', ({ data }) => data.lang === 'en');
+  return suites.map((suite) => ({ params: { slug: baseSlug(suite.slug) }, props: { suite } }));
+}
+
+const { suite } = Astro.props;
+---
+
+<SuiteDetailScreen suite={suite} />

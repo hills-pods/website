@@ -47,8 +47,9 @@ CLS ≤ 0.1 (constitution Principle IV). Home page visually usable within 3s on 
 mobile connection (SC-002). Per-page asset budget enforced; ship ~zero render-blocking JS.
 
 **Constraints**: Image-heavy yet must stay within asset budgets and degrade gracefully on
-slow connections (FR-012). WCAG 2.1 AA on all primary pages (FR-013, SC-007). Single
-language (English) for v1. No login/accounts. Booking handled externally.
+slow connections (FR-012). WCAG 2.1 AA on all primary pages (FR-013, SC-007). Bilingual:
+Ukrainian (default, at root) and English (under `/en/`) via Astro i18n (FR-016–FR-021).
+No login/accounts. Booking handled externally.
 
 **Scale/Scope**: Small brochure site — roughly 4-6 pages/sections: Home, Accommodations
 (suite detail), Experiences/Amenities, Gallery, Location & Contact, plus a graceful 404.

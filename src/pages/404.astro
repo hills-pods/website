@@ -1,26 +1,5 @@
 ---
-import BaseLayout from '@/layouts/BaseLayout.astro';
-import BookNowButton from '@/components/BookNowButton.astro';
+import NotFoundScreen from '@/screens/NotFoundScreen.astro';
 ---
 
-<BaseLayout
-  title="Page Not Found"
-  description="The page you were looking for has drifted off into the mountain mist."
->
-  <section class="container-luxe flex min-h-dvh flex-col items-center justify-center text-center">
-    <p class="eyebrow">Error 404</p>
-    <h1 class="mt-4 text-5xl sm:text-6xl">This page has drifted into the mist</h1>
-    <p class="mt-6 max-w-md text-mist">
-      The page you were looking for can’t be found. Let’s guide you back to the bubbles.
-    </p>
-    <div class="mt-10 flex flex-wrap items-center justify-center gap-4">
-      <a
-        href="/"
-        class="inline-flex min-h-11 items-center rounded-full border border-champagne/60 px-6 py-3 font-body text-sm uppercase tracking-luxe text-champagne transition-colors hover:text-cream"
-      >
-        Return home
-      </a>
-      <BookNowButton />
-    </div>
-  </section>
-</BaseLayout>
+<NotFoundScreen />

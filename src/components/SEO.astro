@@ -1,5 +1,6 @@
 ---
 import { site } from '@/data/site.config';
+import { getLangFromUrl, useTranslations, getAlternateUrl } from '@/i18n/utils';
 
 interface Props {
   title?: string;
@@ -8,19 +9,34 @@ interface Props {
 }
 
 const { title, description, ogImage } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 
-const pageTitle = title ? `${title} — ${site.brandName}` : site.seo.defaultTitle;
-const pageDescription = description ?? site.seo.defaultDescription;
-const image = new URL(ogImage ?? site.seo.ogImage, Astro.site ?? Astro.url).toString();
+const pageTitle = title ? `${title} — ${site.brandName}` : t('seo.defaultTitle');
+const pageDescription = description ?? t('seo.defaultDescription');
+const image = new URL(ogImage ?? site.ogImage, Astro.site ?? Astro.url).toString();
 const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url).toString();
+
+// hreflang alternates for both languages (FR-020).
+const base = Astro.site ?? Astro.url;
+const alternates = [
+  { hreflang: 'uk', href: new URL(getAlternateUrl(Astro.url.pathname, 'uk'), base).toString() },
+  { hreflang: 'en', href: new URL(getAlternateUrl(Astro.url.pathname, 'en'), base).toString() },
+  {
+    hreflang: 'x-default',
+    href: new URL(getAlternateUrl(Astro.url.pathname, 'uk'), base).toString(),
+  },
+];
 ---
 
 <title>{pageTitle}</title>
 <meta name="description" content={pageDescription} />
 <link rel="canonical" href={canonical} />
+{alternates.map((a) => <link rel="alternate" hreflang={a.hreflang} href={a.href} />)}
 
 <!-- Open Graph -->
 <meta property="og:type" content="website" />
+<meta property="og:locale" content={lang === 'uk' ? 'uk_UA' : 'en_US'} />
 <meta property="og:title" content={pageTitle} />
 <meta property="og:description" content={pageDescription} />
 <meta property="og:image" content={image} />

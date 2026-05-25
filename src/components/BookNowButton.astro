@@ -1,14 +1,15 @@
 ---
 import { site } from '@/data/site.config';
 import { resolveBookingTarget } from '@/lib/booking';
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
 
 interface Props {
-  /** Visual emphasis: primary (filled) or subtle (outline). */
   variant?: 'primary' | 'subtle';
   class?: string;
 }
 
 const { variant = 'primary', class: className = '' } = Astro.props;
+const t = useTranslations(getLangFromUrl(Astro.url));
 
 const target = resolveBookingTarget({
   bookingUrl: site.bookingUrl,
@@ -25,10 +26,8 @@ const styles =
 // External handoff opens in a new tab and is labeled as leaving the site (FR-006/007).
 // When no provider is configured, this resolves to the contact method instead (FR-008).
 const externalAttrs = target.external ? { target: '_blank', rel: 'noopener noreferrer' } : {};
-const label = target.external ? 'Book Now' : 'Enquire to Book';
-const a11yLabel = target.external
-  ? 'Book Now — opens our booking site in a new tab'
-  : 'Enquire to book by email';
+const label = target.external ? t('book.now') : t('book.enquire');
+const a11yLabel = target.external ? t('book.ariaExternal') : t('book.ariaEnquire');
 ---
 
 <a
@@ -46,8 +45,4 @@ const a11yLabel = target.external
     )
   }
 </a>
-{
-  target.external && (
-    <span class="sr-only">This link opens an external booking site in a new tab.</span>
-  )
-}
+{target.external && <span class="sr-only">{t('book.srExternal')}</span>}

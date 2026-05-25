@@ -1,8 +1,9 @@
 ---
+lang: en
 name: Guided Stargazing
 order: 1
 description: Late-night sessions with an astronomer and a high-powered telescope, far from any city glow.
-image: ../../assets/experiences/stargazing.jpg
+image: ../../../assets/experiences/stargazing.jpg
 imageAlt: A telescope silhouetted against a star-filled mountain sky
 ---
 

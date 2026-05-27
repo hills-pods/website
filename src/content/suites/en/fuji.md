@@ -2,29 +2,22 @@
 lang: en
 name: Fuji
 order: 2
-summary: A warm-water retreat beside the mountain tarn — our most restful bubble.
-view: South-facing, toward the still waters of the mountain tarn
+summary: Our quietest bubble — set low among the meadow grass, with a Japanese sense of stillness.
+view: Set low among the meadow grass, sheltered
 features:
-  - Transparent dome beside the water
+  - Panoramic dome low to the meadow
   - Private soaking tub and outdoor rain shower
   - Lounge daybed and heated floor
   - Climate control for every season
 included:
   - Welcome cocktail on arrival
   - Sunrise breakfast hamper
-  - Floating breakfast on request
+  - Tea ceremony service on request
 heroImage: ../../../assets/suites/fuji.jpg
-heroImageAlt: The Fuji bubble suite mirrored in a still mountain tarn at dusk
+heroImageAlt: The Fuji bubble suite low among the meadow grass at dusk
 available: true
-gallery:
-  - image: ../../../assets/suites/fuji/interior.jpg
-    alt: Interior of Fuji with warm lighting and natural materials
-  - image: ../../../assets/suites/fuji/terrace.jpg
-    alt: Private terrace and soaking tub at Fuji
-  - image: ../../../assets/suites/fuji/detail.jpg
-    alt: Material detail at Fuji
 ---
 
-Fuji sits low beside the tarn, where the water holds the sky. The calmest of the suites, it
-trades altitude for stillness — long soaks, soft light on water, and the slow rhythm of a
-mountain evening.
+Fuji sits low among the meadow grass — the quietest of the suites, set apart for its
+stillness. The interior follows a Japanese sense of restraint: dark cedar, paper-screen
+light, and clean low lines that ask nothing of you.

@@ -36,17 +36,16 @@ export const ui = {
 
     'hero.eyebrow': 'A luxury bubble hotel in the mountains',
     'hero.subcopy':
-      'Transparent suites suspended in an alpine meadow — where the only thing between you and the stars is a breath of warm air.',
+      'Panoramic bubble suites set in a Carpathian meadow — where the only thing between you and the stars is a breath of warm air.',
     'hero.explore': 'Explore the suites',
-    'hero.imageAlt':
-      'A transparent bubble suite glowing beneath a star-filled mountain sky at night',
+    'hero.imageAlt': 'A panoramic bubble suite glowing beneath a star-filled mountain sky at night',
 
     'home.exp.eyebrow': 'The experience',
     'home.exp.title': 'A night you feel rather than simply book',
     'home.exp.body':
-      'Bubble is a handful of transparent suites set in a high alpine meadow. No lobby, no crowds — only the slow theatre of weather and light, and the quiet luxury of being completely, comfortably present in the mountains.',
+      'Bubble is a handful of panoramic suites set in a high Carpathian meadow, each one themed after a different storied mountain. No lobby, no crowds — only the slow theatre of weather and light, and the quiet luxury of being completely, comfortably present in the mountains.',
     'home.suites.eyebrow': 'The suites',
-    'home.suites.title': 'Three ways to sleep under the sky',
+    'home.suites.title': 'Five ways to sleep under the sky',
     'home.suites.all': 'All suites',
     'home.exps.eyebrow': 'The experiences',
     'home.exps.title': 'Days as memorable as the nights',
@@ -65,7 +64,7 @@ export const ui = {
     'acc.eyebrow': 'Accommodations',
     'acc.title': 'Choose your bubble',
     'acc.intro':
-      'A small collection of transparent suites, each framing the mountains differently. Every stay includes the quiet essentials of a Bubble night.',
+      'A small collection of panoramic suites, each with an interior keyed to its namesake mountain — and each framing the sky differently. Every stay includes the quiet essentials of a Bubble night.',
     'acc.srHeading': 'Our suites',
 
     'suite.features': 'Features',
@@ -82,23 +81,15 @@ export const ui = {
     'gallery.eyebrow': 'Gallery',
     'gallery.title': 'A glimpse of the stay',
     'gallery.intro': 'Light, weather, and quiet — a few frames from life at Bubble.',
-    'gallery.alt.hoverla': 'The Hoverla suite glowing above Carpathian ridgelines at dawn',
-    'gallery.cap.hoverla': 'Hoverla at first light',
-    'gallery.alt.meadow': 'An alpine meadow at golden hour',
-    'gallery.cap.meadow': 'The meadow',
-    'gallery.alt.dusk': 'Bubble suites silhouetted against a dusky purple sky',
-    'gallery.cap.dusk': 'Dusk over the bubbles',
-    'gallery.alt.montblanc': 'The Mont Blanc suite facing a glacial sunset',
-    'gallery.alt.stargazing': 'A telescope beneath a star-filled sky',
-    'gallery.cap.stargazing': 'Guided stargazing',
-    'gallery.alt.interior': 'The warm interior of a bubble suite',
-    'gallery.alt.everest': "The Everest suite at the property's highest point",
-    'gallery.cap.everest': 'The Everest',
+    // Shared suffix used by both the main /gallery and per-suite galleries. Screens
+    // prepend the appropriate name (brand or suite) and append the index, so each image
+    // gets a unique, localized alt like "Bubble — frame 5" or "Hoverla — frame 3".
+    'gallery.frameSuffix': '— frame',
 
     'loc.eyebrow': 'Plan your visit',
     'loc.title': 'Finding the mountain',
     'loc.description':
-      'Tucked into a high alpine meadow above the treeline, a winding hour from the valley town.',
+      'Tucked into a high Carpathian meadow above the treeline, a winding hour from the valley town.',
     'loc.gettingThere': 'Getting there',
     'loc.directions':
       'From the valley, follow the mountain road to the trailhead car park; a private transfer carries you the final ascent.',
@@ -121,13 +112,13 @@ export const ui = {
 
     'seo.defaultTitle': 'Bubble — A Luxury Bubble Hotel in the Mountains',
     'seo.defaultDescription':
-      'Transparent bubble suites under alpine skies. A rare, luxurious escape in the mountains.',
+      'Panoramic bubble suites under Carpathian skies. A rare, luxurious escape in the mountains.',
     'seo.suites.title': 'The Suites',
     'seo.suites.desc':
-      'Explore the transparent bubble suites at Bubble — each a different way to sleep beneath the mountain sky.',
+      'Explore the panoramic bubble suites at Bubble — each themed after a famous mountain, each a different way to sleep beneath the sky.',
     'seo.experiences.title': 'Experiences',
     'seo.experiences.desc':
-      'Stargazing, mountain dining, and alpine wellness — the signature experiences of a stay at Bubble.',
+      'Carpathian eco-trails, the famed Shypit waterfall, and a ridge-top swing — the signature excursions from Bubble.',
     'seo.gallery.title': 'Gallery',
     'seo.gallery.desc': 'A visual tour of Bubble — the suites, the meadow, and the mountain sky.',
     'seo.location.title': 'Location & Contact',
@@ -162,16 +153,16 @@ export const ui = {
 
     'hero.eyebrow': 'Розкішний бабл-готель у горах',
     'hero.subcopy':
-      'Прозорі номери серед альпійської луки — де лише подих теплого повітря відділяє вас від зір.',
+      'Панорамні бабл-номери серед карпатської луки — де лише подих теплого повітря відділяє вас від зір.',
     'hero.explore': 'Переглянути номери',
-    'hero.imageAlt': 'Прозорий бабл-номер світиться під зоряним гірським небом уночі',
+    'hero.imageAlt': 'Панорамний бабл-номер світиться під зоряним гірським небом уночі',
 
     'home.exp.eyebrow': 'Враження',
     'home.exp.title': 'Ніч, яку відчуваєш, а не просто бронюєш',
     'home.exp.body':
-      'Bubble — це кілька прозорих номерів посеред високогірної альпійської луки. Жодного лобі, жодного натовпу — лише повільний театр погоди та світла й тиха розкіш цілковитої присутності в горах.',
+      'Bubble — це кілька панорамних номерів посеред високогірної карпатської луки, кожен з інтер’єром у мотивах легендарної гори. Жодного лобі, жодного натовпу — лише повільний театр погоди та світла й тиха розкіш цілковитої присутності в горах.',
     'home.suites.eyebrow': 'Номери',
-    'home.suites.title': 'Три способи заснути під небом',
+    'home.suites.title': 'П’ять способів заснути під небом',
     'home.suites.all': 'Усі номери',
     'home.exps.eyebrow': 'Враження',
     'home.exps.title': 'Дні, незабутні так само, як ночі',
@@ -190,7 +181,7 @@ export const ui = {
     'acc.eyebrow': 'Проживання',
     'acc.title': 'Оберіть свій бабл',
     'acc.intro':
-      'Невелика колекція прозорих номерів, кожен з яких по-своєму обрамлює гори. Кожне перебування включає тихі неодмінні складові ночі в Bubble.',
+      'Невелика колекція панорамних номерів, кожен з інтер’єром, що відсилає до своєї однойменної гори — і кожен по-своєму обрамлює небо. Кожне перебування включає тихі неодмінні складові ночі в Bubble.',
     'acc.srHeading': 'Наші номери',
 
     'suite.features': 'Зручності',
@@ -207,23 +198,12 @@ export const ui = {
     'gallery.eyebrow': 'Галерея',
     'gallery.title': 'Погляд на відпочинок',
     'gallery.intro': 'Світло, погода й тиша — кілька кадрів із життя в Bubble.',
-    'gallery.alt.hoverla': 'Номер «Говерла» світиться над карпатськими хребтами на світанку',
-    'gallery.cap.hoverla': '«Говерла» на першому світлі',
-    'gallery.alt.meadow': 'Альпійська лука в золоту годину',
-    'gallery.cap.meadow': 'Лука',
-    'gallery.alt.dusk': 'Силуети бабл-номерів на тлі присмеркового фіолетового неба',
-    'gallery.cap.dusk': 'Сутінки над баблами',
-    'gallery.alt.montblanc': 'Номер «Монблан» обличчям до льодовикового заходу сонця',
-    'gallery.alt.stargazing': 'Телескоп під зоряним небом',
-    'gallery.cap.stargazing': 'Спостереження за зорями з гідом',
-    'gallery.alt.interior': 'Теплий інтер’єр бабл-номера',
-    'gallery.alt.everest': 'Номер «Еверест» у найвищій точці садиби',
-    'gallery.cap.everest': '«Еверест»',
+    'gallery.frameSuffix': '— кадр',
 
     'loc.eyebrow': 'Сплануйте візит',
     'loc.title': 'Як нас знайти',
     'loc.description':
-      'Захований у високогірній альпійській луці над межею лісу, за звивисту годину від долинного містечка.',
+      'Захований у високогірній карпатській луці над межею лісу, за звивисту годину від долинного містечка.',
     'loc.gettingThere': 'Як дістатися',
     'loc.directions':
       'З долини їдьте гірською дорогою до парковки біля початку стежки; приватний трансфер довезе вас на фінальному підйомі.',
@@ -248,13 +228,13 @@ export const ui = {
 
     'seo.defaultTitle': 'Bubble — розкішний бабл-готель у горах',
     'seo.defaultDescription':
-      'Прозорі бабл-номери під альпійським небом. Рідкісна, розкішна втеча в горах.',
+      'Панорамні бабл-номери під карпатським небом. Рідкісна, розкішна втеча в горах.',
     'seo.suites.title': 'Номери',
     'seo.suites.desc':
-      'Перегляньте прозорі бабл-номери Bubble — кожен дарує власний спосіб заснути під гірським небом.',
+      'Перегляньте панорамні бабл-номери Bubble — кожен у мотивах однойменної гори, кожен дарує власний спосіб заснути під небом.',
     'seo.experiences.title': 'Враження',
     'seo.experiences.desc':
-      'Спостереження за зорями, гірська вечеря та альпійський велнес — фірмові враження перебування в Bubble.',
+      'Карпатські еко-стежки, відомий водоспад Шипот і гойдалка на гребені хребта — фірмові вилазки з Bubble.',
     'seo.gallery.title': 'Галерея',
     'seo.gallery.desc': 'Візуальна подорож Bubble — номери, лука й гірське небо.',
     'seo.location.title': 'Розташування та контакти',

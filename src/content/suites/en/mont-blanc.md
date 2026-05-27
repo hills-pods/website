@@ -3,7 +3,7 @@ lang: en
 name: Mont Blanc
 order: 3
 summary: Alpine elegance with an unbroken line to the setting sun.
-view: West-facing, across the glacier line toward sunset
+view: Across the glacier line toward sunset
 features:
   - Panoramic dome with an unobstructed sunset line
   - Private wood-fired hot tub
@@ -16,15 +16,9 @@ included:
 heroImage: ../../../assets/suites/mont-blanc.jpg
 heroImageAlt: The Mont Blanc bubble suite facing a glacial sunset
 available: true
-gallery:
-  - image: ../../../assets/suites/mont-blanc/interior.jpg
-    alt: Interior of Mont Blanc with warm lighting and natural materials
-  - image: ../../../assets/suites/mont-blanc/terrace.jpg
-    alt: Private terrace and wood-fired hot tub at Mont Blanc
-  - image: ../../../assets/suites/mont-blanc/detail.jpg
-    alt: Material detail at Mont Blanc
 ---
 
-Mont Blanc faces the close of the day. Its panoramic dome frames an unbroken western
-horizon, so evenings begin with champagne and end with the glacier line dimming to rose and
-indigo beyond the glass.
+Mont Blanc faces the close of the day. Its panoramic dome frames an unbroken horizon, so
+evenings begin with champagne and end with the glacier line dimming to rose and indigo
+beyond the glass. The interior is French-alpine in spirit: pale cashmere, brushed brass,
+and the quiet luxury of a Savoyard chalet.

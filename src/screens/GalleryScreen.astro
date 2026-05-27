@@ -2,27 +2,31 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import PageHeader from '@/components/PageHeader.astro';
 import Gallery, { type GalleryItem } from '@/components/Gallery.astro';
+import type { ImageMetadata } from 'astro';
+import { site } from '@/data/site.config';
 import { getLangFromUrl, useTranslations } from '@/i18n/utils';
-
-import meadow from '@/assets/gallery/meadow.jpg';
-import dusk from '@/assets/gallery/dusk.jpg';
-import interior from '@/assets/gallery/interior.jpg';
-import hoverla from '@/assets/suites/hoverla.jpg';
-import montblanc from '@/assets/suites/mont-blanc.jpg';
-import everest from '@/assets/suites/everest.jpg';
-import stargazing from '@/assets/experiences/stargazing.jpg';
 
 const t = useTranslations(getLangFromUrl(Astro.url));
 
-const items: GalleryItem[] = [
-  { src: hoverla, alt: t('gallery.alt.hoverla'), caption: t('gallery.cap.hoverla') },
-  { src: meadow, alt: t('gallery.alt.meadow'), caption: t('gallery.cap.meadow') },
-  { src: dusk, alt: t('gallery.alt.dusk'), caption: t('gallery.cap.dusk') },
-  { src: montblanc, alt: t('gallery.alt.montblanc') },
-  { src: stargazing, alt: t('gallery.alt.stargazing'), caption: t('gallery.cap.stargazing') },
-  { src: interior, alt: t('gallery.alt.interior') },
-  { src: everest, alt: t('gallery.alt.everest'), caption: t('gallery.cap.everest') },
-];
+// Every photo dropped into src/assets/gallery/ is imported at build time. Replace, add,
+// or remove files in that folder and the page picks them up on the next build — no edits
+// to this file required. The masonry order is reshuffled on every build (Fisher-Yates)
+// so the gallery never reads strictly top-down.
+const modules = import.meta.glob<{ default: ImageMetadata }>('../assets/gallery/gallery_*.jpg', {
+  eager: true,
+});
+const images = Object.values(modules).map((m) => m.default);
+
+for (let i = images.length - 1; i > 0; i--) {
+  const j = Math.floor(Math.random() * (i + 1));
+  [images[i], images[j]] = [images[j], images[i]];
+}
+
+const frameSuffix = t('gallery.frameSuffix');
+const items: GalleryItem[] = images.map((src, i) => ({
+  src,
+  alt: `${site.brandName} ${frameSuffix} ${i + 1}`,
+}));
 ---
 
 <BaseLayout title={t('seo.gallery.title')} description={t('seo.gallery.desc')}>

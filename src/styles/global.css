@@ -7,6 +7,11 @@
     color-scheme: dark;
   }
 
+  html {
+    /* Anchor jumps (e.g. the "skip to content" link) clear the fixed header. */
+    scroll-padding-top: 5rem;
+  }
+
   body {
     @apply bg-night font-body text-cream antialiased;
   }

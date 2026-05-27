@@ -12,7 +12,23 @@ const canonical = toCanonicalPath(Astro.url.pathname);
 const isActive = (href: string) => (href === '/' ? canonical === '/' : canonical.startsWith(href));
 ---
 
-<header class="absolute inset-x-0 top-0 z-30">
+<header data-header class="fixed inset-x-0 top-0 z-30">
+  <!-- Initial scrim: a soft gradient that keeps the header readable over the hero photo
+       at the very top of the page. Fades out once the user scrolls. -->
+  <div
+    data-header-scrim
+    aria-hidden="true"
+    class="pointer-events-none absolute inset-x-0 top-0 -z-10 h-48 bg-gradient-to-b from-night/85 via-night/40 to-transparent transition-opacity duration-300"
+  >
+  </div>
+  <!-- Scrolled backdrop: translucent frosted bar that fades in once the user scrolls past
+       the hero edge, so page content never bleeds through the header. -->
+  <div
+    data-header-backdrop
+    aria-hidden="true"
+    class="pointer-events-none absolute inset-0 -z-10 border-b border-white/10 bg-night/90 opacity-0 backdrop-blur-md transition-opacity duration-300"
+  >
+  </div>
   <div class="container-luxe flex items-center justify-between py-6">
     <a
       href={localizeHref('/', lang)}
@@ -51,3 +67,22 @@ const isActive = (href: string) => (href === '/' ? canonical === '/' : canonical
     </div>
   </div>
 </header>
+
+<script>
+  // Scroll-aware header: scrim over the hero (top of page), translucent backdrop once
+  // the user scrolls. Progressive enhancement — no-JS visitors keep the scrim, which is
+  // already enough for header readability over a hero photo and invisible on dark pages.
+  const header = document.querySelector<HTMLElement>('[data-header]');
+  const scrim = header?.querySelector<HTMLElement>('[data-header-scrim]');
+  const backdrop = header?.querySelector<HTMLElement>('[data-header-backdrop]');
+  if (header && scrim && backdrop) {
+    const SCROLL_THRESHOLD = 40;
+    const update = () => {
+      const scrolled = window.scrollY > SCROLL_THRESHOLD;
+      scrim.classList.toggle('opacity-0', scrolled);
+      backdrop.classList.toggle('opacity-0', !scrolled);
+    };
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+  }
+</script>

@@ -21,8 +21,9 @@ export default {
         mist: '#8a93a6',
       },
       fontFamily: {
-        // Display serif for headings; clean sans for body.
-        display: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+        // Sans-serif display for headings; clean sans for body. Different families so the
+        // hierarchy still reads as two voices, not one weight of the same typeface.
+        display: ['Manrope', 'system-ui', 'sans-serif'],
         body: ['Inter', 'system-ui', 'sans-serif'],
       },
       letterSpacing: {

@@ -3,6 +3,7 @@ lang: en
 name: Mont Blanc
 order: 3
 summary: Alpine elegance with an unbroken line to the setting sun.
+description: Mont Blanc faces the close of the day — its panoramic dome frames an unbroken horizon where the glacier line dims to rose and indigo beyond the glass. The interior is French-alpine — pale cashmere, brushed brass, the quiet of a Savoyard chalet. Best for sunset rituals.
 view: Across the glacier line toward sunset
 features:
   - Panoramic dome with an unobstructed sunset line

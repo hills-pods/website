@@ -3,6 +3,7 @@ lang: en
 name: Kilimanjaro
 order: 4
 summary: Wide skies and golden light, made for slow mornings.
+description: Kilimanjaro opens onto the widest sky on the property — at the meadow's edge, with the widest sunrise view of any bubble. The interior draws from the East African plains — ochre and umber, hand-woven textiles, warm carved wood. Best for unhurried mornings and long horizons.
 view: Over the open meadow toward a wide sunrise
 features:
   - Panoramic dome with the widest sunrise view

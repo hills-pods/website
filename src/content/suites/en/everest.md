@@ -3,6 +3,7 @@ lang: en
 name: Everest
 order: 5
 summary: Our highest, most exclusive bubble — the whole valley beneath you.
+description: The highest and most private bubble — reached by a final winding path, with the whole valley falling away beneath you from the summit perch. The interior is keyed to the Himalayan high country — yak-wool throws, low brass lamplight, expedition warmth. Best for solitude under the stars.
 view: The highest vantage on the property
 features:
   - Highest vantage on the property

@@ -4,12 +4,29 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import PageHeader from '@/components/PageHeader.astro';
 import SuiteRow from '@/components/SuiteRow.astro';
 import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+import type { UIKey } from '@/i18n/ui';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const suites = (await getCollection('suites', ({ data }) => data.lang === lang)).sort(
   (a, b) => a.data.order - b.data.order,
 );
+
+// Universal amenities shown below the suite list. Order is intentional — most-asked-about
+// first. To add or remove items, edit this list and the matching `acc.amenity.*` keys in
+// src/i18n/ui.ts. `scopeKey` is an optional sub-label for amenities that apply to only
+// some suites (e.g. the bathtub with mountain view, exclusive to the three high suites).
+const amenities: Array<{ key: UIKey; scopeKey?: UIKey }> = [
+  { key: 'acc.amenity.breakfast' },
+  { key: 'acc.amenity.kitchen' },
+  { key: 'acc.amenity.terrace' },
+  { key: 'acc.amenity.fireplace' },
+  { key: 'acc.amenity.ac' },
+  { key: 'acc.amenity.barbecue' },
+  { key: 'acc.amenity.parking' },
+  { key: 'acc.amenity.transfer' },
+  { key: 'acc.amenity.bathtub', scopeKey: 'acc.amenity.bathtub.scope' },
+];
 ---
 
 <BaseLayout title={t('seo.suites.title')} description={t('seo.suites.desc')}>
@@ -18,6 +35,27 @@ const suites = (await getCollection('suites', ({ data }) => data.lang === lang))
   <section class="container-luxe pb-24 sm:pb-32" aria-label={t('acc.srHeading')}>
     <div class="flex flex-col gap-20 sm:gap-28">
       {suites.map((suite, i) => <SuiteRow suite={suite} reverse={i % 2 === 1} />)}
+    </div>
+  </section>
+
+  <section class="bg-night-800 py-20 sm:py-28" aria-labelledby="amenities-heading">
+    <div class="container-luxe">
+      <div class="mb-12 max-w-2xl">
+        <p class="eyebrow">{t('acc.amenities.eyebrow')}</p>
+        <h2 id="amenities-heading" class="mt-4 text-4xl sm:text-5xl">
+          {t('acc.amenities.title')}
+        </h2>
+      </div>
+      <ul class="grid gap-x-8 gap-y-6 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          amenities.map(({ key, scopeKey }) => (
+            <li class="border-t border-white/10 pt-4">
+              <p class="font-body text-sm uppercase tracking-luxe text-cream">{t(key)}</p>
+              {scopeKey && <p class="mt-1 font-body text-xs text-mist">{t(scopeKey)}</p>}
+            </li>
+          ))
+        }
+      </ul>
     </div>
   </section>
 </BaseLayout>

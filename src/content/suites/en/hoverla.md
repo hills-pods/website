@@ -3,6 +3,7 @@ lang: en
 name: Hoverla
 order: 1
 summary: Our Carpathian flagship, where dawn breaks first over the eastern ridges.
+description: Named for the highest peak of the Carpathians, Hoverla catches the first light of day — east-facing, with a 360° panoramic dome and a clear-view ceiling for stargazing. The interior is woven in Carpathian craft — hand-loomed wool, beech wood, hutsul restraint. Best for early risers.
 view: Over rolling Carpathian ridgelines
 features:
   - 360° panoramic dome with a clear-view ceiling

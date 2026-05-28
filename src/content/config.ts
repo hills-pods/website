@@ -16,6 +16,10 @@ const suites = defineCollection({
       name: z.string().min(1),
       order: z.number(),
       summary: z.string().min(1),
+      // Longer descriptive blurb shown only on the /accommodations listing row.
+      // Capped at 300 chars so it cannot grow into a body of its own; `SuiteRow`
+      // falls back to `summary` when this is absent.
+      description: z.string().min(1).max(300).optional(),
       view: z.string().min(1),
       features: z.array(z.string()).min(1),
       included: z.array(z.string()).min(1),

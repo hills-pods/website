@@ -4,6 +4,7 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import Hero from '@/components/Hero.astro';
 import SuiteCarousel from '@/components/SuiteCarousel.astro';
 import ExperienceCard from '@/components/ExperienceCard.astro';
+import ReviewCarousel from '@/components/ReviewCarousel.astro';
 import BookNowButton from '@/components/BookNowButton.astro';
 import { getLangFromUrl, useTranslations, localizeHref } from '@/i18n/utils';
 
@@ -17,6 +18,9 @@ const experiences = (await getCollection('experiences', ({ data }) => data.lang 
   (a, b) => a.data.order - b.data.order,
 );
 const featuredExperiences = experiences.slice(0, 3);
+const reviews = (await getCollection('reviews', ({ data }) => data.lang === lang)).sort(
+  (a, b) => a.data.order - b.data.order,
+);
 ---
 
 <BaseLayout>
@@ -57,6 +61,20 @@ const featuredExperiences = experiences.slice(0, 3);
       </div>
     </div>
   </section>
+
+  {
+    reviews.length > 0 && (
+      <section class="container-luxe py-24 sm:py-32" aria-labelledby="reviews-heading">
+        <div class="mb-12 max-w-2xl">
+          <p class="eyebrow">{t('home.reviews.eyebrow')}</p>
+          <h2 id="reviews-heading" class="mt-4 text-4xl sm:text-5xl">
+            {t('home.reviews.title')}
+          </h2>
+        </div>
+        <ReviewCarousel reviews={reviews} />
+      </section>
+    )
+  }
 
   <section class="container-luxe py-24 text-center sm:py-32">
     <p class="eyebrow">{t('home.stay.eyebrow')}</p>

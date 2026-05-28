@@ -49,6 +49,8 @@ export const ui = {
     'home.suites.all': 'All suites',
     'home.exps.eyebrow': 'The experiences',
     'home.exps.title': 'Days as memorable as the nights',
+    'home.reviews.eyebrow': 'Reviews',
+    'home.reviews.title': 'Letters from the hills',
     'home.stay.eyebrow': 'How to stay',
     'home.stay.title': 'A handful of bubbles. Reserve yours.',
     'home.stay.body':
@@ -58,8 +60,9 @@ export const ui = {
     'card.unavailable': 'Currently unavailable',
 
     'carousel.suites': 'Suites carousel',
-    'carousel.prev': 'Previous suites',
-    'carousel.next': 'Next suites',
+    'carousel.reviews': 'Guest reviews carousel',
+    'carousel.prev': 'Previous',
+    'carousel.next': 'Next',
 
     'acc.eyebrow': 'Accommodations',
     'acc.title': 'Choose your bubble',
@@ -163,6 +166,8 @@ export const ui = {
     'home.suites.all': 'Усі номери',
     'home.exps.eyebrow': 'Враження',
     'home.exps.title': 'Дні, незабутні так само, як ночі',
+    'home.reviews.eyebrow': 'Відгуки',
+    'home.reviews.title': 'Листи зі схилів',
     'home.stay.eyebrow': 'Як зупинитися',
     'home.stay.title': 'Лише кілька баблів. Забронюйте свій.',
     'home.stay.body':
@@ -172,8 +177,9 @@ export const ui = {
     'card.unavailable': 'Наразі недоступно',
 
     'carousel.suites': 'Карусель номерів',
-    'carousel.prev': 'Попередні номери',
-    'carousel.next': 'Наступні номери',
+    'carousel.reviews': 'Карусель відгуків',
+    'carousel.prev': 'Попередні',
+    'carousel.next': 'Наступні',
 
     'acc.eyebrow': 'Проживання',
     'acc.title': 'Оберіть свій бабл',

@@ -1,0 +1,24 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  review: CollectionEntry<'reviews'>;
+}
+
+const { review } = Astro.props;
+const { Content } = await review.render();
+---
+
+<figure class="flex h-full flex-col rounded-lg border border-white/10 bg-night-800 p-8 sm:p-10">
+  <!-- Decorative open-quote glyph; aria-hidden because the text below is what the reader needs. -->
+  <span aria-hidden="true" class="font-display text-6xl leading-none text-champagne/70">
+    &ldquo;
+  </span>
+  <blockquote class="mt-4 flex-1 font-display text-xl italic leading-relaxed text-cream/90">
+    <Content />
+  </blockquote>
+  <figcaption class="mt-8 border-t border-white/10 pt-6">
+    <p class="font-body text-base text-cream">{review.data.name}</p>
+    <p class="mt-1 font-body text-xs uppercase tracking-luxe text-mist">{review.data.stay}</p>
+  </figcaption>
+</figure>

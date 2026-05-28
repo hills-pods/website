@@ -27,5 +27,12 @@ for (const { lang, base } of locales) {
       await page.goto(url(base, '/'));
       await expect(page.locator('[data-carousel-track] article')).toHaveCount(5);
     });
+
+    test('renders the guest reviews section with at least one quote', async ({ page }) => {
+      await page.goto(url(base, '/'));
+      const region = page.getByRole('region', { name: t(lang, 'home.reviews.title') });
+      await expect(region).toBeVisible();
+      expect(await region.locator('figure').count()).toBeGreaterThan(0);
+    });
   });
 }

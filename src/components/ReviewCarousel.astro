@@ -1,0 +1,57 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import ReviewCard from './ReviewCard.astro';
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+
+interface Props {
+  reviews: CollectionEntry<'reviews'>[];
+}
+
+const { reviews } = Astro.props;
+const t = useTranslations(getLangFromUrl(Astro.url));
+---
+
+<div class="relative" data-carousel>
+  <!-- Native scroll-snap track: swipeable on touch, keyboard-scrollable, screen-reader
+       readable. Works with zero JS; prev/next buttons are an enhancement. -->
+  <div
+    class="snap-x snap-mandatory overflow-x-auto scroll-smooth pb-4 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+    tabindex="0"
+    role="group"
+    aria-label={t('carousel.reviews')}
+    data-carousel-track
+  >
+    <ul class="flex items-stretch gap-6">
+      {
+        reviews.map((review) => (
+          <li class="w-[85%] shrink-0 snap-start sm:w-[46%] lg:w-[31%]">
+            <ReviewCard review={review} />
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+
+  <button
+    type="button"
+    hidden
+    data-carousel-prev
+    aria-label={t('carousel.prev')}
+    class="absolute left-0 top-1/2 hidden h-11 w-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-champagne/40 bg-night/80 text-2xl text-cream backdrop-blur transition-opacity hover:border-champagne disabled:opacity-30 sm:flex"
+  >
+    <span aria-hidden="true">‹</span>
+  </button>
+  <button
+    type="button"
+    hidden
+    data-carousel-next
+    aria-label={t('carousel.next')}
+    class="absolute right-0 top-1/2 hidden h-11 w-11 -translate-y-1/2 translate-x-1/2 items-center justify-center rounded-full border border-champagne/40 bg-night/80 text-2xl text-cream backdrop-blur transition-opacity hover:border-champagne disabled:opacity-30 sm:flex"
+  >
+    <span aria-hidden="true">›</span>
+  </button>
+</div>
+
+<script>
+  import '@/scripts/carousel';
+</script>

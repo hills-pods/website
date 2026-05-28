@@ -47,4 +47,18 @@ const experiences = defineCollection({
     }),
 });
 
-export const collections = { suites, experiences };
+// Guest reviews. Body of each markdown file is the quote itself; frontmatter
+// carries the guest's name and a short "stay" line (which suite, what date).
+// Bilingual: each review has a uk/ and en/ file with the shared base slug
+// linking the two — same translation model used by suites and experiences.
+const reviews = defineCollection({
+  type: 'content',
+  schema: z.object({
+    lang,
+    name: z.string().min(1),
+    order: z.number(),
+    stay: z.string().min(1),
+  }),
+});
+
+export const collections = { suites, experiences, reviews };

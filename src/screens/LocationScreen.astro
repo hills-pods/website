@@ -7,6 +7,17 @@ import { getLangFromUrl, useTranslations } from '@/i18n/utils';
 
 const t = useTranslations(getLangFromUrl(Astro.url));
 const telHref = `tel:${site.contact.phone.replace(/[^+\d]/g, '')}`;
+
+// Map widget. Both URLs override-or-derive: when `mapUrl` / `mapEmbedUrl` are set
+// in site.config.ts (Google Maps in our case), we use those verbatim. When they
+// are unset, both fall back to OpenStreetMap derived from `coordinates` — so
+// removing the config fields reverts to a no-key, no-tracking OSM map.
+const { lat, lon } = site.coordinates;
+const bbox = [lon - 0.06, lat - 0.05, lon + 0.06, lat + 0.05].join(',');
+const embedUrl =
+  site.mapEmbedUrl ??
+  `https://www.openstreetmap.org/export/embed.html?bbox=${bbox}&layer=mapnik&marker=${lat},${lon}`;
+const mapsHref = site.mapUrl ?? `https://www.openstreetmap.org/?mlat=${lat}&mlon=${lon}&zoom=14`;
 ---
 
 <BaseLayout title={t('seo.location.title')} description={t('seo.location.desc')}>
@@ -17,18 +28,14 @@ const telHref = `tel:${site.contact.phone.replace(/[^+\d]/g, '')}`;
       <div>
         <p class="eyebrow mb-4">{t('loc.gettingThere')}</p>
         <p class="text-lg leading-relaxed text-cream/85">{t('loc.directions')}</p>
-        {
-          site.mapUrl && (
-            <a
-              href={site.mapUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="mt-4 inline-flex min-h-11 items-center font-body text-sm uppercase tracking-luxe text-champagne underline-offset-8 hover:underline"
-            >
-              {t('loc.openMaps')}
-            </a>
-          )
-        }
+        <a
+          href={mapsHref}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="mt-4 inline-flex min-h-11 items-center font-body text-sm uppercase tracking-luxe text-champagne underline-offset-8 hover:underline"
+        >
+          {t('loc.openMaps')}
+        </a>
       </div>
 
       <div>
@@ -48,13 +55,15 @@ const telHref = `tel:${site.contact.phone.replace(/[^+\d]/g, '')}`;
       <BookNowButton />
     </div>
 
-    <div class="rounded-lg bg-night-800 p-8">
-      <p class="eyebrow mb-4">{t('loc.goodToKnow')}</p>
-      <ul class="space-y-3 text-sm text-cream/80">
-        <li class="border-b border-white/10 pb-3">{t('loc.gtk1')}</li>
-        <li class="border-b border-white/10 pb-3">{t('loc.gtk2')}</li>
-        <li class="border-b border-white/10 pb-3">{t('loc.gtk3')}</li>
-      </ul>
+    <!-- Map widget. Lazy-loaded so it doesn't block the LCP element above. -->
+    <div class="min-h-[420px] overflow-hidden rounded-lg border border-white/10 bg-night-800">
+      <iframe
+        src={embedUrl}
+        title={t('loc.mapTitle')}
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        allowfullscreen
+        class="h-full min-h-[420px] w-full border-0"></iframe>
     </div>
   </section>
 </BaseLayout>

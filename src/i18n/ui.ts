@@ -95,10 +95,7 @@ export const ui = {
       'From the valley, follow the mountain road to the trailhead car park; a private transfer carries you the final ascent.',
     'loc.openMaps': 'Open in maps ↗',
     'loc.contact': 'Contact',
-    'loc.goodToKnow': 'Good to know',
-    'loc.gtk1': 'A private transfer carries you the final ascent — arrange it when you book.',
-    'loc.gtk2': 'Suites are released in limited number across the season.',
-    'loc.gtk3': 'Have a question before booking? Email or call and we’ll help personally.',
+    'loc.mapTitle': 'A map of the property location in the Carpathian mountains',
 
     'footer.explore': 'Explore',
     'footer.contact': 'Contact',
@@ -209,12 +206,7 @@ export const ui = {
       'З долини їдьте гірською дорогою до парковки біля початку стежки; приватний трансфер довезе вас на фінальному підйомі.',
     'loc.openMaps': 'Відкрити на карті ↗',
     'loc.contact': 'Контакти',
-    'loc.goodToKnow': 'Корисно знати',
-    'loc.gtk1':
-      'Приватний трансфер довезе вас на фінальному підйомі — замовте його під час бронювання.',
-    'loc.gtk2': 'Номери доступні в обмеженій кількості протягом сезону.',
-    'loc.gtk3':
-      'Маєте запитання перед бронюванням? Напишіть або зателефонуйте — ми допоможемо особисто.',
+    'loc.mapTitle': 'Карта розташування садиби в Карпатах',
 
     'footer.explore': 'Розділи',
     'footer.contact': 'Контакти',

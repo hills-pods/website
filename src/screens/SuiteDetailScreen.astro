@@ -13,12 +13,11 @@ interface Props {
 const { suite } = Astro.props;
 const { data } = suite;
 const t = useTranslations(getLangFromUrl(Astro.url));
-const { Content } = await suite.render();
 
 // Per-suite gallery: every photo dropped into src/assets/suites/<slug>/ is imported at
-// build time and rendered below. Replace, add, or remove files in the suite's folder —
-// no edits to this file or the suite's frontmatter required. Order is reshuffled per
-// build (Fisher-Yates) so the gallery never reads strictly top-down.
+// build time and rendered below the hero. Replace, add, or remove files in the suite's
+// folder — no edits to this file or the suite's frontmatter required. Order is
+// reshuffled per build (Fisher-Yates) so the gallery never reads strictly top-down.
 //
 // Vite requires statically analyzable globs, so we glob ALL suite folders eagerly then
 // filter by slug at request time. The folder-name match handles slugs whose filenames
@@ -64,34 +63,9 @@ const frameSuffix = t('gallery.frameSuffix');
     </div>
   </section>
 
-  <section class="container-luxe grid gap-12 py-20 lg:grid-cols-3">
-    <div class="space-y-4 text-lg leading-relaxed text-cream/85 lg:col-span-2">
-      <Content />
-    </div>
-
-    <div class="space-y-10">
-      <div>
-        <p class="eyebrow mb-4">{t('suite.features')}</p>
-        <ul class="space-y-2 text-sm text-cream/80">
-          {data.features.map((f) => <li class="border-b border-white/10 pb-2">{f}</li>)}
-        </ul>
-      </div>
-      <div>
-        <p class="eyebrow mb-4">{t('suite.included')}</p>
-        <ul class="space-y-2 text-sm text-cream/80">
-          {data.included.map((i) => <li class="border-b border-white/10 pb-2">{i}</li>)}
-        </ul>
-      </div>
-      <BookNowButton />
-    </div>
-  </section>
-
   {
     galleryImages.length > 0 && (
-      <section class="container-luxe pb-24" aria-labelledby="suite-gallery-heading">
-        <h2 id="suite-gallery-heading" class="mb-8 text-3xl sm:text-4xl">
-          {t('suite.gallery')}
-        </h2>
+      <section class="container-luxe py-16 sm:py-20">
         <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {galleryImages.map((src, i) => (
             <li class="overflow-hidden rounded-lg">
@@ -109,4 +83,8 @@ const frameSuffix = t('gallery.frameSuffix');
       </section>
     )
   }
+
+  <div class="container-luxe flex justify-center pb-24 sm:pb-32">
+    <BookNowButton />
+  </div>
 </BaseLayout>

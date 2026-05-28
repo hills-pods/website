@@ -83,9 +83,6 @@ export const ui = {
     'acc.amenity.bathtub': 'Bathtub with mountain view',
     'acc.amenity.bathtub.scope': 'Everest · Kilimanjaro · Mont Blanc',
 
-    'suite.features': 'Features',
-    'suite.included': 'Included',
-    'suite.gallery': 'More views',
     'suite.unavailableNote': 'Currently unavailable — join the waitlist via enquiry',
 
     'exp.eyebrow': 'Experiences',
@@ -213,9 +210,6 @@ export const ui = {
     'acc.amenity.bathtub': 'Ванна з гірським краєвидом',
     'acc.amenity.bathtub.scope': '«Еверест» · «Кіліманджаро» · «Монблан»',
 
-    'suite.features': 'Зручності',
-    'suite.included': 'Включено',
-    'suite.gallery': 'Більше виглядів',
     'suite.unavailableNote': 'Наразі недоступно — приєднайтеся до списку очікування через запит',
 
     'exp.eyebrow': 'Враження',

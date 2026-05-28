@@ -13,14 +13,11 @@ for (const { lang, base } of locales) {
       // First suite by order is Hoverla; its base slug is stable across languages.
       await page.locator('article a').first().click();
       await expect(page).toHaveURL(new RegExp(`${base}/accommodations/hoverla`));
-      await expect(page.getByText(t(lang, 'suite.features'))).toBeVisible();
-      await expect(page.getByText(t(lang, 'suite.included'))).toBeVisible();
 
-      // Per-suite gallery section renders the photos found in src/assets/suites/<slug>/.
-      // Count is data-driven (5–8 per suite today) — just assert at least one rendered.
-      const gallery = page.getByRole('region', { name: t(lang, 'suite.gallery') });
-      await expect(gallery).toBeVisible();
-      expect(await gallery.locator('img').count()).toBeGreaterThan(0);
+      // Detail page is image-led — hero + gallery photos (no body, no features list).
+      // Hero contributes one <img>; the gallery contributes the rest. Assert >1 to
+      // confirm both rendered without depending on the exact per-suite photo count.
+      expect(await page.locator('main img').count()).toBeGreaterThan(1);
     });
 
     // Unavailable-state assertion intentionally omitted: all suites currently render

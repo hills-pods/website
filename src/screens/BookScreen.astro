@@ -1,0 +1,89 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHeader from '@/components/PageHeader.astro';
+import { site } from '@/data/site.config';
+import { resolveBookingFallback } from '@/lib/booking';
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+
+const t = useTranslations(getLangFromUrl(Astro.url));
+
+// The /book page always renders a "what if the widget breaks" fallback panel —
+// it's the safety net so guests are never stranded by a blocked third-party
+// script. Returns either the external provider URL or a contact mailto.
+const fallback = resolveBookingFallback({
+  bookingUrl: site.bookingUrl,
+  contactEmail: site.contact.email,
+});
+const fallbackIsExternal = fallback.kind === 'external';
+const easyMs = site.easyMs;
+---
+
+<BaseLayout title={t('seo.book.title')} description={t('seo.book.desc')}>
+  <PageHeader eyebrow={t('book.eyebrow')} title={t('book.title')} intro={t('book.intro')} />
+
+  <section class="container-luxe pb-20" aria-label={t('book.widgetTitle')}>
+    {
+      easyMs && (
+        <div class="overflow-hidden rounded-lg border border-white/10 bg-cream p-4 sm:p-6">
+          {/*
+            EasyMS reservation module. The bundle reads moduleKey from the
+            type="text/props" payload and renders the booking UI into the
+            #easyms-reservation-module container. min-h reserves space so the
+            page doesn't reflow when the script paints, protecting CLS
+            (Principle IV).
+
+            `is:inline` keeps both tags as-is so Astro's bundler doesn't try to
+            process the third-party loader. Required for any vendor script that
+            self-initializes from a sibling props tag.
+          */}
+          <div id="easyms-reservation-module" class="min-h-[640px]">
+            <script
+              is:inline
+              type="text/props"
+              set:html={JSON.stringify({ moduleKey: easyMs.moduleKey })}
+            />
+          </div>
+          <script is:inline async src="https://my.easyms.co/reservation-module/bundle.js" />
+        </div>
+      )
+    }
+  </section>
+
+  {
+    /*
+    Always-visible safety net. Surfaces both the external provider (when set)
+    and the email contact. We don't gate this on widget failure because (a) the
+    detection adds JS complexity for marginal benefit and (b) some guests
+    simply prefer email — letting them see both routes is honest UX.
+  */
+  }
+  <section class="border-t border-white/10 bg-night-800">
+    <div class="container-luxe grid gap-8 py-16 lg:grid-cols-[1fr_2fr]">
+      <p class="eyebrow">{t('book.fallback.eyebrow')}</p>
+      <div class="space-y-6">
+        <p class="text-lg leading-relaxed text-cream/85">{t('book.fallback.body')}</p>
+        <div class="flex flex-wrap items-center gap-4">
+          {
+            fallbackIsExternal && (
+              <a
+                href={fallback.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={t('book.fallback.partnerAria')}
+                class="inline-flex min-h-11 items-center gap-2 rounded-full border border-champagne/60 px-6 py-3 font-body text-sm uppercase tracking-luxe text-champagne transition-colors hover:border-champagne hover:text-cream"
+              >
+                <span>{t('book.fallback.partner')}</span>
+              </a>
+            )
+          }
+          <a
+            href={`mailto:${site.contact.email}`}
+            class="inline-flex min-h-11 items-center font-body text-sm uppercase tracking-luxe text-champagne underline-offset-8 hover:underline"
+          >
+            {t('book.fallback.emailLabel')}: {site.contact.email}
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

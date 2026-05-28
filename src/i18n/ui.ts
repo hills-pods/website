@@ -30,9 +30,22 @@ export const ui = {
 
     'book.now': 'Book Now',
     'book.enquire': 'Enquire to Book',
+    'book.ariaInternal': 'Book Now — open the reservation page',
     'book.ariaExternal': 'Book Now — opens our booking site in a new tab',
     'book.ariaEnquire': 'Enquire to book by email',
     'book.srExternal': 'This link opens an external booking site in a new tab.',
+
+    'book.eyebrow': 'Reservations',
+    'book.title': 'Reserve your bubble',
+    'book.intro':
+      'Pick your dates and your suite below. Confirmation is instant — your night beneath the stars is held the moment you book.',
+    'book.widgetTitle': 'Reservation form',
+    'book.fallback.eyebrow': 'Alternative ways to book',
+    'book.fallback.body':
+      'If the form above does not appear, you can still secure your stay through our partner site or by writing to us directly. We answer within the day.',
+    'book.fallback.partner': 'Book via our partner ↗',
+    'book.fallback.partnerAria': 'Book via our partner booking site — opens in a new tab',
+    'book.fallback.emailLabel': 'Email us',
 
     'hero.eyebrow': 'A luxury bubble hotel in the mountains',
     'hero.subcopy':
@@ -134,6 +147,9 @@ export const ui = {
     'seo.location.title': 'Location & Contact',
     'seo.location.desc':
       'Where to find Bubble in the mountains, how to reach us, and how to get in touch.',
+    'seo.book.title': 'Book your stay',
+    'seo.book.desc':
+      'Reserve a panoramic bubble suite at Bubble — check dates, pick your suite, and confirm in a single step.',
     'seo.notfound.title': 'Page Not Found',
     'seo.notfound.desc': 'The page you were looking for has drifted off into the mountain mist.',
   },
@@ -157,9 +173,23 @@ export const ui = {
 
     'book.now': 'Забронювати',
     'book.enquire': 'Запитати про бронювання',
+    'book.ariaInternal': 'Забронювати — відкрити сторінку бронювання',
     'book.ariaExternal': 'Забронювати — відкриває сайт бронювання в новій вкладці',
     'book.ariaEnquire': 'Запитати про бронювання електронною поштою',
     'book.srExternal': 'Це посилання відкриває зовнішній сайт бронювання в новій вкладці.',
+
+    'book.eyebrow': 'Бронювання',
+    'book.title': 'Забронюйте свій бабл',
+    'book.intro':
+      'Оберіть дати й номер нижче. Підтвердження надходить миттєво — ваша ніч під зорями закріплюється за вами одразу після бронювання.',
+    'book.widgetTitle': 'Форма бронювання',
+    'book.fallback.eyebrow': 'Альтернативні способи бронювання',
+    'book.fallback.body':
+      'Якщо форма вище не з’явилася, ви все одно можете забронювати ніч через наш партнерський сайт або написавши нам напряму. Відповідаємо протягом дня.',
+    'book.fallback.partner': 'Забронювати через партнера ↗',
+    'book.fallback.partnerAria':
+      'Забронювати через партнерський сайт — відкривається в новій вкладці',
+    'book.fallback.emailLabel': 'Написати нам',
 
     'hero.eyebrow': 'Розкішний бабл-готель у горах',
     'hero.subcopy':
@@ -257,6 +287,9 @@ export const ui = {
     'seo.gallery.desc': 'Візуальна подорож Bubble — номери, лука й гірське небо.',
     'seo.location.title': 'Розташування та контакти',
     'seo.location.desc': 'Де знайти Bubble у горах, як до нас дістатися та як зв’язатися.',
+    'seo.book.title': 'Забронювати ніч',
+    'seo.book.desc':
+      'Забронюйте панорамний бабл-номер у Bubble — оберіть дати, номер і підтвердьте бронювання за один крок.',
     'seo.notfound.title': 'Сторінку не знайдено',
     'seo.notfound.desc': 'Сторінка, яку ви шукали, розчинилася в гірському тумані.',
   },

@@ -5,11 +5,18 @@
 export interface SiteConfig {
   brandName: string;
   /**
-   * External booking provider URL. When set, "Book Now" hands off to it (FR-006).
-   * When `null`, "Book Now" falls back to the contact method (FR-008).
+   * Embedded booking widget. When set, "Book Now" routes to the in-page /book
+   * page that hosts the widget. When `null`, the resolver falls through to
+   * `bookingUrl` (external) or the contact email (enquiry) — guests are never
+   * stranded (FR-008).
+   */
+  easyMs: { moduleKey: string } | null;
+  /**
+   * External booking provider URL. Used as the silent fallback on /book when
+   * the embedded widget fails to load, and as the primary target when no
+   * embedded widget is configured.
    *
-   * TODO(booking-provider): replace the placeholder below with the hotel's real
-   * booking provider URL before launch, or set to `null` to use the contact fallback.
+   * Set to `null` to use the contact-email fallback instead.
    */
   bookingUrl: string | null;
   contact: {
@@ -42,7 +49,11 @@ export interface SiteConfig {
 
 export const site: SiteConfig = {
   brandName: 'Bubble',
-  // Placeholder until the real provider is supplied (see TODO above).
+  // Embedded reservation widget — when set, /book hosts it and "Book Now"
+  // routes there instead of an external provider. The bookingUrl below stays
+  // as a silent fallback shown on /book when the widget fails to load.
+  easyMs: { moduleKey: '29aab2ff-f21a-4048-8446-50b258af1671' },
+  // Placeholder external provider — used as the on-page fallback only.
   bookingUrl: 'https://reservations.bubblehotel.example',
   contact: {
     email: 'stay@bubblehotel.example',

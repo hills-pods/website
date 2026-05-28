@@ -1,7 +1,7 @@
 ---
 import { site } from '@/data/site.config';
 import { resolveBookingTarget } from '@/lib/booking';
-import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+import { getLangFromUrl, useTranslations, localizeHref } from '@/i18n/utils';
 
 interface Props {
   variant?: 'primary' | 'subtle';
@@ -9,9 +9,11 @@ interface Props {
 }
 
 const { variant = 'primary', class: className = '' } = Astro.props;
-const t = useTranslations(getLangFromUrl(Astro.url));
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 
 const target = resolveBookingTarget({
+  hasEmbeddedWidget: site.easyMs !== null,
   bookingUrl: site.bookingUrl,
   contactEmail: site.contact.email,
 });
@@ -23,26 +25,29 @@ const styles =
     ? 'bg-champagne text-night hover:bg-champagne-600'
     : 'border border-champagne/60 text-champagne hover:border-champagne hover:text-cream';
 
-// External handoff opens in a new tab and is labeled as leaving the site (FR-006/007).
-// When no provider is configured, this resolves to the contact method instead (FR-008).
-const externalAttrs = target.external ? { target: '_blank', rel: 'noopener noreferrer' } : {};
-const label = target.external ? t('book.now') : t('book.enquire');
-const a11yLabel = target.external ? t('book.ariaExternal') : t('book.ariaEnquire');
+// 'internal' → in-page booking screen (no new tab, no external glyph).
+// 'external' → third-party provider (FR-006/007: open in new tab, mark as external).
+// 'enquiry'  → mailto fallback (FR-008): never strand a guest.
+const isInternal = target.kind === 'internal';
+const isExternal = target.kind === 'external';
+const href = isInternal ? localizeHref(target.href, lang) : target.href;
+const externalAttrs = isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {};
+const label = isInternal || isExternal ? t('book.now') : t('book.enquire');
+const a11yLabel = isInternal
+  ? t('book.ariaInternal')
+  : isExternal
+    ? t('book.ariaExternal')
+    : t('book.ariaEnquire');
 ---
 
-<a
-  href={target.href}
-  class={`${base} ${styles} ${className}`}
-  aria-label={a11yLabel}
-  {...externalAttrs}
->
+<a href={href} class={`${base} ${styles} ${className}`} aria-label={a11yLabel} {...externalAttrs}>
   <span>{label}</span>
   {
-    target.external && (
+    isExternal && (
       <span aria-hidden="true" class="text-xs">
         ↗
       </span>
     )
   }
 </a>
-{target.external && <span class="sr-only">{t('book.srExternal')}</span>}
+{isExternal && <span class="sr-only">{t('book.srExternal')}</span>}

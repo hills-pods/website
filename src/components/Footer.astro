@@ -2,6 +2,7 @@
 import { site } from '@/data/site.config';
 import { navLinks } from '@/data/nav';
 import { getLangFromUrl, useTranslations, localizeHref } from '@/i18n/utils';
+import SocialLinks from './SocialLinks.astro';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -35,26 +36,14 @@ const year = new Date().getFullYear();
 
     <div>
       <p class="eyebrow mb-4">{t('footer.contact')}</p>
-      <ul class="flex flex-col gap-2 text-sm text-cream/80">
-        <li>
-          <a href={`mailto:${site.contact.email}`} class="transition-colors hover:text-champagne">
-            {site.contact.email}
-          </a>
-        </li>
-        <li>
-          <a
-            href={`tel:${site.contact.phone.replace(/[^+\d]/g, '')}`}
-            class="transition-colors hover:text-champagne"
-          >
-            {site.contact.phone}
-          </a>
-        </li>
-        <li>
-          <a href={localizeHref('/location', lang)} class="transition-colors hover:text-champagne">
-            {t('footer.findUs')}
-          </a>
-        </li>
-      </ul>
+      <a
+        href={`tel:${site.contact.phone.replace(/[^+\d]/g, '')}`}
+        class="text-sm text-cream/80 transition-colors hover:text-champagne"
+      >
+        {site.contact.phone}
+      </a>
+
+      <SocialLinks class="mt-4" />
     </div>
   </div>
 

@@ -1,0 +1,56 @@
+---
+import { Icon } from 'astro-icon/components';
+import { site } from '@/data/site.config';
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+
+// One source of truth for the Instagram + Telegram icon row — rendered in
+// the footer (size="sm") and on the location page (size="md", to match the
+// larger text-lg contact details it sits next to). Each handle is optional
+// in site.config.ts; setting either to an empty string hides just that icon.
+
+interface Props {
+  /** Icon scale. sm = h-5 w-5 (footer); md = h-6 w-6 (location page). */
+  size?: 'sm' | 'md';
+  class?: string;
+}
+
+const { size = 'sm', class: className = '' } = Astro.props;
+const t = useTranslations(getLangFromUrl(Astro.url));
+
+const iconClass = size === 'md' ? 'h-6 w-6' : 'h-5 w-5';
+const ig = site.contact.social.instagram;
+const tg = site.contact.social.telegram;
+---
+
+{
+  (ig || tg) && (
+    <ul class={`flex items-center gap-2 ${className}`} aria-label={t('social.label')}>
+      {ig && (
+        <li>
+          <a
+            href={ig}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={t('social.instagram')}
+            class="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full text-cream/80 transition-colors hover:text-champagne"
+          >
+            <Icon name="simple-icons:instagram" class={iconClass} />
+          </a>
+        </li>
+      )}
+      {tg && (
+        <li>
+          <a
+            href={tg}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={t('social.telegram')}
+            class="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full text-cream/80 transition-colors hover:text-champagne"
+          >
+            <Icon name="simple-icons:telegram" class={iconClass} />
+          </a>
+        </li>
+      )}
+    </ul>
+  )
+}

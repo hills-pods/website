@@ -22,6 +22,15 @@ export interface SiteConfig {
   contact: {
     email: string;
     phone: string;
+    /**
+     * Social handles linked from the footer. Each is a full URL — keeps the
+     * footer template agnostic about handle vs. username vs. full URL. Set to
+     * an empty string to hide the icon (rendered conditionally).
+     */
+    social: {
+      instagram: string;
+      telegram: string;
+    };
   };
   /**
    * Latitude / longitude of the property. Used as the fallback when `mapUrl`
@@ -58,6 +67,12 @@ export const site: SiteConfig = {
   contact: {
     email: 'stay@bubblehotel.example',
     phone: '+1 (555) 014-2200',
+    // TODO(social): replace placeholders with real handles. Setting either to
+    // an empty string hides that icon (Footer renders conditionally).
+    social: {
+      instagram: 'https://instagram.com/your-handle',
+      telegram: 'https://t.me/your-handle',
+    },
   },
   coordinates: { lat: 48.596151, lon: 23.407029 },
   mapUrl: 'https://www.google.com/maps/search/Mandra+Hills/@48.596151,23.407029,15z',

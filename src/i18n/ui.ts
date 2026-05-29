@@ -125,8 +125,11 @@ export const ui = {
 
     'footer.explore': 'Explore',
     'footer.contact': 'Contact',
-    'footer.findUs': 'Find us',
     'footer.rights': 'All rights reserved.',
+
+    'social.label': 'Find us on social media',
+    'social.instagram': 'Bubble on Instagram — opens in a new tab',
+    'social.telegram': 'Bubble on Telegram — opens in a new tab',
 
     'nf.eyebrow': 'Error 404',
     'nf.title': 'This page has drifted into the mist',
@@ -266,8 +269,11 @@ export const ui = {
 
     'footer.explore': 'Розділи',
     'footer.contact': 'Контакти',
-    'footer.findUs': 'Знайти нас',
     'footer.rights': 'Усі права захищено.',
+
+    'social.label': 'Знайти нас у соцмережах',
+    'social.instagram': 'Bubble в Instagram — відкривається в новій вкладці',
+    'social.telegram': 'Bubble у Telegram — відкривається в новій вкладці',
 
     'nf.eyebrow': 'Помилка 404',
     'nf.title': 'Ця сторінка загубилася в тумані',

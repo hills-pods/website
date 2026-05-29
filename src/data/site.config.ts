@@ -52,7 +52,7 @@ export const site: SiteConfig = {
   // Embedded reservation widget — when set, /book hosts it and "Book Now"
   // routes there instead of an external provider. The bookingUrl below stays
   // as a silent fallback shown on /book when the widget fails to load.
-  easyMs: { moduleKey: '29aab2ff-f21a-4048-8446-50b258af1671' },
+  easyMs: { moduleKey: 'c8df41e1-35b4-4563-a300-b2e9e0512107' },
   // Placeholder external provider — used as the on-page fallback only.
   bookingUrl: 'https://reservations.bubblehotel.example',
   contact: {

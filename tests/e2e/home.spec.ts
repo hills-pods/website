@@ -1,5 +1,22 @@
 import { test, expect } from '@playwright/test';
 import { locales, t, url } from './_helpers';
+import { site } from '../../src/data/site.config';
+import { resolveBookingTarget } from '../../src/lib/booking';
+
+// Mirror BookNowButton's resolution so the CTA assertion tracks the configured
+// booking mode (internal /book page, external provider, or mailto enquiry)
+// rather than hard-coding one label.
+const bookingKind = resolveBookingTarget({
+  hasEmbeddedWidget: site.easyMs !== null,
+  bookingUrl: site.bookingUrl,
+  contactEmail: site.contact.email,
+}).kind;
+const bookingAriaKey =
+  bookingKind === 'internal'
+    ? 'book.ariaInternal'
+    : bookingKind === 'external'
+      ? 'book.ariaExternal'
+      : 'book.ariaEnquire';
 
 // US1 + US5 — the home page captivates above the fold in each language (FR-001, FR-019, FR-020).
 for (const { lang, base } of locales) {
@@ -19,7 +36,7 @@ for (const { lang, base } of locales) {
     test('exposes a reachable Book Now call-to-action', async ({ page }) => {
       await page.goto(url(base, '/'));
       await expect(
-        page.getByRole('link', { name: t(lang, 'book.ariaExternal') }).first(),
+        page.getByRole('link', { name: t(lang, bookingAriaKey) }).first(),
       ).toBeVisible();
     });
 

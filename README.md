@@ -1,6 +1,6 @@
-# Bubble — Luxury Bubble Hotel Website
+# World Peaks — Luxury Bubble Hotel Website
 
-A simple, beautiful, mobile-first marketing site for the Bubble hotel — transparent bubble
+A simple, beautiful, mobile-first marketing site for the World Peaks hotel — transparent bubble
 suites in an alpine meadow. Built with **Astro + Tailwind CSS**, static, deployed to
 **Vercel**. The site is purely presentational; "Book Now" hands off to an external booking
 provider.

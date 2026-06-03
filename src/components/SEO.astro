@@ -12,7 +12,7 @@ const { title, description, ogImage } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-const pageTitle = title ? `${title} — ${site.brandName}` : t('seo.defaultTitle');
+const pageTitle = title ? `${title} — ${t('brand.name')}` : t('seo.defaultTitle');
 const pageDescription = description ?? t('seo.defaultDescription');
 const image = new URL(ogImage ?? site.ogImage, Astro.site ?? Astro.url).toString();
 const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url).toString();

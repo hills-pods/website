@@ -8,5 +8,5 @@ imageAlt: The multi-tier Shypit waterfall cascading through Carpathian spruce fo
 ---
 
 Shypit drops fourteen metres through a stand of ancient spruce — the most photographed
-waterfall in the Ukrainian Carpathians and one of the easiest to reach from Bubble. Bring
+waterfall in the Ukrainian Carpathians and one of the easiest to reach from World Peaks. Bring
 a layer; even in summer the canyon holds the cool of the rocks.

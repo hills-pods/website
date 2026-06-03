@@ -1,5 +1,4 @@
 ---
-import { site } from '@/data/site.config';
 import { navLinks } from '@/data/nav';
 import { getLangFromUrl, useTranslations, localizeHref, toCanonicalPath } from '@/i18n/utils';
 import BookNowButton from './BookNowButton.astro';
@@ -35,7 +34,7 @@ const isActive = (href: string) => (href === '/' ? canonical === '/' : canonical
       class="font-display text-2xl tracking-wide text-cream"
       aria-label={t('nav.home.aria')}
     >
-      {site.brandName}
+      {t('brand.name')}
     </a>
 
     <nav class="hidden md:block" aria-label={t('nav.primary')}>

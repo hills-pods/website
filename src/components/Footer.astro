@@ -12,7 +12,7 @@ const year = new Date().getFullYear();
 <footer class="border-t border-white/10 bg-night-800">
   <div class="container-luxe grid gap-10 py-16 sm:grid-cols-2 lg:grid-cols-3">
     <div>
-      <p class="font-display text-2xl text-cream">{site.brandName}</p>
+      <p class="font-display text-2xl text-cream">{t('brand.name')}</p>
       <p class="mt-3 max-w-xs text-sm text-mist">{t('brand.tagline')}</p>
     </div>
 
@@ -48,6 +48,6 @@ const year = new Date().getFullYear();
   </div>
 
   <div class="container-luxe border-t border-white/5 py-6">
-    <p class="text-xs text-mist">© {year} {site.brandName}. {t('footer.rights')}</p>
+    <p class="text-xs text-mist">© {year} {t('brand.name')}. {t('footer.rights')}</p>
   </div>
 </footer>

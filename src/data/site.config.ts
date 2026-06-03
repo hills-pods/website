@@ -3,7 +3,8 @@
 // A typed config means a misconfiguration fails the build, not production (Principle I).
 
 export interface SiteConfig {
-  brandName: string;
+  // Brand name is localized (uk: «Вершини Світу», en: "World Peaks") and lives
+  // in src/i18n/ui.ts under the 'brand.name' key — read it via useTranslations.
   /**
    * Embedded booking widget. When set, "Book Now" routes to the in-page /book
    * page that hosts the widget. When `null`, the resolver falls through to
@@ -57,15 +58,14 @@ export interface SiteConfig {
 }
 
 export const site: SiteConfig = {
-  brandName: 'Bubble',
   // Embedded reservation widget — when set, /book hosts it and "Book Now"
   // routes there instead of an external provider. The bookingUrl below stays
   // as a silent fallback shown on /book when the widget fails to load.
   easyMs: { moduleKey: 'c8df41e1-35b4-4563-a300-b2e9e0512107' },
   // Placeholder external provider — used as the on-page fallback only.
-  bookingUrl: 'https://reservations.bubblehotel.example',
+  bookingUrl: 'https://reservations.worldpeaks.example',
   contact: {
-    email: 'stay@bubblehotel.example',
+    email: 'stay@worldpeaks.example',
     phone: '+1 (555) 014-2200',
     // TODO(social): replace placeholders with real handles. Setting either to
     // an empty string hides that icon (Footer renders conditionally).

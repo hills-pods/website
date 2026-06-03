@@ -23,9 +23,10 @@ export const ui = {
     'nav.openMenu': 'Open menu',
     'nav.closeMenu': 'Close menu',
     'nav.primary': 'Primary',
-    'nav.home.aria': 'Bubble — home',
+    'nav.home.aria': 'World Peaks — home',
     'nav.skip': 'Skip to content',
 
+    'brand.name': 'World Peaks',
     'brand.tagline': 'Sleep beneath the stars, wrapped in mountain quiet.',
 
     'book.now': 'Book Now',
@@ -56,7 +57,7 @@ export const ui = {
     'home.exp.eyebrow': 'The experience',
     'home.exp.title': 'A night you feel rather than simply book',
     'home.exp.body':
-      'Bubble is a handful of panoramic suites set in a high Carpathian meadow, each one themed after a different storied mountain. No lobby, no crowds — only the slow theatre of weather and light, and the quiet luxury of being completely, comfortably present in the mountains.',
+      'World Peaks is a handful of panoramic suites set in a high Carpathian meadow, each one themed after a different storied mountain. No lobby, no crowds — only the slow theatre of weather and light, and the quiet luxury of being completely, comfortably present in the mountains.',
     'home.suites.eyebrow': 'The suites',
     'home.suites.title': 'Five ways to sleep under the sky',
     'home.suites.all': 'All suites',
@@ -80,7 +81,7 @@ export const ui = {
     'acc.eyebrow': 'Accommodations',
     'acc.title': 'Choose your bubble',
     'acc.intro':
-      'A small collection of panoramic suites, each with an interior keyed to its namesake mountain — and each framing the sky differently. Every stay includes the quiet essentials of a Bubble night.',
+      'A small collection of panoramic suites, each with an interior keyed to its namesake mountain — and each framing the sky differently. Every stay includes the quiet essentials of a World Peaks night.',
     'acc.srHeading': 'Our suites',
 
     'acc.amenities.eyebrow': 'Amenities',
@@ -106,10 +107,10 @@ export const ui = {
 
     'gallery.eyebrow': 'Gallery',
     'gallery.title': 'A glimpse of the stay',
-    'gallery.intro': 'Light, weather, and quiet — a few frames from life at Bubble.',
+    'gallery.intro': 'Light, weather, and quiet — a few frames from life at World Peaks.',
     // Shared suffix used by both the main /gallery and per-suite galleries. Screens
     // prepend the appropriate name (brand or suite) and append the index, so each image
-    // gets a unique, localized alt like "Bubble — frame 5" or "Hoverla — frame 3".
+    // gets a unique, localized alt like "World Peaks — frame 5" or "Hoverla — frame 3".
     'gallery.frameSuffix': '— frame',
 
     'loc.eyebrow': 'Plan your visit',
@@ -128,31 +129,31 @@ export const ui = {
     'footer.rights': 'All rights reserved.',
 
     'social.label': 'Find us on social media',
-    'social.instagram': 'Bubble on Instagram — opens in a new tab',
-    'social.telegram': 'Bubble on Telegram — opens in a new tab',
+    'social.instagram': 'World Peaks on Instagram — opens in a new tab',
+    'social.telegram': 'World Peaks on Telegram — opens in a new tab',
 
     'nf.eyebrow': 'Error 404',
     'nf.title': 'This page has drifted into the mist',
     'nf.body': 'The page you were looking for can’t be found. Let’s guide you back to the bubbles.',
     'nf.returnHome': 'Return home',
 
-    'seo.defaultTitle': 'Bubble — A Luxury Bubble Hotel in the Mountains',
+    'seo.defaultTitle': 'World Peaks — A Luxury Bubble Hotel in the Mountains',
     'seo.defaultDescription':
       'Panoramic bubble suites under Carpathian skies. A rare, luxurious escape in the mountains.',
     'seo.suites.title': 'The Suites',
     'seo.suites.desc':
-      'Explore the panoramic bubble suites at Bubble — each themed after a famous mountain, each a different way to sleep beneath the sky.',
+      'Explore the panoramic bubble suites at World Peaks — each themed after a famous mountain, each a different way to sleep beneath the sky.',
     'seo.experiences.title': 'Experiences',
     'seo.experiences.desc':
-      'Carpathian eco-trails, the famed Shypit waterfall, and a ridge-top swing — the signature excursions from Bubble.',
+      'Carpathian eco-trails, the famed Shypit waterfall, and a ridge-top swing — the signature excursions from World Peaks.',
     'seo.gallery.title': 'Gallery',
-    'seo.gallery.desc': 'A visual tour of Bubble — the suites, the meadow, and the mountain sky.',
+    'seo.gallery.desc': 'A visual tour of World Peaks — the suites, the meadow, and the mountain sky.',
     'seo.location.title': 'Location & Contact',
     'seo.location.desc':
-      'Where to find Bubble in the mountains, how to reach us, and how to get in touch.',
+      'Where to find World Peaks in the mountains, how to reach us, and how to get in touch.',
     'seo.book.title': 'Book your stay',
     'seo.book.desc':
-      'Reserve a panoramic bubble suite at Bubble — check dates, pick your suite, and confirm in a single step.',
+      'Reserve a panoramic bubble suite at World Peaks — check dates, pick your suite, and confirm in a single step.',
     'seo.notfound.title': 'Page Not Found',
     'seo.notfound.desc': 'The page you were looking for has drifted off into the mountain mist.',
   },
@@ -169,9 +170,10 @@ export const ui = {
     'nav.openMenu': 'Відкрити меню',
     'nav.closeMenu': 'Закрити меню',
     'nav.primary': 'Основне',
-    'nav.home.aria': 'Bubble — головна',
+    'nav.home.aria': 'Вершини Світу — головна',
     'nav.skip': 'Перейти до вмісту',
 
+    'brand.name': 'Вершини Світу',
     'brand.tagline': 'Засинайте під зорями, оповиті гірською тишею.',
 
     'book.now': 'Забронювати',
@@ -203,7 +205,7 @@ export const ui = {
     'home.exp.eyebrow': 'Враження',
     'home.exp.title': 'Ніч, яку відчуваєш, а не просто бронюєш',
     'home.exp.body':
-      'Bubble — це кілька панорамних номерів посеред високогірної карпатської луки, кожен з інтер’єром у мотивах легендарної гори. Жодного лобі, жодного натовпу — лише повільний театр погоди та світла й тиха розкіш цілковитої присутності в горах.',
+      'Вершини Світу — це кілька панорамних номерів посеред високогірної карпатської луки, кожен з інтер’єром у мотивах легендарної гори. Жодного лобі, жодного натовпу — лише повільний театр погоди та світла й тиха розкіш цілковитої присутності в горах.',
     'home.suites.eyebrow': 'Номери',
     'home.suites.title': 'П’ять способів заснути під небом',
     'home.suites.all': 'Усі номери',
@@ -227,7 +229,7 @@ export const ui = {
     'acc.eyebrow': 'Проживання',
     'acc.title': 'Оберіть свій бабл',
     'acc.intro':
-      'Невелика колекція панорамних номерів, кожен з інтер’єром, що відсилає до своєї однойменної гори — і кожен по-своєму обрамлює небо. Кожне перебування включає тихі неодмінні складові ночі в Bubble.',
+      'Невелика колекція панорамних номерів, кожен з інтер’єром, що відсилає до своєї однойменної гори — і кожен по-своєму обрамлює небо. Кожне перебування включає тихі неодмінні складові ночі у «Вершинах Світу».',
     'acc.srHeading': 'Наші номери',
 
     'acc.amenities.eyebrow': 'Зручності',
@@ -253,7 +255,7 @@ export const ui = {
 
     'gallery.eyebrow': 'Галерея',
     'gallery.title': 'Погляд на відпочинок',
-    'gallery.intro': 'Світло, погода й тиша — кілька кадрів із життя в Bubble.',
+    'gallery.intro': 'Світло, погода й тиша — кілька кадрів із життя у «Вершинах Світу».',
     'gallery.frameSuffix': '— кадр',
 
     'loc.eyebrow': 'Сплануйте візит',
@@ -272,30 +274,30 @@ export const ui = {
     'footer.rights': 'Усі права захищено.',
 
     'social.label': 'Знайти нас у соцмережах',
-    'social.instagram': 'Bubble в Instagram — відкривається в новій вкладці',
-    'social.telegram': 'Bubble у Telegram — відкривається в новій вкладці',
+    'social.instagram': 'Вершини Світу в Instagram — відкривається в новій вкладці',
+    'social.telegram': 'Вершини Світу у Telegram — відкривається в новій вкладці',
 
     'nf.eyebrow': 'Помилка 404',
     'nf.title': 'Ця сторінка загубилася в тумані',
     'nf.body': 'Сторінку, яку ви шукали, не знайдено. Повернімо вас до баблів.',
     'nf.returnHome': 'На головну',
 
-    'seo.defaultTitle': 'Bubble — розкішний бабл-готель у горах',
+    'seo.defaultTitle': 'Вершини Світу — розкішний бабл-готель у горах',
     'seo.defaultDescription':
       'Панорамні бабл-номери під карпатським небом. Рідкісна, розкішна втеча в горах.',
     'seo.suites.title': 'Номери',
     'seo.suites.desc':
-      'Перегляньте панорамні бабл-номери Bubble — кожен у мотивах однойменної гори, кожен дарує власний спосіб заснути під небом.',
+      'Перегляньте панорамні бабл-номери «Вершин Світу» — кожен у мотивах однойменної гори, кожен дарує власний спосіб заснути під небом.',
     'seo.experiences.title': 'Враження',
     'seo.experiences.desc':
-      'Карпатські еко-стежки, відомий водоспад Шипот і гойдалка на гребені хребта — фірмові вилазки з Bubble.',
+      'Карпатські еко-стежки, відомий водоспад Шипот і гойдалка на гребені хребта — фірмові вилазки з «Вершин Світу».',
     'seo.gallery.title': 'Галерея',
-    'seo.gallery.desc': 'Візуальна подорож Bubble — номери, лука й гірське небо.',
+    'seo.gallery.desc': 'Візуальна подорож «Вершинами Світу» — номери, лука й гірське небо.',
     'seo.location.title': 'Розташування та контакти',
-    'seo.location.desc': 'Де знайти Bubble у горах, як до нас дістатися та як зв’язатися.',
+    'seo.location.desc': 'Де знайти «Вершини Світу» у горах, як до нас дістатися та як зв’язатися.',
     'seo.book.title': 'Забронювати ніч',
     'seo.book.desc':
-      'Забронюйте панорамний бабл-номер у Bubble — оберіть дати, номер і підтвердьте бронювання за один крок.',
+      'Забронюйте панорамний бабл-номер у «Вершинах Світу» — оберіть дати, номер і підтвердьте бронювання за один крок.',
     'seo.notfound.title': 'Сторінку не знайдено',
     'seo.notfound.desc': 'Сторінка, яку ви шукали, розчинилася в гірському тумані.',
   },

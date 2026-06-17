@@ -66,11 +66,11 @@ export const site: SiteConfig = {
   bookingUrl: 'https://reservations.worldpeaks.example',
   contact: {
     email: 'stay@worldpeaks.example',
-    phone: '+1 (555) 014-2200',
+    phone: '+38 073 277 55 73',
     // TODO(social): replace placeholders with real handles. Setting either to
     // an empty string hides that icon (Footer renders conditionally).
     social: {
-      instagram: 'https://instagram.com/your-handle',
+      instagram: 'https://instagram.com/vershyny_svitu',
       telegram: 'https://t.me/your-handle',
     },
   },

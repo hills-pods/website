@@ -1,5 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- «Вершини Світу» / World Peaks — alpine-night badge: gold peaks under a moon -->
   <rect width="32" height="32" rx="6" fill="#10131a" />
-  <circle cx="16" cy="16" r="9" fill="none" stroke="#c7a16b" stroke-width="1.5" />
-  <circle cx="12.5" cy="12.5" r="2.2" fill="#f6f1e7" opacity="0.85" />
+  <!-- moon + star -->
+  <circle cx="7" cy="8" r="3" fill="#f6f1e7" opacity="0.95" />
+  <circle cx="26" cy="8" r="1" fill="#f6f1e7" opacity="0.6" />
+  <!-- back ridge (deeper gold) for depth -->
+  <path d="M0 27 L6 19 L12 24 L18 17 L26 24 L32 20 L32 27 Z" fill="#b08c52" opacity="0.7" />
+  <!-- front range -->
+  <path d="M2 27 L11 14 L16 20 L23 11 L30 27 Z" fill="#c7a16b" />
+  <!-- snow cap on the tallest summit -->
+  <path d="M23 11 L20.3 14.5 L25.7 14.5 Z" fill="#f6f1e7" />
 </svg>

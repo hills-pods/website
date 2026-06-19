@@ -86,4 +86,111 @@ const easyMs = site.easyMs;
       </div>
     </div>
   </section>
+
+  <style is:global>
+    /*
+      EasyMS widget colour overrides. The module renders into our light DOM
+      (no iframe, no shadow root) and is built on Material Components Web,
+      compiled with custom-property theming — so MDC's --mdc-theme-* variables
+      recolour every button, select and text field it paints. The date pickers
+      are react-day-picker (not MDC), so they need their own explicit rules.
+
+      Must be `is:global`: the widget paints at runtime, after build, so its
+      DOM never carries Astro's scoping attribute and scoped styles would miss
+      it. Everything is scoped under #easyms-reservation-module so nothing
+      leaks to the rest of the page.
+
+      Hex values mirror the brand tokens in tailwind.config.mjs
+      (champagne #c7a16b, night #10131a / #262d3d, cream #f6f1e7).
+    */
+
+    /* Option 1 — MDC theme variables. Covers buttons, selects, text fields. */
+    #easyms-reservation-module {
+      --mdc-theme-primary: #c7a16b; /* champagne — buttons, focus, active states */
+      --mdc-theme-on-primary: #10131a; /* night — text/icons sitting on primary */
+      --mdc-theme-secondary: #c7a16b; /* champagne */
+      --mdc-theme-on-secondary: #10131a; /* night */
+      --mdc-theme-surface: #f6f1e7; /* cream — card surfaces */
+      --mdc-theme-on-surface: #10131a; /* night — text on surface */
+      --mdc-theme-background: #f6f1e7; /* cream */
+      --mdc-theme-text-primary-on-background: #10131a; /* night */
+      --mdc-theme-text-secondary-on-background: #262d3d; /* night-700 */
+    }
+
+    /*
+      Option 2 — react-day-picker date fields (not MDC). Target the STABLE class
+      prefix: the __<hash> suffix (e.g. datePickerField__2C9ar) is regenerated
+      on a vendor redeploy, so [class*="datePickerField__"] survives that.
+      !important is required to beat the widget's own injected stylesheet.
+    */
+    #easyms-reservation-module [class*="datePickerField__"] .DayInput {
+      color: #10131a !important; /* night — typed date text */
+      border-color: rgba(199, 161, 107, 0.5) !important; /* champagne @ 50% (only shows where a border exists) */
+    }
+    #easyms-reservation-module [class*="datePickerField__"] .DayInput:focus {
+      border-color: #c7a16b !important; /* champagne */
+      outline-color: #c7a16b !important;
+    }
+    #easyms-reservation-module [class*="datePickerField__"] label {
+      color: #262d3d !important; /* night-700 — field label */
+    }
+    #easyms-reservation-module [class*="datePickerField__"] .CalendarIcon svg path {
+      fill: #c7a16b !important; /* champagne — calendar glyph */
+    }
+
+    /*
+      Search results + booking summary render on white MDC elevation cards, but
+      the widget hardcodes light (dark-theme) text on the card container, which
+      every child inherits — so room names, prices, dates and the "Your booking"
+      summary come out cream-on-white and barely readable. Setting a readable
+      night colour on the two card containers fixes all of it via inheritance
+      (no child sets its own colour). Stable-prefix selectors as above.
+    */
+    #easyms-reservation-module [class*="categoryElevation__"],
+    #easyms-reservation-module [class*="shoppingCartElevation__"] {
+      color: #10131a !important; /* night — readable on the widget's white cards */
+    }
+
+    /*
+      Date-picker popover (react-day-picker v7 — stable, unhashed .DayPicker-*
+      classes). Its overlay is white, but the widget's dark theme leaves day
+      numbers and the caption light/grey (unreadable), and selected days default
+      to react-day-picker's blue #4a90e2. Recolour to brand: night text on the
+      white overlay, champagne for the selected/today day and the "Today" link.
+    */
+    #easyms-reservation-module .DayPicker-Caption,
+    #easyms-reservation-module .DayPicker-Caption > div {
+      color: #10131a !important; /* night — "June 2026" month label */
+      font-weight: 600 !important;
+    }
+    #easyms-reservation-module .DayPicker-Weekday {
+      color: #262d3d !important; /* night-700 — Mon/Tue… header row */
+    }
+    #easyms-reservation-module .DayPicker-Day {
+      color: #10131a !important; /* night — readable day numbers on white */
+    }
+    #easyms-reservation-module .DayPicker-Day--outside {
+      color: #8a93a6 !important; /* mist — adjacent-month days */
+    }
+    #easyms-reservation-module .DayPicker-Day--disabled {
+      color: #c2c2c2 !important; /* faded — unavailable / past days */
+    }
+    #easyms-reservation-module
+      .DayPicker:not(.DayPicker--interactionDisabled)
+      .DayPicker-Day:not(.DayPicker-Day--disabled):not(.DayPicker-Day--selected):not(.DayPicker-Day--outside):hover {
+      background-color: rgba(199, 161, 107, 0.18) !important; /* champagne tint on hover */
+    }
+    #easyms-reservation-module
+      .DayPicker-Day--selected:not(.DayPicker-Day--disabled):not(.DayPicker-Day--outside) {
+      background-color: #c7a16b !important; /* champagne — selected day / range */
+      color: #10131a !important; /* night text */
+    }
+    #easyms-reservation-module .DayPicker-Day--today {
+      color: #b08c52 !important; /* champagne-600 — today accent (when unselected) */
+      font-weight: 700 !important;
+    }
+    #easyms-reservation-module .DayPicker-TodayButton {
+      color: #b08c52 !important; /* champagne-600 — footer "Today" shortcut */
+    }
+  </style>
 </BaseLayout>

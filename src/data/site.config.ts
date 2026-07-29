@@ -34,6 +34,23 @@ export interface SiteConfig {
     };
   };
   /**
+   * Legal-entity requisites, published in full on /legal and (name only) in the
+   * footer to satisfy WayForPay's merchant-disclosure requirement. These are
+   * placeholders — replace every [ЗАПОВНИТИ] before connecting the processor.
+   */
+  legal: {
+    /** Full legal name — «ФОП Прізвище Ім'я По батькові» or «ТОВ "…"». */
+    entityName: string;
+    /** Tax ID — ІПН (ФОП) or ЄДРПОУ (ТОВ). */
+    taxId: string;
+    /** Registered (legal) address. */
+    addressLegal: string;
+    /** Actual operating address. */
+    addressActual: string;
+    /** Optional IBAN / bank line for the offer; empty string hides the row. */
+    bank?: string;
+  };
+  /**
    * Latitude / longitude of the property. Used as the fallback when `mapUrl`
    * or `mapEmbedUrl` are unset — derives an OpenStreetMap link/embed from
    * these coordinates. Also handy if you want to wire up distance/weather
@@ -73,6 +90,13 @@ export const site: SiteConfig = {
       instagram: 'https://instagram.com/vershyny_svitu',
       telegram: 'https://t.me/your-handle',
     },
+  },
+  legal: {
+    entityName: "[ЗАПОВНИТИ: повне найменування — ФОП … або ТОВ «…»]",
+    taxId: '[ЗАПОВНИТИ: ІПН (ФОП) або ЄДРПОУ (ТОВ)]',
+    addressLegal: '[ЗАПОВНИТИ: юридична адреса]',
+    addressActual: '[ЗАПОВНИТИ: фактична адреса]',
+    bank: '',
   },
   coordinates: { lat: 48.596151, lon: 23.407029 },
   mapUrl: 'https://www.google.com/maps/search/Mandra+Hills/@48.596151,23.407029,15z',

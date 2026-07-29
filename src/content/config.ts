@@ -65,4 +65,11 @@ const reviews = defineCollection({
   }),
 });
 
-export const collections = { suites, experiences, reviews };
+// Legal / public-offer document. One markdown file per language (uk binding,
+// en courtesy translation). Body is the offer prose; only `lang` is structured.
+const legal = defineCollection({
+  type: 'content',
+  schema: z.object({ lang }),
+});
+
+export const collections = { suites, experiences, reviews, legal };

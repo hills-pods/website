@@ -1,0 +1,73 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHeader from '@/components/PageHeader.astro';
+import { getCollection } from 'astro:content';
+import { site } from '@/data/site.config';
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+// One offer entry per language; base slug is shared ("offer").
+const [offer] = await getCollection('legal', ({ data }) => data.lang === lang);
+const { Content } = await offer.render();
+
+const req = site.legal;
+const rows = [
+  { label: t('legal.req.name'), value: req.entityName },
+  { label: t('legal.req.taxId'), value: req.taxId },
+  { label: t('legal.req.addressLegal'), value: req.addressLegal },
+  { label: t('legal.req.addressActual'), value: req.addressActual },
+  { label: t('legal.req.phone'), value: site.contact.phone },
+  { label: t('legal.req.email'), value: site.contact.email },
+  ...(req.bank ? [{ label: t('legal.req.bank'), value: req.bank }] : []),
+];
+---
+
+<BaseLayout title={t('seo.legal.title')} description={t('seo.legal.desc')}>
+  <PageHeader eyebrow={t('legal.eyebrow')} title={t('legal.title')} intro={t('legal.intro')} />
+
+  <section class="container-luxe grid gap-12 pb-24 lg:grid-cols-3">
+    <article class="legal-prose max-w-2xl lg:col-span-2">
+      <Content />
+    </article>
+
+    <aside class="h-max rounded-lg border border-white/10 bg-night-800 p-6">
+      <p class="eyebrow mb-4">{t('legal.requisites.title')}</p>
+      <dl class="space-y-3 text-sm">
+        {
+          rows.map((row) => (
+            <div>
+              <dt class="text-mist">{row.label}</dt>
+              <dd class="text-cream/90">{row.value}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </aside>
+  </section>
+</BaseLayout>
+
+<style>
+  .legal-prose :global(h2) {
+    @apply mt-10 text-2xl;
+  }
+  .legal-prose :global(h3) {
+    @apply mt-6 text-xl;
+  }
+  .legal-prose :global(p),
+  .legal-prose :global(ul),
+  .legal-prose :global(ol) {
+    @apply mt-4 leading-relaxed text-cream/80;
+  }
+  .legal-prose :global(ul),
+  .legal-prose :global(ol) {
+    @apply list-disc space-y-2 pl-6;
+  }
+  .legal-prose :global(blockquote) {
+    @apply mt-4 border-l-2 border-champagne/50 pl-4 italic text-mist;
+  }
+  .legal-prose :global(strong) {
+    @apply text-cream;
+  }
+</style>

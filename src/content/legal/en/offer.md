@@ -10,27 +10,27 @@ This document is an official public offer by the Provider — whose full legal n
 
 ## 2. Subject of the agreement
 
-The Provider supplies temporary accommodation in the panoramic suites of the World Peaks hotel, located in the Carpathians (Ukraine), and the Customer undertakes to pay for those services according to the chosen rate.
+The Provider supplies temporary accommodation in the panoramic suites of the World Peaks hotel, located in the Mizhhirya district of the Zakarpattia region (Ukraine), and the Customer undertakes to pay for those services according to the chosen rate.
 
 ## 3. Booking and payment
 
 - Bookings are made on the website, by phone, or by email, as listed in the "Merchant details" section.
-- Payment is accepted by bank card — **Visa** and **Mastercard** — via the **WayForPay** payment service.
-- A prepayment of **[ЗАПОВНИТИ: prepayment amount, %]** of the accommodation cost is charged to confirm a booking; the balance is paid **[ЗАПОВНИТИ: at check-in / other terms]**.
+- Payment is accepted by non-cash methods via the **WayForPay** payment service.
+- A prepayment of 100% of the accommodation cost is charged to confirm a booking.
 - The service is deemed rendered at the end of the stay specified in the booking.
 
 ## 4. Provision of services
 
-- Check-in from **[ЗАПОВНИТИ: e.g. 14:00]**, check-out by **[ЗАПОВНИТИ: e.g. 12:00]**.
-- The price includes **[ЗАПОВНИТИ: what is included — breakfast, parking, etc.]**.
+- Check-in from 14:00 to 19:00, check-out by 12:00.
+- The price includes breakfast and parking.
 - Services are provided at the hotel's actual address listed in "Merchant details". Service area — Ukraine.
 
 ## 5. Refunds and cancellation
 
 - The Customer may cancel a booking by notifying the Provider using the contacts in "Merchant details".
-- If cancelled **more than [ЗАПОВНИТИ: N] days** before the arrival date, the prepayment is refunded in full.
-- If cancelled **fewer than [ЗАПОВНИТИ: N] days** before the arrival date, the prepayment is **[ЗАПОВНИТИ: non-refundable / partially refundable — terms]**.
-- Refunds are made by the same method used for payment, within **[ЗАПОВНИТИ: up to 30 (thirty)]** banking days of receiving the request.
+- If cancelled **more than 7 days** before the arrival date, the prepayment is refunded in full.
+- If cancelled **fewer than 7 days** before the arrival date, the prepayment is **non-refundable**.
+- Refunds are made by the same method used for payment, within **up to 10 (ten)** banking days of receiving the request.
 - Refunds are handled in accordance with the Law of Ukraine "On Protection of Consumer Rights".
 
 ## 6. Rights, obligations, and liability
@@ -46,4 +46,12 @@ The Provider supplies temporary accommodation in the panoramic suites of the Wor
 
 ## 8. Merchant details
 
-The Provider's full details are shown in the "Merchant details" section on this page.
+World Peaks recreation complex
+Individual entrepreneur Yurii Oleksandrovych Kryvoborodov
+ЄДРПОУ 3088003474
+
+Actual address: Richka village, Mizhhirya district, Zakarpattia region, Ukraine
+Legal address: 36D Obolonskyi Avenue, Kyiv, Ukraine
+
+Phone: +38 073 277 55 73
+Email: world.peaks.richka@gmail.com

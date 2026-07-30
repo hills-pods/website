@@ -82,7 +82,7 @@ export const site: SiteConfig = {
   // Placeholder external provider — used as the on-page fallback only.
   bookingUrl: 'https://reservations.worldpeaks.example',
   contact: {
-    email: 'stay@worldpeaks.example',
+    email: 'world.peaks.richka@gmail.com',
     phone: '+38 073 277 55 73',
     // TODO(social): replace placeholders with real handles. Setting either to
     // an empty string hides that icon (Footer renders conditionally).
@@ -92,10 +92,10 @@ export const site: SiteConfig = {
     },
   },
   legal: {
-    entityName: "[ЗАПОВНИТИ: повне найменування — ФОП … або ТОВ «…»]",
-    taxId: '[ЗАПОВНИТИ: ІПН (ФОП) або ЄДРПОУ (ТОВ)]',
-    addressLegal: '[ЗАПОВНИТИ: юридична адреса]',
-    addressActual: '[ЗАПОВНИТИ: фактична адреса]',
+    entityName: 'ФОП Кривобородов Юрій Олександрович',
+    taxId: 'ЄДРПОУ 3088003474',
+    addressLegal: 'м. Київ, пр. Оболонський, 36Д',
+    addressActual: 'с. Річка, Міжгірський район, Закарпатська обл., Україна',
     bank: '',
   },
   coordinates: { lat: 48.596151, lon: 23.407029 },

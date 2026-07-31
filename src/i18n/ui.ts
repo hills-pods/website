@@ -125,9 +125,15 @@ export const ui = {
     'loc.mapTitle': 'A map of the property location in the Carpathian mountains',
 
     'legal.eyebrow': 'Legal',
-    'legal.title': 'Public Offer Agreement',
-    'legal.intro':
-      'The terms on which we provide accommodation, how payment and refunds work, and our full company details. The Ukrainian version of this offer is the legally binding one.',
+    'legal.offer.title': 'Public Offer Agreement',
+    'legal.offer.intro':
+      'The public offer under which we provide accommodation. The Ukrainian version of this offer is the legally binding one.',
+    'legal.terms.title': 'Terms and Conditions',
+    'legal.terms.intro': 'How booking and payment work, the conditions of your stay, and the house rules.',
+    'legal.refund.title': 'Refund Policy',
+    'legal.refund.intro': 'How to cancel a booking and how refunds are processed.',
+    'legal.contacts.title': 'Contact Information',
+    'legal.contacts.intro': 'Our full company details and how to reach us.',
     'legal.requisites.title': 'Merchant details',
     'legal.req.name': 'Legal name',
     'legal.req.taxId': 'Tax ID (ІПН / ЄДРПОУ)',
@@ -140,7 +146,10 @@ export const ui = {
     'footer.explore': 'Explore',
     'footer.contact': 'Contact',
     'footer.rights': 'All rights reserved.',
-    'footer.legal': 'Terms & Conditions',
+    'footer.offer': 'Public Offer',
+    'footer.terms': 'Terms & Conditions',
+    'footer.refund': 'Refund Policy',
+    'footer.contacts': 'Contact Information',
 
     'social.label': 'Find us on social media',
     'social.instagram': 'World Peaks on Instagram — opens in a new tab',
@@ -165,9 +174,14 @@ export const ui = {
     'seo.location.title': 'Location & Contact',
     'seo.location.desc':
       'Where to find World Peaks in the mountains, how to reach us, and how to get in touch.',
-    'seo.legal.title': 'Terms & Conditions',
-    'seo.legal.desc':
-      'The public offer agreement for stays at World Peaks — booking, payment, refunds, and our company details.',
+    'seo.offer.title': 'Public Offer Agreement',
+    'seo.offer.desc': 'The public offer agreement for stays at World Peaks.',
+    'seo.terms.title': 'Terms and Conditions',
+    'seo.terms.desc': 'Booking, payment, and the conditions of a stay at World Peaks.',
+    'seo.refund.title': 'Refund Policy',
+    'seo.refund.desc': 'How to cancel a booking and how refunds are processed at World Peaks.',
+    'seo.contacts.title': 'Contact Information',
+    'seo.contacts.desc': 'Company details and contacts for World Peaks.',
     'seo.book.title': 'Book your stay',
     'seo.book.desc':
       'Reserve a panoramic bubble suite at World Peaks — check dates, pick your suite, and confirm in a single step.',
@@ -287,9 +301,16 @@ export const ui = {
     'loc.mapTitle': 'Карта розташування садиби в Карпатах',
 
     'legal.eyebrow': 'Правова інформація',
-    'legal.title': 'Публічна оферта',
-    'legal.intro':
-      'Умови, на яких ми надаємо послуги проживання, як відбувається оплата й повернення коштів, а також повні реквізити виконавця.',
+    'legal.offer.title': 'Публічний договір (Оферта)',
+    'legal.offer.intro':
+      'Публічна оферта, на підставі якої ми надаємо послуги проживання. Юридично обов’язковою є українська версія цієї оферти.',
+    'legal.terms.title': 'Правила та умови',
+    'legal.terms.intro':
+      'Як відбувається бронювання й оплата, умови перебування та правила проживання.',
+    'legal.refund.title': 'Правила повернення грошових коштів',
+    'legal.refund.intro': 'Як скасувати бронювання та як здійснюється повернення коштів.',
+    'legal.contacts.title': 'Контактна інформація',
+    'legal.contacts.intro': 'Повні реквізити Виконавця та способи зв’язку.',
     'legal.requisites.title': 'Реквізити виконавця',
     'legal.req.name': 'Найменування',
     'legal.req.taxId': 'Податковий номер (ІПН / ЄДРПОУ)',
@@ -302,7 +323,10 @@ export const ui = {
     'footer.explore': 'Розділи',
     'footer.contact': 'Контакти',
     'footer.rights': 'Усі права захищено.',
-    'footer.legal': 'Публічна оферта',
+    'footer.offer': 'Публічний договір',
+    'footer.terms': 'Правила та умови',
+    'footer.refund': 'Повернення коштів',
+    'footer.contacts': 'Контактна інформація',
 
     'social.label': 'Знайти нас у соцмережах',
     'social.instagram': 'Вершини Світу в Instagram — відкривається в новій вкладці',
@@ -326,9 +350,14 @@ export const ui = {
     'seo.gallery.desc': 'Візуальна подорож «Вершинами Світу» — номери, лука й гірське небо.',
     'seo.location.title': 'Розташування та контакти',
     'seo.location.desc': 'Де знайти «Вершини Світу» у горах, як до нас дістатися та як зв’язатися.',
-    'seo.legal.title': 'Публічна оферта',
-    'seo.legal.desc':
-      'Договір публічної оферти на проживання у «Вершинах Світу» — бронювання, оплата, повернення коштів і реквізити.',
+    'seo.offer.title': 'Публічний договір (Оферта)',
+    'seo.offer.desc': 'Договір публічної оферти на проживання у «Вершинах Світу».',
+    'seo.terms.title': 'Правила та умови',
+    'seo.terms.desc': 'Бронювання, оплата та умови проживання у «Вершинах Світу».',
+    'seo.refund.title': 'Правила повернення грошових коштів',
+    'seo.refund.desc': 'Як скасувати бронювання та як здійснюється повернення коштів у «Вершинах Світу».',
+    'seo.contacts.title': 'Контактна інформація',
+    'seo.contacts.desc': 'Реквізити та контактні дані «Вершин Світу».',
     'seo.book.title': 'Забронювати ніч',
     'seo.book.desc':
       'Забронюйте панорамний бабл-номер у «Вершинах Світу» — оберіть дати, номер і підтвердьте бронювання за один крок.',

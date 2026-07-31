@@ -1,50 +1,121 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import PageHeader from '@/components/PageHeader.astro';
+import SocialLinks from '@/components/SocialLinks.astro';
 import { getCollection } from 'astro:content';
 import { site } from '@/data/site.config';
-import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+import { getLangFromUrl, useTranslations, baseSlug } from '@/i18n/utils';
+import type { UIKey } from '@/i18n/ui';
 
+export type LegalSlug = 'offer' | 'terms' | 'refund' | 'contacts';
+
+interface Props {
+  slug: LegalSlug;
+}
+
+const { slug } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-// One offer entry per language; base slug is shared ("offer").
-const [offer] = await getCollection('legal', ({ data }) => data.lang === lang);
-const { Content } = await offer.render();
+// Typed per-page chrome — literal UIKeys keep uk/en key parity compile-checked.
+const chrome: Record<LegalSlug, { title: UIKey; intro: UIKey; seoTitle: UIKey; seoDesc: UIKey }> = {
+  offer: {
+    title: 'legal.offer.title',
+    intro: 'legal.offer.intro',
+    seoTitle: 'seo.offer.title',
+    seoDesc: 'seo.offer.desc',
+  },
+  terms: {
+    title: 'legal.terms.title',
+    intro: 'legal.terms.intro',
+    seoTitle: 'seo.terms.title',
+    seoDesc: 'seo.terms.desc',
+  },
+  refund: {
+    title: 'legal.refund.title',
+    intro: 'legal.refund.intro',
+    seoTitle: 'seo.refund.title',
+    seoDesc: 'seo.refund.desc',
+  },
+  contacts: {
+    title: 'legal.contacts.title',
+    intro: 'legal.contacts.intro',
+    seoTitle: 'seo.contacts.title',
+    seoDesc: 'seo.contacts.desc',
+  },
+};
+const c = chrome[slug];
 
+// One entry per (language, base slug); base slug is the filename (e.g. "offer").
+const doc = (await getCollection('legal', ({ data }) => data.lang === lang)).find(
+  (entry) => baseSlug(entry.slug) === slug,
+);
+if (!doc) throw new Error(`Missing legal document "${slug}" for language "${lang}"`);
+const { Content } = await doc.render();
+
+// The requisites + contact channels belong on the Contacts page only.
+const showRequisites = slug === 'contacts';
 const req = site.legal;
-const rows = [
-  { label: t('legal.req.name'), value: req.entityName },
-  { label: t('legal.req.taxId'), value: req.taxId },
-  { label: t('legal.req.addressLegal'), value: req.addressLegal },
-  { label: t('legal.req.addressActual'), value: req.addressActual },
-  { label: t('legal.req.phone'), value: site.contact.phone },
-  { label: t('legal.req.email'), value: site.contact.email },
-  ...(req.bank ? [{ label: t('legal.req.bank'), value: req.bank }] : []),
-];
+const telHref = `tel:${site.contact.phone.replace(/[^+\d]/g, '')}`;
+const mailHref = `mailto:${site.contact.email}`;
 ---
 
-<BaseLayout title={t('seo.legal.title')} description={t('seo.legal.desc')}>
-  <PageHeader eyebrow={t('legal.eyebrow')} title={t('legal.title')} intro={t('legal.intro')} />
+<BaseLayout title={t(c.seoTitle)} description={t(c.seoDesc)}>
+  <PageHeader eyebrow={t('legal.eyebrow')} title={t(c.title)} intro={t(c.intro)} />
 
-  <section class="container-luxe grid gap-12 pb-24 lg:grid-cols-3">
-    <article class="legal-prose max-w-2xl lg:col-span-2">
+  <section class="container-luxe pb-24">
+    <article class="legal-prose max-w-2xl">
       <Content />
     </article>
 
-    <aside class="h-max rounded-lg border border-white/10 bg-night-800 p-6">
-      <p class="eyebrow mb-4">{t('legal.requisites.title')}</p>
-      <dl class="space-y-3 text-sm">
-        {
-          rows.map((row) => (
+    {
+      showRequisites && (
+        <div class="mt-10 max-w-2xl rounded-lg border border-white/10 bg-night-800 p-6">
+          <p class="eyebrow mb-4">{t('legal.requisites.title')}</p>
+          <dl class="space-y-3 text-sm">
             <div>
-              <dt class="text-mist">{row.label}</dt>
-              <dd class="text-cream/90">{row.value}</dd>
+              <dt class="text-mist">{t('legal.req.name')}</dt>
+              <dd class="text-cream/90">{req.entityName}</dd>
             </div>
-          ))
-        }
-      </dl>
-    </aside>
+            <div>
+              <dt class="text-mist">{t('legal.req.taxId')}</dt>
+              <dd class="text-cream/90">{req.taxId}</dd>
+            </div>
+            <div>
+              <dt class="text-mist">{t('legal.req.addressLegal')}</dt>
+              <dd class="text-cream/90">{req.addressLegal}</dd>
+            </div>
+            <div>
+              <dt class="text-mist">{t('legal.req.addressActual')}</dt>
+              <dd class="text-cream/90">{req.addressActual}</dd>
+            </div>
+            <div>
+              <dt class="text-mist">{t('legal.req.phone')}</dt>
+              <dd>
+                <a href={telHref} class="text-cream/90 hover:text-champagne">
+                  {site.contact.phone}
+                </a>
+              </dd>
+            </div>
+            <div>
+              <dt class="text-mist">{t('legal.req.email')}</dt>
+              <dd>
+                <a href={mailHref} class="text-cream/90 hover:text-champagne">
+                  {site.contact.email}
+                </a>
+              </dd>
+            </div>
+            {req.bank && (
+              <div>
+                <dt class="text-mist">{t('legal.req.bank')}</dt>
+                <dd class="text-cream/90">{req.bank}</dd>
+              </div>
+            )}
+          </dl>
+          <SocialLinks size="md" class="mt-6" />
+        </div>
+      )
+    }
   </section>
 </BaseLayout>
 

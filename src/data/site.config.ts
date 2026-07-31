@@ -85,10 +85,13 @@ export const site: SiteConfig = {
     email: 'world.peaks.richka@gmail.com',
     phone: '+38 073 277 55 73',
     // TODO(social): replace placeholders with real handles. Setting either to
-    // an empty string hides that icon (Footer renders conditionally).
+    // an empty string hides that icon (SocialLinks renders each conditionally).
     social: {
       instagram: 'https://instagram.com/vershyny_svitu',
-      telegram: 'https://t.me/your-handle',
+      // Telegram intentionally hidden until a proper Telegram bot is configured.
+      // The SocialLinks Telegram block is kept in code; restore a URL here to
+      // show the icon again, e.g. 'https://t.me/<handle>'.
+      telegram: '',
     },
   },
   legal: {

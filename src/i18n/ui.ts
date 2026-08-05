@@ -160,6 +160,12 @@ export const ui = {
     'nf.body': 'The page you were looking for can’t be found. Let’s guide you back to the bubbles.',
     'nf.returnHome': 'Return home',
 
+    'thanks.eyebrow': 'Booking confirmed',
+    'thanks.title': 'Thank you for your booking',
+    'thanks.body':
+      'Your reservation is confirmed — we can’t wait to welcome you to the mountains. A confirmation has been sent to your email.',
+    'thanks.backHome': 'Back to home',
+
     'seo.defaultTitle': 'World Peaks — A Luxury Bubble Hotel in the Mountains',
     'seo.defaultDescription':
       'Panoramic bubble suites under Carpathian skies. A rare, luxurious escape in the mountains.',
@@ -187,6 +193,8 @@ export const ui = {
       'Reserve a panoramic bubble suite at World Peaks — check dates, pick your suite, and confirm in a single step.',
     'seo.notfound.title': 'Page Not Found',
     'seo.notfound.desc': 'The page you were looking for has drifted off into the mountain mist.',
+    'seo.thanks.title': 'Booking Confirmed',
+    'seo.thanks.desc': 'Your booking at World Peaks is confirmed.',
   },
 
   uk: {
@@ -337,6 +345,12 @@ export const ui = {
     'nf.body': 'Сторінку, яку ви шукали, не знайдено. Повернімо вас до баблів.',
     'nf.returnHome': 'На головну',
 
+    'thanks.eyebrow': 'Бронювання підтверджено',
+    'thanks.title': 'Дякуємо за бронювання',
+    'thanks.body':
+      'Ваше бронювання підтверджено — ми з нетерпінням чекаємо на вас у горах. Підтвердження надіслано на вашу електронну пошту.',
+    'thanks.backHome': 'На головну',
+
     'seo.defaultTitle': 'Вершини Світу — розкішний бабл-готель у горах',
     'seo.defaultDescription':
       'Панорамні бабл-номери під карпатським небом. Рідкісна, розкішна втеча в горах.',
@@ -363,6 +377,8 @@ export const ui = {
       'Забронюйте панорамний бабл-номер у «Вершинах Світу» — оберіть дати, номер і підтвердьте бронювання за один крок.',
     'seo.notfound.title': 'Сторінку не знайдено',
     'seo.notfound.desc': 'Сторінка, яку ви шукали, розчинилася в гірському тумані.',
+    'seo.thanks.title': 'Бронювання підтверджено',
+    'seo.thanks.desc': 'Ваше бронювання у «Вершинах Світу» підтверджено.',
   },
 } as const;
 

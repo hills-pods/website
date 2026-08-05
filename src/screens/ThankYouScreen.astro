@@ -1,0 +1,51 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHeader from '@/components/PageHeader.astro';
+import { getLangFromUrl, useTranslations, localizeHref } from '@/i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<BaseLayout title={t('seo.thanks.title')} description={t('seo.thanks.desc')}>
+  <PageHeader eyebrow={t('thanks.eyebrow')} title={t('thanks.title')} intro={t('thanks.body')} />
+
+  <section class="container-luxe pb-24">
+    <a
+      href={localizeHref('/', lang)}
+      class="inline-flex min-h-11 items-center font-body text-sm uppercase tracking-luxe text-champagne underline-offset-8 hover:underline"
+    >
+      {t('thanks.backHome')}
+    </a>
+  </section>
+
+  {/*
+    Meta Pixel — Purchase. This confirmation page fires a client-side Purchase
+    only when it is reached with booking data, e.g.
+    /thank-you?value=1234&currency=UAH&event_id=<id>. That happens only if an
+    EasyMS post-payment return URL is later pointed here. The real Purchase is
+    sent server-side via the Conversions API (booking-tools); pass the SAME
+    event_id there so Meta deduplicates the two. Guarded: no-ops without fbq or
+    without a positive value, so the page is inert until deliberately wired.
+  */}
+  <script is:inline>
+    (function () {
+      if (typeof window.fbq !== 'function') return;
+      try {
+        const p = new URLSearchParams(window.location.search);
+        const value = parseFloat(p.get('value') || '');
+        if (isNaN(value) || value <= 0) return;
+        const currency = p.get('currency') || 'UAH';
+        const eventId = p.get('event_id') || undefined;
+        window.fbq(
+          'track',
+          'Purchase',
+          { value: value, currency: currency },
+          eventId ? { eventID: eventId } : undefined,
+        );
+      } catch {
+        /* never break the page */
+      }
+    })();
+  </script>
+</BaseLayout>

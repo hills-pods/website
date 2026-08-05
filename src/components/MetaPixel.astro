@@ -1,0 +1,47 @@
+---
+import { site } from '@/data/site.config';
+
+// Meta (Facebook) Pixel base code. Rendered only when a Pixel ID is configured
+// in site.config.ts — with an empty ID nothing is injected, so there is no
+// broken pixel and no console noise. When set, it defines window.fbq and fires
+// a PageView on every page. Event tracking (InitiateCheckout on /book, Purchase
+// on /thank-you) is added by those pages and no-ops when fbq is absent.
+//
+// The bootstrap runs via define:vars (clean JS Astro can bundle); the <noscript>
+// fallback uses a real <img> with a concatenated src. We deliberately avoid a
+// `${}` template literal in a set:html attribute — that pattern breaks Astro's
+// compiler here.
+const pixelId = site.tracking.metaPixelId?.trim();
+const noscriptSrc = 'https://www.facebook.com/tr?id=' + pixelId + '&ev=PageView&noscript=1';
+---
+
+{
+  pixelId && (
+    <Fragment>
+      <script define:vars={{ pixelId }}>
+        /* eslint-disable -- Meta Pixel vendor bootstrap; kept verbatim. */
+        (function (f, b, e, v) {
+          if (f.fbq) return;
+          var n = (f.fbq = function () {
+            n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
+          });
+          if (!f._fbq) f._fbq = n;
+          n.push = n;
+          n.loaded = true;
+          n.version = '2.0';
+          n.queue = [];
+          const t = b.createElement(e);
+          t.async = true;
+          t.src = v;
+          const s = b.getElementsByTagName(e)[0];
+          s.parentNode.insertBefore(t, s);
+        })(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', pixelId);
+        fbq('track', 'PageView');
+      </script>
+      <noscript>
+        <img height="1" width="1" style="display:none" src={noscriptSrc} alt="" />
+      </noscript>
+    </Fragment>
+  )
+}

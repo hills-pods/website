@@ -1,0 +1,31 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHeader from '@/components/PageHeader.astro';
+import { site } from '@/data/site.config';
+import { getLangFromUrl, useTranslations, localizeHref } from '@/i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const mailHref = `mailto:${site.contact.email}`;
+---
+
+<BaseLayout title={t('seo.fail.title')} description={t('seo.fail.desc')}>
+  <PageHeader eyebrow={t('fail.eyebrow')} title={t('fail.title')} intro={t('fail.body')} />
+
+  <section class="container-luxe pb-24">
+    <div class="flex flex-wrap items-center gap-6">
+      <a
+        href={localizeHref('/book', lang)}
+        class="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-champagne px-6 py-3 font-body text-sm uppercase tracking-luxe text-night transition-colors duration-200 hover:bg-champagne-600"
+      >
+        {t('fail.retry')}
+      </a>
+      <a
+        href={mailHref}
+        class="inline-flex min-h-11 items-center font-body text-sm uppercase tracking-luxe text-champagne underline-offset-8 hover:underline"
+      >
+        {t('fail.contact')}: {site.contact.email}
+      </a>
+    </div>
+  </section>
+</BaseLayout>

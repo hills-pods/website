@@ -5,12 +5,9 @@ import icon from 'astro-icon';
 
 // Static, content-driven site deployed to Vercel (see specs/001-bubble-hotel-website/plan.md).
 export default defineConfig({
-  // Drives canonical URLs and hreflang alternates in <head>. Set this to the
-  // production URL — first deploys land on `<project>.vercel.app`; swap for
-  // the custom domain once it's pointed at the project (Vercel → Settings →
-  // Domains). SEO depends on this matching the URL users actually visit.
-  // TODO(deploy): replace with the live Vercel URL or custom domain.
-  site: 'https://hills-pods.vercel.app',
+  // Drives canonical URLs and hreflang alternates in <head>. Must match the URL
+  // users actually visit, or SEO/OG/canonical tags point at the wrong host.
+  site: 'https://worldpeaks.com.ua',
   // Bilingual: Ukrainian is the default at the root; English is served under /en/.
   i18n: {
     locales: ['uk', 'en'],

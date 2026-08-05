@@ -166,6 +166,13 @@ export const ui = {
       'Your reservation is confirmed — we can’t wait to welcome you to the mountains. A confirmation has been sent to your email.',
     'thanks.backHome': 'Back to home',
 
+    'fail.eyebrow': 'Payment',
+    'fail.title': 'Your payment didn’t go through',
+    'fail.body':
+      'The payment wasn’t completed, so your booking isn’t confirmed yet — and you haven’t been charged. You can try again, or reach out and we’ll help you book.',
+    'fail.retry': 'Try booking again',
+    'fail.contact': 'Email us',
+
     'seo.defaultTitle': 'World Peaks — A Luxury Bubble Hotel in the Mountains',
     'seo.defaultDescription':
       'Panoramic bubble suites under Carpathian skies. A rare, luxurious escape in the mountains.',
@@ -195,6 +202,9 @@ export const ui = {
     'seo.notfound.desc': 'The page you were looking for has drifted off into the mountain mist.',
     'seo.thanks.title': 'Booking Confirmed',
     'seo.thanks.desc': 'Your booking at World Peaks is confirmed.',
+    'seo.fail.title': 'Payment Not Completed',
+    'seo.fail.desc':
+      'Your payment wasn’t completed and your booking isn’t confirmed. Try again or contact World Peaks.',
   },
 
   uk: {
@@ -351,6 +361,13 @@ export const ui = {
       'Ваше бронювання підтверджено — ми з нетерпінням чекаємо на вас у горах. Підтвердження надіслано на вашу електронну пошту.',
     'thanks.backHome': 'На головну',
 
+    'fail.eyebrow': 'Оплата',
+    'fail.title': 'Оплата не пройшла',
+    'fail.body':
+      'Платіж не завершено, тому ваше бронювання ще не підтверджено — і кошти не списано. Ви можете спробувати ще раз або звернутися до нас, і ми допоможемо з бронюванням.',
+    'fail.retry': 'Спробувати ще раз',
+    'fail.contact': 'Написати нам',
+
     'seo.defaultTitle': 'Вершини Світу — розкішний бабл-готель у горах',
     'seo.defaultDescription':
       'Панорамні бабл-номери під карпатським небом. Рідкісна, розкішна втеча в горах.',
@@ -379,6 +396,9 @@ export const ui = {
     'seo.notfound.desc': 'Сторінка, яку ви шукали, розчинилася в гірському тумані.',
     'seo.thanks.title': 'Бронювання підтверджено',
     'seo.thanks.desc': 'Ваше бронювання у «Вершинах Світу» підтверджено.',
+    'seo.fail.title': 'Оплату не завершено',
+    'seo.fail.desc':
+      'Платіж не завершено, бронювання не підтверджено. Спробуйте ще раз або зв’яжіться з «Вершинами Світу».',
   },
 } as const;
 

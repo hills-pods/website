@@ -5,6 +5,19 @@
 //
 // WayForPay "unsuccessful payment" redirect URL → https://worldpeaks.com.ua/api/payment-failure
 export default function handler(req, res) {
+  // TEMPORARY DIAGNOSTIC — see payment-success.js. Logs the return POST so we
+  // can read the real field set for a declined/cancelled payment too. Remove
+  // once we've captured it.
+  console.log(
+    '[wayforpay-return:failure]',
+    JSON.stringify({
+      method: req.method,
+      contentType: req.headers['content-type'] || null,
+      query: req.query || null,
+      body: req.body ?? null,
+    }),
+  );
+
   res.setHeader('Location', '/payment-failed');
   res.status(303).end();
 }

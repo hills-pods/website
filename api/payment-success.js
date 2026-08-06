@@ -5,13 +5,25 @@
 //
 // This Vercel serverless function is the return URL instead. It catches the
 // POST and 303-redirects the browser to the static /thank-you page, which then
-// loads with a normal GET (classic POST-redirect-GET). We intentionally ignore
-// the POST body here — the authoritative "paid" confirmation is handled
-// server-side via WayForPay's serviceUrl / the Meta Conversions API, not this
-// browser redirect.
+// loads with a normal GET (classic POST-redirect-GET).
 //
 // WayForPay "successful payment" redirect URL → https://worldpeaks.com.ua/api/payment-success
 export default function handler(req, res) {
+  // TEMPORARY DIAGNOSTIC — log exactly what WayForPay POSTs to the return URL,
+  // so we can see the real field set (amount, currency, orderReference,
+  // transactionStatus, merchantSignature, …) instead of guessing. Visible in
+  // Vercel → Project → Logs (or `vercel logs`). Remove once we've read it.
+  // WayForPay masks the card number, so no full PAN is logged.
+  console.log(
+    '[wayforpay-return:success]',
+    JSON.stringify({
+      method: req.method,
+      contentType: req.headers['content-type'] || null,
+      query: req.query || null,
+      body: req.body ?? null,
+    }),
+  );
+
   res.setHeader('Location', '/thank-you');
   res.status(303).end();
 }

@@ -8,19 +8,57 @@
 // loads with a normal GET (classic POST-redirect-GET).
 //
 // WayForPay "successful payment" redirect URL → https://worldpeaks.com.ua/api/payment-success
+
+// Non-sensitive fields we're allowed to log the VALUES of while discovering the
+// return payload's shape. Everything else (clientEmail, clientPhone, cardPan,
+// merchantSignature, names, tokens, …) is deliberately NOT logged — we log only
+// its key name via `fields` so we learn the structure without leaking PII.
+const SAFE_FIELDS = [
+  'orderReference',
+  'amount',
+  'currency',
+  'transactionStatus',
+  'reason',
+  'reasonCode',
+  'authCode',
+  'paymentSystem',
+  'transactionType',
+  'fee',
+  'cardType',
+  'issuerBankName',
+  'issuerBankCountry',
+  'createdDate',
+  'processingDate',
+];
+
+function toObject(raw, contentType) {
+  if (raw && typeof raw === 'object') return raw;
+  if (typeof raw !== 'string' || raw === '') return {};
+  try {
+    if ((contentType || '').includes('application/json')) return JSON.parse(raw);
+    return Object.fromEntries(new URLSearchParams(raw));
+  } catch {
+    return {};
+  }
+}
+
 export default function handler(req, res) {
-  // TEMPORARY DIAGNOSTIC — log exactly what WayForPay POSTs to the return URL,
-  // so we can see the real field set (amount, currency, orderReference,
-  // transactionStatus, merchantSignature, …) instead of guessing. Visible in
-  // Vercel → Project → Logs (or `vercel logs`). Remove once we've read it.
-  // WayForPay masks the card number, so no full PAN is logged.
+  // TEMPORARY DIAGNOSTIC — capture the SHAPE of WayForPay's return POST (which
+  // field names it sends) plus a few non-sensitive values, without logging PII.
+  // Visible in Vercel → Project → Logs. Remove once we've read the field set.
+  const contentType = req.headers['content-type'] || null;
+  const body = toObject(req.body, contentType);
+  const safe = {};
+  for (const key of SAFE_FIELDS) {
+    if (key in body) safe[key] = body[key];
+  }
   console.log(
     '[wayforpay-return:success]',
     JSON.stringify({
       method: req.method,
-      contentType: req.headers['content-type'] || null,
-      query: req.query || null,
-      body: req.body ?? null,
+      contentType,
+      fields: Object.keys(body), // field-set discovery — names only
+      safe, // allowlisted, non-sensitive values only
     }),
   );
 

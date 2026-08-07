@@ -5,6 +5,8 @@
 //
 // WayForPay "unsuccessful payment" redirect URL → https://worldpeaks.com.ua/api/payment-failure
 
+/* global URLSearchParams */
+
 // See payment-success.js — log only field names + these non-sensitive values,
 // never the raw body (which contains clientEmail/clientPhone/cardPan/etc.).
 const SAFE_FIELDS = [

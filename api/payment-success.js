@@ -9,6 +9,8 @@
 //
 // WayForPay "successful payment" redirect URL → https://worldpeaks.com.ua/api/payment-success
 
+/* global URLSearchParams */
+
 // Non-sensitive fields we're allowed to log the VALUES of while discovering the
 // return payload's shape. Everything else (clientEmail, clientPhone, cardPan,
 // merchantSignature, names, tokens, …) is deliberately NOT logged — we log only

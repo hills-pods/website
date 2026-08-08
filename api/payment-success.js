@@ -1,20 +1,18 @@
 // WayForPay redirects the customer's browser back to the return URL with an
-// HTTP POST (the payment result is in the POST body). Static pages only answer
-// GET/HEAD, so a POST straight to /thank-you returns 405 Method Not Allowed
-// (the page only renders after a manual refresh, which is a GET).
+// HTTP POST. Its result page auto-submits an HTML form, so the browser encodes
+// the payload as multipart/form-data. Static pages only answer GET/HEAD, so a
+// POST straight to /thank-you returns 405 (the page only renders on refresh).
 //
-// This Vercel serverless function is the return URL instead. It catches the
-// POST and 303-redirects the browser to the static /thank-you page, which then
-// loads with a normal GET (classic POST-redirect-GET).
+// This Vercel function is the return URL instead: it catches the POST and
+// 303-redirects to the static /thank-you page (POST-redirect-GET).
 //
 // WayForPay "successful payment" redirect URL → https://worldpeaks.com.ua/api/payment-success
 
-/* global URLSearchParams */
+/* global URLSearchParams, Buffer */
 
-// Non-sensitive fields we're allowed to log the VALUES of while discovering the
-// return payload's shape. Everything else (clientEmail, clientPhone, cardPan,
-// merchantSignature, names, tokens, …) is deliberately NOT logged — we log only
-// its key name via `fields` so we learn the structure without leaking PII.
+// Non-sensitive fields we may log the VALUES of while discovering the payload
+// shape. Everything else (clientEmail, clientPhone, cardPan, merchantSignature,
+// names, tokens, …) is never logged — only its key name via `fields`.
 const SAFE_FIELDS = [
   'orderReference',
   'amount',
@@ -33,23 +31,49 @@ const SAFE_FIELDS = [
   'processingDate',
 ];
 
-function toObject(raw, contentType) {
-  if (raw && typeof raw === 'object') return raw;
-  if (typeof raw !== 'string' || raw === '') return {};
+async function readRawBody(req) {
   try {
-    if ((contentType || '').includes('application/json')) return JSON.parse(raw);
-    return Object.fromEntries(new URLSearchParams(raw));
+    const chunks = [];
+    for await (const chunk of req) chunks.push(chunk);
+    return Buffer.concat(chunks).toString('utf8');
   } catch {
-    return {};
+    return '';
   }
 }
 
-export default function handler(req, res) {
-  // TEMPORARY DIAGNOSTIC — capture the SHAPE of WayForPay's return POST (which
-  // field names it sends) plus a few non-sensitive values, without logging PII.
-  // Visible in Vercel → Project → Logs. Remove once we've read the field set.
-  const contentType = req.headers['content-type'] || null;
-  const body = toObject(req.body, contentType);
+function parseMultipart(raw, boundary) {
+  const out = {};
+  for (const segment of raw.split('--' + boundary)) {
+    const nameMatch = segment.match(/name="([^"]+)"/);
+    if (!nameMatch) continue;
+    const sep = segment.indexOf('\r\n\r\n');
+    if (sep === -1) continue;
+    out[nameMatch[1]] = segment.slice(sep + 4).replace(/\r\n$/, '');
+  }
+  return out;
+}
+
+function parseBody(raw, contentType, reqBody) {
+  try {
+    if (contentType.includes('multipart/form-data')) {
+      const boundary = (contentType.split('boundary=')[1] || '').replace(/^"|"$/g, '').trim();
+      return raw && boundary ? parseMultipart(raw, boundary) : {};
+    }
+    if (contentType.includes('application/json')) return raw ? JSON.parse(raw) : {};
+    if (raw) return Object.fromEntries(new URLSearchParams(raw));
+    if (reqBody && typeof reqBody === 'object') return reqBody;
+  } catch {
+    /* fall through to empty */
+  }
+  return {};
+}
+
+export default async function handler(req, res) {
+  // TEMPORARY DIAGNOSTIC — capture the field-name set + a few non-sensitive
+  // values, no PII. Remove once we've read the payload shape.
+  const contentType = req.headers['content-type'] || '';
+  const raw = await readRawBody(req);
+  const body = parseBody(raw, contentType, req.body);
   const safe = {};
   for (const key of SAFE_FIELDS) {
     if (key in body) safe[key] = body[key];
@@ -59,8 +83,9 @@ export default function handler(req, res) {
     JSON.stringify({
       method: req.method,
       contentType,
-      fields: Object.keys(body), // field-set discovery — names only
-      safe, // allowlisted, non-sensitive values only
+      rawLength: raw ? raw.length : 0,
+      fields: Object.keys(body),
+      safe,
     }),
   );
 

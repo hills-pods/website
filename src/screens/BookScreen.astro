@@ -49,49 +49,6 @@ const easyMs = site.easyMs;
     }
   </section>
 
-  {/*
-    Meta Pixel — InitiateCheckout. The EasyMS widget completes payment off-site:
-    it POSTs to `.../createOrder` and then does `window.location = redirectUrl`
-    (the WayForPay page). That POST is the "checkout started" signal, so we wrap
-    fetch to fire InitiateCheckout when we see it. The true "Purchase" is sent
-    server-side via the Conversions API (booking-tools), since payment success
-    happens off our domain. Fully guarded: no-ops when fbq is absent (no Pixel
-    ID set) and never throws, so it can't break the booking flow.
-  */}
-  <script is:inline>
-    (function () {
-      if (window.__easymsIcHooked) return;
-      window.__easymsIcHooked = true;
-      const orig = window.fetch;
-      if (typeof orig !== 'function') return;
-      window.fetch = function (input, init) {
-        try {
-          const url = typeof input === 'string' ? input : (input && input.url) || '';
-          if (url.indexOf('/api/reservation/pub/') !== -1 && url.indexOf('/createOrder') !== -1) {
-            if (typeof window.fbq === 'function') {
-              let value;
-              try {
-                const body = init && typeof init.body === 'string' ? JSON.parse(init.body) : null;
-                const t = body && (body.totalPrice || body.total || body.amount || body.price);
-                if (typeof t === 'number' && t > 0) value = t;
-              } catch {
-                /* best-effort value only */
-              }
-              window.fbq(
-                'track',
-                'InitiateCheckout',
-                value != null ? { value: value, currency: 'UAH' } : {},
-              );
-            }
-          }
-        } catch {
-          /* never break the widget's fetch */
-        }
-        return orig.call(this, input, init);
-      };
-    })();
-  </script>
-
   {
     /*
     Always-visible safety net. Surfaces both the external provider (when set)

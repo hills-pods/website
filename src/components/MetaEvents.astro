@@ -1,0 +1,44 @@
+---
+import { site } from '@/data/site.config';
+
+// Meta Pixel interaction events. One delegated click listener (so it also
+// covers the third-party EasyMS widget, whose DOM is added at runtime). Only
+// rendered when a Pixel ID is configured; every handler no-ops if fbq is absent.
+//
+// Event map (per the marketing spec):
+//   Contact          — click a phone (tel:) link
+//   Schedule         — click an email (mailto:) link
+//   InitiateCheckout — click a "Забронювати" button (data-fbq) OR the EasyMS
+//                      "Знайти номера" search button (matched by text, since we
+//                      don't own that markup — may need re-tuning if the widget
+//                      changes)
+//   FindLocation     — click "Переглянути номери" / "Детальніше" (data-fbq)
+// (Lead fires on /thank-you, in ThankYouScreen.)
+const pixelId = site.tracking.metaPixelId?.trim();
+---
+
+{
+  pixelId && (
+    <script is:inline>
+      (function () {
+        document.addEventListener(
+          'click',
+          function (e) {
+            if (typeof window.fbq !== 'function') return;
+            const el = e.target;
+            if (!el || !el.closest) return;
+            if (el.closest('a[href^="tel:"]')) return window.fbq('track', 'Contact');
+            if (el.closest('a[href^="mailto:"]')) return window.fbq('track', 'Schedule');
+            if (el.closest('[data-fbq="InitiateCheckout"]'))
+              return window.fbq('track', 'InitiateCheckout');
+            if (el.closest('[data-fbq="FindLocation"]')) return window.fbq('track', 'FindLocation');
+            const wbtn = el.closest('#easyms-reservation-module button');
+            if (wbtn && /знайти|search|find/i.test(wbtn.textContent || ''))
+              return window.fbq('track', 'InitiateCheckout');
+          },
+          true,
+        );
+      })();
+    </script>
+  )
+}

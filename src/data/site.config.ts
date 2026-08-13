@@ -78,13 +78,17 @@ export interface SiteConfig {
    */
   tracking: {
     /**
-     * Meta (Facebook) Pixel ID. Empty until it's created in Meta Events
-     * Manager — paste the numeric ID here to activate the Pixel base code
-     * (BaseLayout) and the InitiateCheckout event on /book. The real
-     * "Purchase" conversion is sent server-side via the Conversions API in
-     * the booking-tools repo, because payment completes off-site.
+     * Meta (Facebook) Pixel ID. Empty disables the Pixel entirely (nothing is
+     * injected). When set, it activates the base code + PageView (BaseLayout)
+     * and the interaction events wired in MetaEvents.astro.
      */
     metaPixelId: string;
+    /**
+     * Meta Business "facebook-domain-verification" token. When set, a static
+     * <meta> tag is rendered in <head> so Meta can verify domain ownership.
+     * Empty = no tag rendered.
+     */
+    metaDomainVerification: string;
   };
 }
 
@@ -121,7 +125,7 @@ export const site: SiteConfig = {
     'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3519.893959191376!2d23.40702858974402!3d48.596151491974965!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4739e94c638bb5f3%3A0x218c6ed291e8eb08!2sMandra%20Hills!5e1!3m2!1sen!2ses!4v1779884811903!5m2!1sen!2ses',
   ogImage: '/og-default.jpg',
   tracking: {
-    // TODO(meta): paste the numeric Meta Pixel ID from Events Manager to activate.
-    metaPixelId: '',
+    metaPixelId: '4347205088876878',
+    metaDomainVerification: '6y2msqh116udowmc8b0n3t8lms2gq3',
   },
 };

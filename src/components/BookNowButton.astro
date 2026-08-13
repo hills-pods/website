@@ -40,7 +40,13 @@ const a11yLabel = isInternal
     : t('book.ariaEnquire');
 ---
 
-<a href={href} class={`${base} ${styles} ${className}`} aria-label={a11yLabel} {...externalAttrs}>
+<a
+  href={href}
+  class={`${base} ${styles} ${className}`}
+  aria-label={a11yLabel}
+  data-fbq="InitiateCheckout"
+  {...externalAttrs}
+>
   <span>{label}</span>
   {
     isExternal && (

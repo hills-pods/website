@@ -15,6 +15,8 @@ import Header from '@/components/Header.astro';
 import Footer from '@/components/Footer.astro';
 import SEO from '@/components/SEO.astro';
 import MetaPixel from '@/components/MetaPixel.astro';
+import MetaEvents from '@/components/MetaEvents.astro';
+import { site } from '@/data/site.config';
 import { getLangFromUrl, useTranslations } from '@/i18n/utils';
 
 interface Props {
@@ -26,6 +28,7 @@ interface Props {
 const { title, description, ogImage } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+const fbDomainVerification = site.tracking.metaDomainVerification?.trim();
 
 // Self-host fonts with font-display: optional + preload of the above-the-fold weights.
 // Preloading makes the type available before first paint, while `optional` guarantees
@@ -67,6 +70,11 @@ const preloadBody = lang === 'uk' ? interCyr400 : interLatin400;
     <link rel="preload" href={preloadBody} as="font" type="font/woff2" crossorigin />
     <style set:html={fontFaces}></style>
     <meta name="generator" content={Astro.generator} />
+    {
+      fbDomainVerification && (
+        <meta name="facebook-domain-verification" content={fbDomainVerification} />
+      )
+    }
     <SEO title={title} description={description} ogImage={ogImage} />
     <MetaPixel />
   </head>
@@ -77,5 +85,6 @@ const preloadBody = lang === 'uk' ? interCyr400 : interLatin400;
       <slot />
     </main>
     <Footer />
+    <MetaEvents />
   </body>
 </html>

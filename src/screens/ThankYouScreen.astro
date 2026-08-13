@@ -20,32 +20,13 @@ const t = useTranslations(lang);
   </section>
 
   {/*
-    Meta Pixel — Purchase. This confirmation page fires a client-side Purchase
-    only when it is reached with booking data, e.g.
-    /thank-you?value=1234&currency=UAH&event_id=<id>. That happens only if an
-    EasyMS post-payment return URL is later pointed here. The real Purchase is
-    sent server-side via the Conversions API (booking-tools); pass the SAME
-    event_id there so Meta deduplicates the two. Guarded: no-ops without fbq or
-    without a positive value, so the page is inert until deliberately wired.
+    Meta Pixel — Lead. The guest reaches this page only via the successful-
+    payment return (api/payment-success → /thank-you), so a booking was
+    completed; per the marketing spec that counts as a Lead. No-ops without fbq.
   */}
   <script is:inline>
     (function () {
-      if (typeof window.fbq !== 'function') return;
-      try {
-        const p = new URLSearchParams(window.location.search);
-        const value = parseFloat(p.get('value') || '');
-        if (isNaN(value) || value <= 0) return;
-        const currency = p.get('currency') || 'UAH';
-        const eventId = p.get('event_id') || undefined;
-        window.fbq(
-          'track',
-          'Purchase',
-          { value: value, currency: currency },
-          eventId ? { eventID: eventId } : undefined,
-        );
-      } catch {
-        /* never break the page */
-      }
+      if (typeof window.fbq === 'function') window.fbq('track', 'Lead');
     })();
   </script>
 </BaseLayout>

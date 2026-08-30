@@ -1,0 +1,31 @@
+---
+import { site } from '@/data/site.config';
+
+// Microsoft Clarity — session recordings + heatmaps. Rendered only when a
+// project ID is configured in site.config.ts; with an empty ID nothing is
+// injected, so the site ships clean and there is no console noise.
+//
+// The bootstrap runs via define:vars (clean JS Astro can bundle) rather than
+// the vendor's minified one-liner — same behaviour, readable source.
+const clarityId = site.tracking.clarityProjectId?.trim();
+---
+
+{
+  clarityId && (
+    <script define:vars={{ clarityId }}>
+      /* eslint-disable -- Microsoft Clarity vendor bootstrap; kept verbatim. */
+      (function (c, l, a, r, i) {
+        c[a] =
+          c[a] ||
+          function () {
+            (c[a].q = c[a].q || []).push(arguments);
+          };
+        const t = l.createElement(r);
+        t.async = 1;
+        t.src = 'https://www.clarity.ms/tag/' + i;
+        const y = l.getElementsByTagName(r)[0];
+        y.parentNode.insertBefore(t, y);
+      })(window, document, 'clarity', 'script', clarityId);
+    </script>
+  )
+}

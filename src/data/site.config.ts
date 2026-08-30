@@ -89,6 +89,11 @@ export interface SiteConfig {
      * Empty = no tag rendered.
      */
     metaDomainVerification: string;
+    /**
+     * Microsoft Clarity project ID (session recordings + heatmaps). Empty
+     * disables Clarity entirely — no tag is injected.
+     */
+    clarityProjectId: string;
   };
 }
 
@@ -127,5 +132,6 @@ export const site: SiteConfig = {
   tracking: {
     metaPixelId: '4347205088876878',
     metaDomainVerification: '6y2msqh116udowmc8b0n3t8lms2gq3',
+    clarityProjectId: 'y3roa35s66',
   },
 };

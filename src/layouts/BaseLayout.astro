@@ -16,6 +16,7 @@ import Footer from '@/components/Footer.astro';
 import SEO from '@/components/SEO.astro';
 import MetaPixel from '@/components/MetaPixel.astro';
 import MetaEvents from '@/components/MetaEvents.astro';
+import ClarityAnalytics from '@/components/ClarityAnalytics.astro';
 import { site } from '@/data/site.config';
 import { getLangFromUrl, useTranslations } from '@/i18n/utils';
 
@@ -77,6 +78,7 @@ const preloadBody = lang === 'uk' ? interCyr400 : interLatin400;
     }
     <SEO title={title} description={description} ogImage={ogImage} />
     <MetaPixel />
+    <ClarityAnalytics />
   </head>
   <body class="min-h-dvh">
     <a href="#main" class="skip-link">{t('nav.skip')}</a>
